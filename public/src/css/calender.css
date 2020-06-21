@@ -1,0 +1,234 @@
+main,
+section,
+div {
+  box-sizing: border-box;
+}
+
+body {
+  box-sizing: border-box;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  background-color: #E3E6F3;
+  position: relative;
+  font-family: 'Muli', sans-serif;
+}
+
+.wlhs-calendar {
+  border: 1px solid #DDDDDD;
+  max-width: 100vw;
+  background-color: white;
+}
+
+/* 헤더 */
+#header {
+  height: 65px;
+}
+
+.calendar-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 15px 15px 15px 198px;
+  border-bottom: 1px solid #DDDDDD;
+}
+
+.calendar-header .month-year {
+  margin-right: auto;
+  margin: 0;
+  padding-left: 10px;
+  width: 100%;
+  height: 34px;
+  font-size: 20px;
+  text-transform: uppercase;
+  color: rgb(10, 115, 190);
+}
+
+.calendar-header button {
+  background-color: transparent;
+  height: 34px;
+  width: 34px;
+  margin-left: 5px;
+  line-height: 34px;
+  text-align: center;
+  border: none;
+  cursor: pointer;
+}
+
+.calendar-header button:active {
+  outline: none;
+}
+
+.calendar-header .arrow {
+  border: solid #AAAAAA;
+  border-width: 0 2px 2px 0;
+  display: inline-block;
+  padding: 5px;
+  background-color: transparent;
+  border-radius: 1px;
+}
+
+.calendar-header .current-month {
+  width: 12px;
+  height: 12px;
+  background-color: rgb(10, 115, 190);
+  content: '';
+  display: inline-block;
+  border-radius: 50%;
+}
+
+.prev-month {
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+}
+
+.next-month {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+
+/* body-container */
+.body-container {
+  display: grid;
+  grid-template-columns: 1fr 6fr;
+}
+
+/* 사이드 */
+#sidemenu {
+  height: calc(100vh - 67px);
+  border-right: 1px solid #DDDDDD;
+}
+
+/* 캘린더 바디 */
+#calendar {
+  height: 100%;
+}
+
+.week-days {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-bottom: 1px solid #DDDDDD;
+  /* padding: 10px 0 5px 0; */
+  font-weight: bolder;
+  font-size: 12px;
+}
+
+.week-days div {
+  width: calc(100% / 7);
+  height: 20px;
+  border-right: 1px solid #DDDDDD;
+  text-align: center;
+}
+
+.wlhs-calendar .day {
+  display: flex;
+  justify-content: center;
+  width: calc(100% / 7);
+  border: none;
+  background-color: transparent;
+  color: black;
+}
+
+.wlhs-calendar button.not-current {
+  color: #AAAAAA;
+}
+
+.wlhs-calendar .active span {
+  color: rgb(10, 115, 190);
+  font-weight: bold;
+}
+
+.wlhs-calendar .selected span {
+  color: white;
+  font-weight: bold;
+  background-color: rgb(100, 165, 211);
+  -webkit-transition: all .3s ease;
+  transition: all .3s ease;
+}
+
+.calendar-body .day {
+  box-sizing: border-box;
+  width: calc(100% / 7);
+  display: inline-block;
+  border-right: 1px solid #DDDDDD;
+  border-bottom: 1px solid #DDDDDD;
+  text-align: center;
+  cursor: pointer;
+  padding: 5px 0;
+}
+
+.calendar-body .not-current {
+  color: #999999;
+}
+
+.digit-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 20px;
+  margin: 0.13px;
+  text-align: center;
+}
+.calendar-body .day span {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  line-height: 20px;
+  border-radius: 50%;
+  font-size: 12px;
+}
+
+.schedule-container {
+  width: 187.83px;
+  height: 79px;
+  overflow: hidden;
+  /* border-top: 1px solid dodgerblue; */
+}
+
+.schedule-inner-container {
+  width: 100%;
+}
+
+/* list 기본 */
+.schedule-list {
+  width: 100%;
+  height: 16px;
+  background-color: dodgerblue;
+  margin-bottom: 5px;
+}
+
+.schedule-list:hover {
+  opacity: 0.7;
+}
+
+/* list 시작 */
+.left {
+  width: 100%;
+  border-radius: 4px 0 0 4px;
+}
+
+/* list 끝 */
+.right {
+  width: 97.5%;
+  border-radius: 0 4px 4px 0;
+}
+
+/* list 한개일 경우 */
+.single {
+  width: 97.5%;
+  border-radius: 4px;
+}
+
+.calendar-header .api-btn {
+  background-color: gray;
+}
