@@ -27,6 +27,11 @@ a {
     color: inherit;
     text-decoration: none;
 }
+
+p {
+    margin: 0;
+}
+
 /* ul 초기화 */
 ul {
     padding-left: 0;

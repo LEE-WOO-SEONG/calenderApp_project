@@ -10250,67 +10250,67 @@ try {
 
 /***/ }),
 
-/***/ "./src/js/calender.js":
-/*!****************************!*\
-  !*** ./src/js/calender.js ***!
-  \****************************/
-/*! exports provided: login2 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ "./public/src/js/index.js":
+/*!********************************!*\
+  !*** ./public/src/js/index.js ***!
+  \********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "login2", function() { return login2; });
-// 번들링 test
-var login2 = 'wooseong';
-
-/***/ }),
-
-/***/ "./src/js/login.js":
-/*!*************************!*\
-  !*** ./src/js/login.js ***!
-  \*************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_polyfill__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/polyfill */ "./node_modules/@babel/polyfill/lib/index.js");
-/* harmony import */ var _babel_polyfill__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_polyfill__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _sidemenu_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./sidemenu.js */ "./src/js/sidemenu.js");
-/* harmony import */ var _calender_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./calender.js */ "./src/js/calender.js");
-// 번들링 test
+// variables
+const jskey = '3b5c9ef85ff48abab916a905a688be13';
+const $btnLogin = document.getElementById('login-form-btn');
 
 
+// functions
 
-console.log(_sidemenu_js__WEBPACK_IMPORTED_MODULE_1__["login"]);
-console.log(_calender_js__WEBPACK_IMPORTED_MODULE_2__["login2"]);
 
-/***/ }),
+// 카카오 로그인 sdk
+Kakao.init(jskey);
+console.log(Kakao.isInitialized());
 
-/***/ "./src/js/sidemenu.js":
-/*!****************************!*\
-  !*** ./src/js/sidemenu.js ***!
-  \****************************/
-/*! exports provided: login */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+// 로그인 성공, 실패 시 조건
+function loginFormWithKakao() {
+  Kakao.Auth.loginForm({
+    success: function () {
+      location.replace('http://akakqogk.dothome.co.kr/calender.html');
+      localStorage.setItem('loginTK', Kakao.Auth.getAccessToken());
+    },
+    fail: function (err) {
+      alert(JSON.stringify(err))
+    },
+  })
+}
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "login", function() { return login; });
-// 번들링 test
-var login = 'lee';
+
+// async function getUserinfo() {
+//   try {
+//     const res = await axios('http://localhost:3000/users');
+//     const user = await res.data;
+//     console.log(user);
+//   } catch (err) {
+//     console.log(err);
+//   }
+// }
+
+// getUserinfo();
+
+// event
+
+$btnLogin.onclick = loginFormWithKakao;
+
 
 /***/ }),
 
 /***/ 0:
-/*!***********************************************!*\
-  !*** multi @babel/polyfill ./src/js/login.js ***!
-  \***********************************************/
+/*!******************************************************!*\
+  !*** multi @babel/polyfill ./public/src/js/index.js ***!
+  \******************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! @babel/polyfill */"./node_modules/@babel/polyfill/lib/index.js");
-module.exports = __webpack_require__(/*! ./src/js/login.js */"./src/js/login.js");
+module.exports = __webpack_require__(/*! ./public/src/js/index.js */"./public/src/js/index.js");
 
 
 /***/ })

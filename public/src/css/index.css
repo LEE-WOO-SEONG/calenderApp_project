@@ -1,0 +1,139 @@
+  #login {
+    margin: 0 auto;
+    padding-top: 25vh;
+  }
+
+  .login-title {
+    font-size: 50px;
+    text-align: center;
+  }
+
+  #login-form {
+    width: 450px;
+    margin: 0 auto;
+  }
+
+  .login-idContainer,
+  .login-pwContainer {
+    position: relative;
+  }
+
+  [for^="login"] {
+    position: absolute;
+    top: 0;
+    font-size: 20px;
+    color: rgb(68, 64, 63);
+  }
+
+  .ing [for^="login"] {
+    animation: fontMod .3s both;
+  }
+
+  #login-id,
+  #login-pw {
+    border: none;
+    border-bottom: 2px solid #ddd;
+    outline: none;
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+    font-size: 30px;
+  }
+
+  .btn-login {
+    font-weight: 700;
+    font-size: 20px;
+    color: #fff;
+    display: block;
+    width: 100%;
+    padding: 10px 0;
+    background-color: rgb(41, 59, 83);
+    border-radius: 10px;
+    margin-top: 5px;
+  }
+
+  .api-container {
+    margin-top: 5px;
+    text-align: center;
+  }
+
+  /* 카카오 로그인 */
+  .btn-kakao {
+    background-image: url('//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg');
+    background-position: 0% 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 240px;
+    height: 45px;
+    border: thin solid #888;
+    box-shadow: 1px 1px 1px grey;
+  }
+
+  /* 구글 로그인 */
+  .btn-google {
+    color: #444;
+    border: thin solid #888;
+    margin-top: 5px;
+    box-shadow: 1px 1px 1px grey;
+  }
+ 
+  .btn-googleLogo {
+    background: url('../img/googlelogo.png');
+    background-position: 0% 50%;
+    background-size: 60px;
+    background-repeat: no-repeat;
+    display: inline-block;
+    vertical-align: middle;
+    width: 42px;
+    height: 42px;
+  }
+  .btn-googleText {
+    display: inline-block;
+    vertical-align: middle;
+    padding-left: 10px;
+    padding-right: 25px;
+    font-size: 17px;
+    font-family: 'Roboto', sans-serif;
+  }
+
+  /* 로그아웃 모달 */
+  .modal-container {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    visibility: hidden;
+    text-align: center;
+    background-color: rgba(128, 127, 127, 0.8);
+  }
+
+  .modal-container.active {
+    visibility: visible;
+  }
+
+  .modal {
+    background-color: #fff;
+    border-radius: 5px;
+    width: 300px;
+    height: 150px;
+    margin: 0 auto;
+    margin-top: 70px;
+    transition: transform .4s;
+  }
+
+  .active .modal {
+    transform: translateY(20%);
+  }
+
+  .modal-comment {
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 100px;
+  }
+
+  .btn-modalClose {
+    font-weight: 700;
+    font-size: 17px;
+    color: rgb(77, 114, 184);
+    padding: 10px;
+  }
