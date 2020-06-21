@@ -53,7 +53,7 @@
   }
 
   .api-container {
-    margin-top: 5px;
+    margin-top: 20px;
     text-align: center;
   }
 
@@ -65,16 +65,23 @@
     background-repeat: no-repeat;
     width: 240px;
     height: 45px;
-    border: thin solid #888;
+    border: thin solid #ddd;
     box-shadow: 1px 1px 1px grey;
+    border-radius: 5px;
+    margin-top: 10px;
   }
-
+  
   /* 구글 로그인 */
   .btn-google {
     color: #444;
-    border: thin solid #888;
+    border: thin solid #ddd;
     margin-top: 5px;
     box-shadow: 1px 1px 1px grey;
+    border-radius: 6px;
+  }
+
+  .btn-google:active {
+    background-color: #ddd;
   }
  
   .btn-googleLogo {
@@ -95,7 +102,7 @@
     font-size: 17px;
     font-family: 'Roboto', sans-serif;
   }
-
+ 
   /* 로그아웃 모달 */
   .modal-container {
     position: fixed;

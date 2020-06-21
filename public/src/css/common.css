@@ -44,5 +44,5 @@ button {
     cursor: pointer;
     border: none;
     background-color: transparent;
-    outline: none;
+    outline-color: rgb(89, 98, 136);
 }
