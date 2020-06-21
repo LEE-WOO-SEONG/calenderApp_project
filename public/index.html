@@ -11,15 +11,10 @@
   <meta property="og:description" content="나만의 일정을 달력에 기록할 수 있는 사이트">
   <meta property="og:image" content="">
   <meta property="og:url" content="">
-  <meta name="google-signin-client_id"
-    content="11449302546-1mphucu8jkiucnp0r4nc6mhd09foarir.apps.googleusercontent.com">
   <title>Private Calender</title>
   <link rel="shortcut icon" href="">
-  <link rel="import" href="./calender.html">
   <link rel="stylesheet" type="text/css" href="./src/css/common.css">
   <link rel="stylesheet" type="text/css" href="./src/css/index.css">
-  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
-  <!-- <script src="https://apis.google.com/js/platform.js" async defer></script> -->
   <script src="https://apis.google.com/js/platform.js"></script>
   <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -41,20 +36,19 @@
       </div>
       <button type="button" class="btn-login" name="password">로그인</button>
       <div class="api-container">
-        <button class="btn-kakao" type="button"></button>
-        <button class="btn-google" type="button">
+        <button type="button" class="btn-google" type="button">
           <span class="btn-googleLogo"></span>
           <span class="btn-googleText">구글계정으로 로그인</span>
         </button>
+        <button type="button" class="btn-kakao"></button>
+        </div>
       </div>
     </form>
     <div class="modal-container">
       <div class="modal">
         <p class="modal-comment">정상적으로 로그아웃 되었습니다.</p>
         <button type="button" class="btn-modalClose">확인</button>
-        <div id="fb-root"></div>
-        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v7.0&appId=708249806679556&autoLogAppEvents=1" nonce="fuQYWaLq"></script>      </div>
-    </div>
+      </div>
 </body>
 
 </html>
