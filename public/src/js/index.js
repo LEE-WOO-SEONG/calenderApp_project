@@ -3,6 +3,7 @@
 // api 키
 const kakaoKey = '3b5c9ef85ff48abab916a905a688be13';
 const googleId = '11449302546-1mphucu8jkiucnp0r4nc6mhd09foarir.apps.googleusercontent.com'
+const facebookId = '708249806679556';
 
 // dom
 const $btnKakao = document.querySelector('.btn-kakao');
@@ -35,8 +36,8 @@ const logoutKakao = () => Kakao.Auth.logout();
 
 
 // 구글 로그인
-const  googleInit  = id => {
-  gapi.load('auth2', function() {
+const googleInit = id => {
+  gapi.load('auth2', function () {
     window.gauth2 = gapi.auth2.init({
       client_id: id
     });
@@ -47,13 +48,13 @@ googleInit(googleId);
 
 const loginGoogle = () => {
   gauth2.signIn()
-  .then(() => {
-    if(gauth2.isSignedIn.get()) {
-      const gtoken = gauth2.currentUser.get().getAuthResponse().id_token;
-      pageMove('http://akakqogk.dothome.co.kr/calender.html');
-      saveToken('googleTk', gtoken);
-    }
-  });
+    .then(() => {
+      if (gauth2.isSignedIn.get()) {
+        const gtoken = gauth2.currentUser.get().getAuthResponse().id_token;
+        pageMove('http://akakqogk.dothome.co.kr/calender.html');
+        saveToken('googleTk', gtoken);
+      }
+    });
 };
 
 const logoutGoogle = async () => {
@@ -61,35 +62,6 @@ const logoutGoogle = async () => {
   auth2.signOut();
 };
 
-// 페이스북 로그인
-// window.fbAsyncInit = function() {
-//   FB.init({
-//     appId      : '708249806679556',
-//     cookie     : true,
-//     xfbml      : true,
-//     version    : 'v7.0'
-//   });
-    
-//   FB.AppEvents.logPageView();
-// };
-
-// (function(d, s, id){
-//    var js, fjs = d.getElementsByTagName(s)[0];
-//    if (d.getElementById(id)) {return;}
-//    js = d.createElement(s); js.id = id;
-//    js.src = "https://connect.facebook.net/en_US/sdk.js";
-//    fjs.parentNode.insertBefore(js, fjs);
-// }(document, 'script', 'facebook-jssdk'));
-
-// FB.getLoginStatus(function(response) {
-//   statusChangeCallback(response);
-// });
-
-// function checkLoginState() {
-//   FB.getLoginStatus(function(response) {
-//     statusChangeCallback(response);
-//   });
-// }
 
 // async function getUserinfo() {
 //   try {
