@@ -1,7 +1,7 @@
 let panel = []
 let calendarList = [] 
 
-function addScheduleRender(calendar){
+function ScheduleRender(calendar){
   function compare(date){
     return (a,b)=> a[date]<b[date] ? 1 : a[date] > b[date] ? -1 : 0
   }
@@ -9,6 +9,7 @@ function addScheduleRender(calendar){
 
   console.log(calendar);
   calendar.forEach(calendarData => { 
+    if( !document.getElementById(`${calendarData.date}`)) return
     const $inner= document.getElementById(`${calendarData.date}`);
     $inner.querySelector('.schedule-inner-container').innerHTML +=`<div class="schedule-list" role="button">${
       calendarData.content}</div>`
@@ -20,7 +21,7 @@ async function getUser() {
     try { 
     const response = await axios.get('users');
     calendarList = response.data.find(users => users.token === localStorage.getItem("userTk"));
-    addScheduleRender(calendarList.calendar);
+    ScheduleRender(calendarList.calendar);
 
     } catch (error) {
       console.error(error);
