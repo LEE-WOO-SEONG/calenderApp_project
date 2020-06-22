@@ -1,6 +1,3 @@
- 
-// variables
-const $btnLogout = document.querySelector('.api-btn');
 // functions
 const pageMove = url => location.replace(url);
 
@@ -178,26 +175,38 @@ function Calendar() {
         // const li2 = document.createElement('div');
         // const li3 = document.createElement('div');
         // const li4 = document.createElement('div');
-        // li1.setAttribute('class', 'schedule-list list1');
+        // const li5 = document.createElement('div');
+        // li1.setAttribute('class', 'schedule-list left');
         // li1.setAttribute('role', 'button');
-        // li2.setAttribute('class', 'schedule-list list2');
+        // li2.setAttribute('class', 'schedule-list right');
         // li2.setAttribute('role', 'button');
-        // li3.setAttribute('class', 'schedule-list list3');
+        // li3.setAttribute('class', 'schedule-list');
         // li3.setAttribute('role', 'button');
-        // li4.setAttribute('class', 'schedule-list list4');
+        // li4.setAttribute('class', 'schedule-list single');
         // li4.setAttribute('role', 'button');
-        // scheduleInnerContainer.appendChild(li1);
-        // scheduleInnerContainer.appendChild(li2);
-        // scheduleInnerContainer.appendChild(li3);
-        // scheduleInnerContainer.appendChild(li4);
+        // li5.setAttribute('class', 'schedule-list single');
+        // li5.setAttribute('role', 'button');
+        // $scheduleInnerContainer.appendChild(li1);
+        // $scheduleInnerContainer.appendChild(li2);
+        // $scheduleInnerContainer.appendChild(li3);
+        // $scheduleInnerContainer.appendChild(li4);
+        // $scheduleInnerContainer.appendChild(li5);
 
         $cell.addEventListener('click', () => {
-          // this.selected = num.id;
           const $selected = document.querySelector('.selected');
           if ($selected) {
             $selected.classList.remove('selected');
           }
           $cell.classList.add('selected');
+        });
+
+        $cell.addEventListener('mousedown', () => {
+          document.getElementById('start-date').value = `${num.id.substring(0, 4)}-${num.id.substring(4, 6)}-${num.id.substring(6, 8)}`;
+        });
+
+        $cell.addEventListener('mouseup', () => {
+          document.getElementById('end-date').value = `${num.id.substring(0, 4)}-${num.id.substring(4, 6)}-${num.id.substring(6, 8)}`;
+          document.querySelector('.modal-container').classList.remove('hidden');
         });
 
         // eslint-disable-next-line no-unused-expressions
@@ -226,3 +235,12 @@ function Calendar() {
 }
 
 new Calendar();
+
+const $scheduleModalClose = document.querySelector('.schedule-modal-close');
+const $schedueleModalSave = document.querySelector('.schedule-modal-save');
+$scheduleModalClose.onclick = () => {
+  document.querySelector('.modal-container').classList.add('hidden');
+};
+$schedueleModalSave.onclick = () => {
+
+};
