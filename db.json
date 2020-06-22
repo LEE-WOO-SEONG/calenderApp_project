@@ -1,16 +1,16 @@
 {
   "users": [
     {
-      "id": "akakqogk",
+      "id": "wooseong",
       "pw": "dldntjd",
-      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFrYWtxb2drIiwicHciOiJsZWUifQ.AmqHxe3ZSKHwMSsIYxQoGiLcZBvWVmjwLUwx45SyXCM",
+      "gender": "male",
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Indvb3Nlb25nIiwicHciOiJkbGRudGpkIn0.63MuIIELRLur7rTsxhYr7ALe7Gy4UKVVpZZcBEjVSuk",
       "title": [
-        { 
-          "heading":"이우성",
-          "color": "red"
-        },
         {
-          
+          "id": 1,
+          "heading": "이우성",
+          "color": "red",
+          "completed": false
         }
       ],
       "calender": [
@@ -21,25 +21,66 @@
     },
     {
       "id": "jihyeon",
-      "pw": "do",
-      "token": "1@dsa@(029231k23asdf",
+      "pw": "ehwlgus",
+      "gender": "female",
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImppaHllb24iLCJwdyI6ImVod2xndXMifQ.Ukhn9ofMxnh2ibymwtIdOU-txscUHKja0b8Dm25FTt4",
       "title": [
         {
+          "id": 1,
           "heading": "도지현",
-          "color": "bronw"
+          "color": "brown",
+          "completed": false
+        }
+      ],
+      "calender": [
+        {
+          "date": "yy:mm:dd"
         }
       ]
     },
     {
-      "id": "dongWoo",
-      "pw": "ryu",
-      "token": "*dijf1020adf213d",
+      "id": "dongwoo",
+      "pw": "gbehddn",
+      "gender": "male",
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImRvbmd3b28iLCJwdyI6ImdiZWhkZG4ifQ.LJn7kfgFCAv_q3alUeyG-yVHczgk4jepWH4GZjrziLM",
       "title": [
         {
+          "id": 1,
           "heading": "류동우",
-          "color": "blue"
+          "color": "blue",
+          "completed": false
+        }
+      ],
+      "calender": [
+        {
+          "date": "yy:mm:dd"
         }
       ]
+    },
+    {
+      "id": "yerin",
+      "pw": "chldPfls",
+      "gender": "female",
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InllcmluIiwicHciOiJjaGxkUGZscyJ9.mNqULwX20ah502qL-PgTuwubjXAOEVM90UTrkQMWp6o",
+      "title": [
+        {
+          "id": 1,
+          "heading": "최예린",
+          "color": "purple",
+          "completed": false
+        }
+      ],
+      "calender": [
+        {
+          "date": "yy:mm:dd"
+        }
+      ]
+    },
+    {
+      "token": "RlMnZlVnx7GFALRqcwBETYeKde2L-3q06HB6Ywo9dJgAAAFy2-upVg",
+      "id": "akakqogk@nate.com",
+      "title": [],
+      "calender": []
     }
   ]
 }

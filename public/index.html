@@ -24,25 +24,28 @@
 
 <body>
   <section id="login">
-    <h1 class="login-title">PrivateCalender</h1>
+    <h1 class="login-title">Private Calender</h1>
     <form id=login-form>
-      <div class="login-idContainer">
-        <label for="login-id">UserName</label>
-        <input id="login-id" type="text" name="id">
-      </div>
-      <div class="login-pwContainer">
-        <label for="login-pw">Password</label>
-        <input id="login-pw" type="password" name="password">
-      </div>
-      <button type="button" class="btn-login" name="password">로그인</button>
-      <div class="api-container">
-        <button type="button" class="btn-google" type="button">
-          <span class="btn-googleLogo"></span>
-          <span class="btn-googleText">구글계정으로 로그인</span>
-        </button>
-        <button type="button" class="btn-kakao"></button>
+      <fieldset>
+        <legend class="a11y-hidden">달력 로그인</legend>
+        <div class="login-idContainer">
+          <label for="login-id">UserName</label>
+          <input id="login-id" type="text" name="id">
         </div>
-      </div>
+        <div class="login-pwContainer">
+          <label for="login-pw">Password</label>
+          <input id="login-pw" type="password" name="password">
+        </div>
+        <button type="button" class="btn-login" name="password">Login</button>
+        <div class="api-container">
+          <button type="button" class="btn-google" type="button">
+            <span class="btn-googleLogo"></span>
+            <span class="btn-googleText">Login with Google</span>
+          </button>
+          <button type="button" class="btn-kakao"></button>
+        </div>
+        </div>
+      </fieldset>
     </form>
     <div class="modal-container">
       <div class="modal">

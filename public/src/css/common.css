@@ -1,7 +1,7 @@
 /* 초기화 */
 
 /* 숨긴콘텐츠 */
-.a11y_hidden {
+.a11y-hidden {
     position: absolute;
     width: 1px;
     height: 1px;
