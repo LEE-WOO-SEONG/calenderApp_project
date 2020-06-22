@@ -52,7 +52,7 @@ const insertUserinfo = async (token, id) => {
   } catch (err) {
     console.error(err);
   }
-}
+};
 
 // 카카오 계정으로 로그인
 Kakao.init('3b5c9ef85ff48abab916a905a688be13');
@@ -92,7 +92,7 @@ const loginGoogle = () => {
   gauth2.signIn()
     .then(() => {
       const googleToken = gauth2.currentUser.get().getAuthResponse().id_token;
-      const googleEmail = gauth2.currentUser.get().getBasicProfile().getEmail();    
+      const googleEmail = gauth2.currentUser.get().getBasicProfile().getEmail();
       insertUserinfo(googleToken, googleEmail);
       saveToken(googleToken);
     })
@@ -108,7 +108,6 @@ const logoutGoogle = async () => {
     console.error(err);
   }
 };
-
 
 /* event */
 // 로그아웃 확인
