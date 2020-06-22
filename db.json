@@ -5,33 +5,32 @@
       "gender": "male",
       "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Indvb3Nlb25nIiwicHciOiJkbGRudGpkIn0.63MuIIELRLur7rTsxhYr7ALe7Gy4UKVVpZZcBEjVSuk",
       "sidePanel": [{
-        "class": "이우성",
-        "color": "red",
-        "completed": "ture"
-      },
-      {
-        "class":"류동우",
+          "class": "이우성",
+          "color": "red",
+          "checked": "true"
+        },
+        {
+          "class": "류동우",
           "color": "blue",
-          "completed":"true"
-      }
-    ],
+          "checked": "true"
+        }
+      ],
       "calendar": [{
-        "date": "20200622",
+        "date": "20200626",
         "content": "미니프로젝트 발표",
         "class": "류동우",
         "color": "blue"
-      },{
+      }, {
         "date": "20200622",
         "content": "족발 먹기",
-        "class": "이우성", 
+        "class": "이우성",
         "color": "red"
-      },{
+      }, {
         "date": "20200623",
         "content": "발표 준비",
-        "class" : "이우성",
-        "color" : "red"
-      }
-    ]
+        "class": "이우성",
+        "color": "red"
+      }]
     },
     {
       "id": "jihyeon",
