@@ -43,8 +43,8 @@ const insertUserinfo = async (token, id) => {
     await axios('http://localhost:3000/users', {
       method: 'POST',
       data: {
-        "token": token,
         "id": id,
+        "token": token,
         "title": [],
         "calender": []
       }
@@ -55,12 +55,13 @@ const insertUserinfo = async (token, id) => {
 };
 
 // 카카오 계정으로 로그인
-Kakao.init('3b5c9ef85ff48abab916a905a688be13');
-
 const loginKakao = () => {
+  Kakao.init('3b5c9ef85ff48abab916a905a688be13');
+
   Kakao.Auth.loginForm({
-    success: function () {
+    success() {
       const kakaoToken = Kakao.Auth.getAccessToken();
+      localStorage.removeItem('kakao_c40e0085c128623f6673bddf89c54ff6');
 
       Kakao.API.request({url: '/v2/user/me'})
         .then(({ kakao_account }) => insertUserinfo(kakaoToken, kakao_account.email))
@@ -68,42 +69,27 @@ const loginKakao = () => {
         .then(() => pageMove('http://akakqogk.dothome.co.kr/calender.html'))
         .catch(console.error);
     },
-    fail: function (err) {
-      alert(JSON.stringify(err))
+    fail(err) {
+      alert(JSON.stringify(err));
     },
-  })
-}
-
-const logoutKakao = () => {
-  if (!Kakao.Auth.getAccessToken()) return;
-  Kakao.Auth.logout();
+  });
 };
 
 // 구글 계정으로 로그인
-(googleInit = () => {
-  gapi.load('auth2', function () {
-    window.gauth2 = gapi.auth2.init({
-      client_id: '11449302546-1mphucu8jkiucnp0r4nc6mhd09foarir.apps.googleusercontent.com'
-    });
-  });
-})();
-
-const loginGoogle = () => {
-  gauth2.signIn()
-    .then(() => {
-      const googleToken = gauth2.currentUser.get().getAuthResponse().id_token;
-      const googleEmail = gauth2.currentUser.get().getBasicProfile().getEmail();
-      insertUserinfo(googleToken, googleEmail);
-      saveToken(googleToken);
-    })
-    .then(() => pageMove('http://akakqogk.dothome.co.kr/calender.html'))
-    .catch(console.error);
-};
-
-const logoutGoogle = async () => {
+const loginGoogle = async () => {
   try {
-    const auth2 = await gapi.auth2.getAuthInstance();
-    auth2.signOut();
+    await gapi.load('auth2', async function () {
+      const gauth2 = await gapi.auth2.init({
+        client_id: '11449302546-1mphucu8jkiucnp0r4nc6mhd09foarir.apps.googleusercontent.com'
+      });
+      const res = await gauth2.signIn({ scope: 'profile email' });
+      const googleToken = await res.getAuthResponse().id_token;
+      const googleEmail = await res.getBasicProfile().getEmail();
+
+      await insertUserinfo(googleToken, googleEmail);
+      saveToken(googleToken);
+      pageMove('http://akakqogk.dothome.co.kr/calender.html');
+    });
   } catch (err) {
     console.error(err);
   }
@@ -113,10 +99,9 @@ const logoutGoogle = async () => {
 // 로그아웃 확인
 window.addEventListener('load', () => {
   if (!localStorage.getItem('userTk')) return;
-  logoutKakao();
-  logoutGoogle();
-  removeToken();
-  $modalContainer.classList.add('active');
+  pageMove('http://akakqogk.dothome.co.kr/calender.html');
+  // removeToken();
+  // $modalContainer.classList.add('active');
 });
 
 // 회원정보로 로그인
@@ -127,33 +112,31 @@ $loginForm.onclick = ({ target }) => {
   const userPw = $inputPw.value;
 
   if (!userId || !userId.trim()) {
-    return alert('ID를 입력하세요')
+    alert('ID를 입력하세요');
   } else if(!userPw) {
-    return alert('Password를 입력하세요')
+    alert('Password를 입력하세요');
+  } else {
+    $inputId.value = '';
+    $inputPw.value = '';
+    validateUserinfo(userId, userPw);
   }
-
-  $inputId.value = '';
-  $inputPw.value = '';
-  validateUserinfo(userId, userPw);
-}
+};
 
 $inputPw.onkeyup = e => {
   if (e.keyCode !== 13) return;
 
-  let userId = $inputId.value;
-  let userPw = $inputPw.value;
+  const userId = $inputId.value;
+  const userPw = $inputPw.value;
 
   if (!userId || !userId.trim()) {
-    return alert('ID를 입력하세요')
-  } else if(!userPw) {
-    return alert('Password를 입력하세요')
+    alert('ID를 입력하세요');
+  } else if (!userPw) {
+    alert('Password를 입력하세요');
+  } else {
+    $inputId.value = '';
+    $inputPw.value = '';
+    validateUserinfo(userId, userPw);
   }
-
-  $inputId.value = '';
-  $inputPw.value = '';
-  validateUserinfo(userId, userPw);
-
-  e.stopPropagation;
 };
 
 // 카카오 계정으로 로그인
