@@ -1,3 +1,5 @@
+import { getUser } from './function.js'
+ 
 // variables
 const $btnLogout = document.querySelector('.api-btn');
 
@@ -230,6 +232,10 @@ function Calendar() {
   };
 
   this.showCalendar();
+  getUser()
 }
 
 new Calendar();
+
+
+

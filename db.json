@@ -9,12 +9,21 @@
           "heading":"이우성",
           "color": "red",
           "checked": "true"
+        },
+        {
+          "heading":"류동우",
+          "color": "blue",
+          "checked":"true"
+        },
+        {
+
         }
       ],
       "calender": [
         {
           "date": "2020-06-26",
           "content": "미니프로젝트 발표"
+
         }
       ]
     },
