@@ -10,27 +10,26 @@ const $modalContainer = document.querySelector('.modal-container');
 /* functions */
 const pageMove = url => location.replace(url);
 const removeToken = () => localStorage.removeItem('userTk');
-const saveToken = (value) => localStorage.setItem('userTk', value);
-
+const saveToken = value => localStorage.setItem('userTk', value);
 
 // 회원정보로 로그인 시 userinfo 확인
 const validateUserinfo = async (userid, userpw) => {
   try {
     const res = await axios('http://localhost:3000/users');
-    const users = await res.data;  
-    const user = users.find(user => user.id == userid);
+    const users = await res.data;
+    const user = users.find(user => user.id === userid);
 
     if (!user) return alert('일치하는 회원정보가 없습니다.');
     const userPw = user.pw;
 
     if (userPw === userpw) {
       pageMove('http://akakqogk.dothome.co.kr/calender.html');
-      saveToken(user.token)
-    } 
+      saveToken(user.token);
+    }
   } catch (err) {
     console.error(err);
   }
-}
+};
 
 // API로그인 시 userinfo 추가
 const insertUserinfo = async (token, id) => {
@@ -49,11 +48,11 @@ const insertUserinfo = async (token, id) => {
         "title": [],
         "calender": []
       }
-    })
-  } catch(err) {
+    });
+  } catch (err) {
     console.error(err);
   }
-}
+};
 
 // 카카오 계정으로 로그인
 Kakao.init('3b5c9ef85ff48abab916a905a688be13');
@@ -78,8 +77,7 @@ const loginKakao = () => {
 const logoutKakao = () => {
   if (!Kakao.Auth.getAccessToken()) return;
   Kakao.Auth.logout();
-}
-
+};
 
 // 구글 계정으로 로그인
 (googleInit = () => {
@@ -91,11 +89,10 @@ const logoutKakao = () => {
 })();
 
 const loginGoogle = () => {
-
   gauth2.signIn()
     .then(() => {
       const googleToken = gauth2.currentUser.get().getAuthResponse().id_token;
-      const googleEmail = gauth2.currentUser.get().getBasicProfile().getEmail();    
+      const googleEmail = gauth2.currentUser.get().getBasicProfile().getEmail();
       insertUserinfo(googleToken, googleEmail);
       saveToken(googleToken);
     })
@@ -106,31 +103,30 @@ const loginGoogle = () => {
 const logoutGoogle = async () => {
   try {
     const auth2 = await gapi.auth2.getAuthInstance();
-    auth2.signOut();  
-  } catch(err) {
+    auth2.signOut();
+  } catch (err) {
     console.error(err);
   }
 };
-
 
 /* event */
 // 로그아웃 확인
 window.addEventListener('load', () => {
   if (!localStorage.getItem('userTk')) return;
-    logoutKakao();
-    logoutGoogle();
-    removeToken();
-    $modalContainer.classList.add('active');
+  logoutKakao();
+  logoutGoogle();
+  removeToken();
+  $modalContainer.classList.add('active');
 });
 
 // 회원정보로 로그인
 $loginForm.onclick = ({ target }) => {
-  if(!target.matches('.btn-login')) return;
+  if (!target.matches('.btn-login')) return;
 
   const userId = $inputId.value;
   const userPw = $inputPw.value;
 
-  if(!userId || !userId.trim()) {
+  if (!userId || !userId.trim()) {
     return alert('ID를 입력하세요')
   } else if(!userPw) {
     return alert('Password를 입력하세요')
@@ -142,12 +138,12 @@ $loginForm.onclick = ({ target }) => {
 }
 
 $inputPw.onkeyup = e => {
-  if(e.keyCode !== 13) return;
+  if (e.keyCode !== 13) return;
 
   let userId = $inputId.value;
   let userPw = $inputPw.value;
 
-  if(!userId || !userId.trim()) {
+  if (!userId || !userId.trim()) {
     return alert('ID를 입력하세요')
   } else if(!userPw) {
     return alert('Password를 입력하세요')
@@ -158,7 +154,7 @@ $inputPw.onkeyup = e => {
   validateUserinfo(userId, userPw);
 
   e.stopPropagation;
-}
+};
 
 // 카카오 계정으로 로그인
 $btnKakao.onclick = loginKakao;
@@ -170,4 +166,4 @@ $btnGoogle.onclick = loginGoogle;
 $modalContainer.onclick = ({ target }) => {
   if (!target.matches('.btn-modalClose')) return;
   $modalContainer.classList.remove('active');
-}
+};
