@@ -176,7 +176,7 @@ body {
   align-items: center;
   width: 100%;
   height: 20px;
-  margin: 0.13px;
+  margin: 0.25px;
   text-align: center;
 }
 .calendar-body .day span {
@@ -189,8 +189,9 @@ body {
 }
 
 .schedule-container {
-  width: 187.83px;
-  height: 79px;
+  /* width: 233.84px; */
+  width: 235px;
+  height: 110px;
   overflow: hidden;
   /* border-top: 1px solid dodgerblue; */
 }
@@ -219,16 +220,100 @@ body {
 
 /* list 끝 */
 .right {
-  width: 97.5%;
+  width: 95%;
   border-radius: 0 4px 4px 0;
 }
 
 /* list 한개일 경우 */
 .single {
-  width: 97.5%;
+  width: 95%;
   border-radius: 4px;
 }
 
 .calendar-header .api-btn {
   background-color: gray;
+}
+
+/* 날짜 입력 모달 컨테이너 */
+.modal-container {
+  display: fixed;
+  position: absolute;
+  top: calc(50vh - 150px);
+  left: calc(50vw - 200px);
+  width: 500px;
+  height: 300px;
+  background-color: rgb(100, 165, 211);
+}
+
+.modal-flex {
+  padding-top: 40px;
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.modal-box-container {
+  /* height: 40px; */
+  border: 2px solid purple;
+  margin: 5px 10px;
+}
+
+.icon-container {
+  display: inline-block;
+}
+
+.input-container {
+  display: inline-block;
+}
+
+.date-input {
+  width: 125px;
+}
+
+#start-time, #end-time {
+  height: 24.5px;
+}
+
+.schedule-modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 26px;
+  height: 26px;
+  border: 1px solid #444;
+  opacity: 0.3;
+  cursor: pointer;
+}
+
+.schedule-modal-close:hover {
+  opacity: 1;
+}
+
+.schedule-modal-close:before, .schedule-modal-close:after {
+  position: absolute;
+  left: 10px;
+  content: ' ';
+  height: 26px;
+  width: 5px;
+  background-color: #333;
+}
+.schedule-modal-close:before {
+  transform: rotate(45deg);
+}
+.schedule-modal-close:after {
+  transform: rotate(-45deg);
+}
+
+.modal-btn-container {
+  display: flex;
+  justify-content: center;
+}
+
+.schedule-modal-save {
+  width: 50px;
+  font-size: 18px;
+  border: 1px solid #333;
+}
+
+.hidden {
+  display: none;
 }
