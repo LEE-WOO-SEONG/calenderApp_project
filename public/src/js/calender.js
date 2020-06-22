@@ -1,4 +1,4 @@
-// functionsf
+// functions
 const pageMove = url => location.replace(url);
 
 function Calendar() {

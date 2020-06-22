@@ -13,6 +13,10 @@
     margin: 0 auto;
   }
 
+  #login-form > fieldset {
+    border:none;
+  }
+
   .login-idContainer,
   .login-pwContainer {
     position: relative;
@@ -23,10 +27,6 @@
     top: 0;
     font-size: 20px;
     color: rgb(68, 64, 63);
-  }
-
-  .ing [for^="login"] {
-    animation: fontMod .3s both;
   }
 
   #login-id,
@@ -52,55 +52,71 @@
     margin-top: 5px;
   }
 
+  .btn-login:hover {
+    background-color: rgba(41, 59, 83, 0.9);
+  }
+
   .api-container {
     margin-top: 20px;
-    text-align: center;
   }
 
   /* 카카오 로그인 */
   .btn-kakao {
-    background-image: url('//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg');
+    background-image: url('../img/kakaologin_en.png');
     background-position: 0% 50%;
     background-size: cover;
     background-repeat: no-repeat;
-    width: 240px;
+    width: 450px;
     height: 45px;
     border: thin solid #ddd;
     box-shadow: 1px 1px 1px grey;
     border-radius: 5px;
     margin-top: 10px;
   }
+
+  .btn-kakao::before {
+    content:'';
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .btn-kakao:hover::before {
+    background-color: rgb(93, 90, 90, 0.2);
+  }
   
   /* 구글 로그인 */
   .btn-google {
     color: #444;
-    border: thin solid #ddd;
     margin-top: 5px;
+    width: 450px;
+    height: 45px;
+    border: thin solid #ddd;
     box-shadow: 1px 1px 1px grey;
     border-radius: 6px;
+    position: relative;
   }
 
-  .btn-google:active {
-    background-color: #ddd;
+  .btn-google:hover {
+    background-color: rgb(93, 90, 90, 0.2);
   }
  
   .btn-googleLogo {
     background: url('../img/googlelogo.png');
-    background-position: 0% 50%;
-    background-size: 60px;
+    background-position: 50%;
+    background-size: 80px;
     background-repeat: no-repeat;
-    display: inline-block;
-    vertical-align: middle;
-    width: 42px;
-    height: 42px;
+    position: absolute;
+    left: 5px;
+    top: 0;
+    width: 60px;
+    height: 40px;
   }
+
   .btn-googleText {
     display: inline-block;
-    vertical-align: middle;
-    padding-left: 10px;
-    padding-right: 25px;
-    font-size: 17px;
-    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    padding-left: 35px;
   }
  
   /* 로그아웃 모달 */

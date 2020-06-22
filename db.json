@@ -1,45 +1,75 @@
 {
-  "users": [
-    {
-      "id": "akakqogk",
+  "users": [{
+      "id": "wooseong",
       "pw": "dldntjd",
-      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFrYWtxb2drIiwicHciOiJsZWUifQ.AmqHxe3ZSKHwMSsIYxQoGiLcZBvWVmjwLUwx45SyXCM",
-      "title": [
-        { 
-          "heading":"이우성",
-          "color": "red"
+      "gender": "male",
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Indvb3Nlb25nIiwicHciOiJkbGRudGpkIn0.63MuIIELRLur7rTsxhYr7ALe7Gy4UKVVpZZcBEjVSuk",
+      "sidePanel": [{
+          "class": "이우성",
+          "color": "red",
+          "checked": "true"
         },
         {
-          
+          "class": "류동우",
+          "color": "blue",
+          "checked": "true"
         }
       ],
-      "calender": [
-        {
-          "date": "yy:mm:dd"
-        }
-      ]
+      "calendar": [{
+        "date": "20200626",
+        "content": "미니프로젝트 발표",
+        "class": "류동우",
+        "color": "blue"
+      }, {
+        "date": "20200622",
+        "content": "족발 먹기",
+        "class": "이우성",
+        "color": "red"
+      }, {
+        "date": "20200623",
+        "content": "발표 준비",
+        "class": "이우성",
+        "color": "red"
+      }]
     },
     {
       "id": "jihyeon",
-      "pw": "do",
-      "token": "1@dsa@(029231k23asdf",
-      "title": [
-        {
-          "heading": "도지현",
-          "color": "bronw"
-        }
-      ]
+      "pw": "ehwlgus",
+      "gender": "female",
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImppaHllb24iLCJwdyI6ImVod2xndXMifQ.Ukhn9ofMxnh2ibymwtIdOU-txscUHKja0b8Dm25FTt4",
+      "title": [{
+        "class": "도지현",
+        "color": "brown"
+      }],
+      "calendar": [{
+        "date": "yy:mm:dd"
+      }]
     },
     {
-      "id": "dongWoo",
-      "pw": "ryu",
-      "token": "*dijf1020adf213d",
-      "title": [
-        {
-          "heading": "류동우",
-          "color": "blue"
-        }
-      ]
+      "id": "dongwoo",
+      "pw": "gbehddn",
+      "gender": "male",
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImRvbmd3b28iLCJwdyI6ImdiZWhkZG4ifQ.LJn7kfgFCAv_q3alUeyG-yVHczgk4jepWH4GZjrziLM",
+      "title": [{
+        "class": "류동우",
+        "color": "blue"
+      }],
+      "calendar": [{
+        "date": "yy:mm:dd"
+      }]
+    },
+    {
+      "id": "yerin",
+      "pw": "chldPfls",
+      "gender": "female",
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InllcmluIiwicHciOiJjaGxkUGZscyJ9.mNqULwX20ah502qL-PgTuwubjXAOEVM90UTrkQMWp6o",
+      "title": [{
+        "class": "최예린",
+        "color": "purple"
+      }],
+      "calendar": [{
+        "date": "yy:mm:dd"
+      }]
     }
   ]
 }

@@ -20,10 +20,13 @@
   <link rel="stylesheet" href="./src/css/calender.css">
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <!-- <script src="../dist/js/bundle.js"></script> -->
+  <script src="src/js/function.js" defer></script>
   <script src="./src/js/calender.js" defer></script>
+  <script src="./src/js/sidemenu.js" defer></script>
 </head>
 
 <body>
+  <button class="api-btn">로그아웃</button>
   <main class="container">
     <!-- <h1 class="a11y-hidden">일정관리 </h1> -->
     <section id="header">
@@ -32,6 +35,19 @@
     <div class="body-container">
       <section id="sidemenu">
         <!-- <h2 class="a11y-hidden">일정제목</h2> -->
+        <div class="add-calender-list-input">
+          <input type="text" placeholder="캘린더 추가" id="add-calender">
+          <!-- <label for="add-calender" class="a11y-hidden">캘린더 추가</label> -->
+          <button type="submit" class="add-list-submit">+</button>
+        </div>
+        <ul class="add-calender-list-box">
+          <li id="1" class="add-calender-first-list calendar-list">
+            <input type="checkbox" id="add-calender-list" class="checkbox">
+            <label for="add-calender-list"></label>
+          </li>
+        </ul>
+
+
       </section>
       <section id="calendar">
         <!-- <h2 class="a11y-hidden">캘린더</h2> -->

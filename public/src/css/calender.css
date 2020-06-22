@@ -25,6 +25,7 @@ body {
 /* 헤더 */
 #header {
   height: 65px;
+  position: relative;
 }
 
 .calendar-header {
@@ -58,6 +59,13 @@ body {
   text-align: center;
   border: none;
   cursor: pointer;
+}
+
+.api-btn {
+  width:auto !important;
+  position: absolute;
+  top:15px;
+  right:15px;
 }
 
 .calendar-header button:active {
