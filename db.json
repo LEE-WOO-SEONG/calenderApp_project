@@ -4,18 +4,26 @@
       "id": "akakqogk",
       "pw": "dldntjd",
       "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFrYWtxb2drIiwicHciOiJsZWUifQ.AmqHxe3ZSKHwMSsIYxQoGiLcZBvWVmjwLUwx45SyXCM",
-      "title": [
+      "side": [
         { 
           "heading":"이우성",
-          "color": "red"
+          "color": "red",
+          "checked": "true"
         },
         {
-          
+          "heading":"류동우",
+          "color": "blue",
+          "checked":"true"
+        },
+        {
+
         }
       ],
       "calender": [
         {
-          "date": "yy:mm:dd"
+          "date": "2020-06-26",
+          "content": "미니프로젝트 발표"
+
         }
       ]
     },
