@@ -1,18 +1,17 @@
 @import url('https://use.fontawesome.com/releases/v5.5.0/css/all.css');
-​
 #sidemenu {
   /* background-color:blue; */
   padding:20px 20px;
 }
-​
+
 .add-calender-list-box {
  position: relative;
 }
-​
+
 .checkbox {
   display: none;
 }
-​
+
 .checkbox + label { 
   transform: translate3d(0, -50%, 0);
   margin-top:15px;  
@@ -23,7 +22,6 @@
   cursor: pointer;
   user-select: none;
 }
-​
 .checkbox + label:before {
   content: "";
   position: absolute;
@@ -35,7 +33,6 @@
   background-color: #fff;
   border: 1px solid #cfdadd;
 }
-​
 .checkbox:checked + label:after {
   content: "";
   position: absolute;
