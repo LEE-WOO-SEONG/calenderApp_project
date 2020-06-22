@@ -22,5 +22,18 @@
   "dependencies": {
     "@babel/polyfill": "^7.10.1",
     "json-server": "^0.16.1"
-  }
+  },
+  "description": "- 팀명: 우린현성",
+  "main": ".eslintrc.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jihyeon-Do/calenderApp_project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jihyeon-Do/calenderApp_project/issues"
+  },
+  "homepage": "https://github.com/jihyeon-Do/calenderApp_project#readme"
 }
