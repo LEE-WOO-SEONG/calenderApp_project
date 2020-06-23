@@ -2,7 +2,7 @@
   "name": "calenderApp_project",
   "version": "1.0.0",
   "scripts": {
-    "start": "json-server --watch db.json",
+    "start": "nodemon server",
     "build": "webpack -w"
   },
   "devDependencies": {
@@ -24,7 +24,7 @@
     "json-server": "^0.16.1"
   },
   "description": "- 팀명: 우린현성",
-  "main": ".eslintrc.js",
+  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jihyeon-Do/calenderApp_project.git"

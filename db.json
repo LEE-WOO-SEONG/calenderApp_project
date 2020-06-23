@@ -11,12 +11,6 @@
           "class": "이우성",
           "color": "red",
           "checked": "true"
-        },
-        {
-          "order": 2,
-          "class": "류동우",
-          "color": "blue",
-          "checked": "true"
         }
       ],
       "calendar": [
@@ -90,6 +84,38 @@
           "date": "yy:mm:dd"
         }
       ]
-    }
+    },
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
   ]
 }
