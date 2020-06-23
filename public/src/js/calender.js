@@ -119,7 +119,7 @@ function Calendar() {
     $btnLogout.onclick = async () => {
       try {
         await removeToken();
-        await pageMove('http://akakqogk.dothome.co.kr');
+        await pageMove('http://localhost:3000');
       } catch (err) {
         console.error(err);
       }
