@@ -7,11 +7,13 @@
       "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Indvb3Nlb25nIiwicHciOiJkbGRudGpkIn0.63MuIIELRLur7rTsxhYr7ALe7Gy4UKVVpZZcBEjVSuk",
       "sidePanel": [
         {
+          "order": 1,
           "class": "이우성",
           "color": "red",
           "checked": "true"
         },
         {
+          "order": 2,
           "class": "류동우",
           "color": "blue",
           "checked": "true"
@@ -88,21 +90,6 @@
           "date": "yy:mm:dd"
         }
       ]
-    },
-    {
-      "token": "eyJhbGciOiJSUzI1NiIsImtpZCI6ImUyMDI4MmY0NDE1NjdjNWVjYjYwNjQ4ODc2ODU3ZjdiOGM1MWM0M2EiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJhY2NvdW50cy5nb29nbGUuY29tIiwiYXpwIjoiMTE0NDkzMDI1NDYtMW1waHVjdThqa2l1Y25wMHI0bmM2bWhkMDlmb2FyaXIuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJhdWQiOiIxMTQ0OTMwMjU0Ni0xbXBodWN1OGpraXVjbnAwcjRuYzZtaGQwOWZvYXJpci5hcHBzLmdvb2dsZXVzZXJjb250ZW50LmNvbSIsInN1YiI6IjEwMDE1NjYxNDc5NTg4MDE5MzU0NyIsImVtYWlsIjoiZGV0cm94MjAyMEBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiYXRfaGFzaCI6InF2X0doRFhGRVliNzFkUE0tZnRwNVEiLCJuYW1lIjoiRGV0cm94IFJ5dSIsInBpY3R1cmUiOiJodHRwczovL2xoNS5nb29nbGV1c2VyY29udGVudC5jb20vLTNXN0tNSmR1T1BFL0FBQUFBQUFBQUFJL0FBQUFBQUFBQUFBL0FNWnV1Y25SVy1nVnVFSEZEQVlQRkxKWXhKR1hsV2FtQncvczk2LWMvcGhvdG8uanBnIiwiZ2l2ZW5fbmFtZSI6IkRldHJveCIsImZhbWlseV9uYW1lIjoiUnl1IiwibG9jYWxlIjoia28iLCJpYXQiOjE1OTI4OTI4NTAsImV4cCI6MTU5Mjg5NjQ1MCwianRpIjoiMDZjMTkwYWE4ODAyNGVlODM3MGFlZWI5NjY4NDJhMWRiY2FlNzhmOCJ9.RDloZEW_j3VRP-PgIjswevZ4cws6QrHeXNI-M9mdI8hq8jp2lNrQA2sZaDzMoAOF4Jayg7oxorYeViu9qqD-PouwhR2IkBUHGWsAh0YlnHrh5GFfA2RTIQPwOiqyf-rggkdZ0cDZ7Vc6vF9qcbE4dwkdPYQ076Bh1QafBtckrvOem5lK_wFgVCue7IYkLZ3oZi-6EAgfwaF_73k_TqO6TAv1kUcGiXk1wS6YEc-jLPKZv6utQx1bM-_MntKpdovLQLI6X5J1BwuuNPlZrv6CwG5UON-jw0nmjcwPJfN8-W64Z2qpJz5z10wvVfAsrnIXHV-nUz7jHqbJaXn6mLIoJw",
-      "id": "detrox2020@gmail.com",
-      "title": [],
-      "calender": []
-    },
-    {
-      "id": "5U7_U0F"
-    },
-    [],
-    {
-      "id": "u6agUHM"
-    },
-    [],
-    []
+    }
   ]
 }

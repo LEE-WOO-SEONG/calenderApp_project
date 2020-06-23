@@ -24,26 +24,27 @@
 
 <body>
   <section id="login">
-    <h1 class="login-title">Private Calender</h1>
-    <form id=login-form>
+    <h1 class="a11y-hidden">Private Calender</h1>
+    <form id="login-form">
       <fieldset>
-        <legend class="a11y-hidden">달력 로그인</legend>
-        <div class="login-idContainer">
-          <label for="login-id">UserName</label>
-          <input id="login-id" type="text" name="id">
+        <legend class="login-title">Sign Up</legend>
+        <div class="login-container">
+          <div class="login-idContainer">
+            <label for="login-id">UserName</label>
+            <input id="login-id" type="text" name="id">
+          </div>
+          <div class="login-pwContainer">
+            <label for="login-pw">Password</label>
+            <input id="login-pw" type="password" name="password">
+          </div>
         </div>
-        <div class="login-pwContainer">
-          <label for="login-pw">Password</label>
-          <input id="login-pw" type="password" name="password">
-        </div>
-        <button type="button" class="btn-login" name="password">Login</button>
+        <button type="button" class="btn-login" name="password">Sign In</button>
         <div class="api-container">
           <button type="button" class="btn-google" type="button">
             <span class="btn-googleLogo"></span>
             <span class="btn-googleText">Login with Google</span>
           </button>
           <button type="button" class="btn-kakao"></button>
-        </div>
         </div>
       </fieldset>
     </form>

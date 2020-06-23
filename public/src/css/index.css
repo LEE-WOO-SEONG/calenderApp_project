@@ -1,32 +1,46 @@
   #login {
-    margin: 0 auto;
     padding-top: 25vh;
-  }
-
-  .login-title {
-    font-size: 50px;
-    text-align: center;
+    background-color: rgb(139, 139, 139);
+    height: calc(100vh - 25vh);
   }
 
   #login-form {
-    width: 450px;
+    position: relative;
+    width: 700px;
+    height: 400px;
     margin: 0 auto;
+    border-radius: 10px;
+    background-color: rgb(250, 246, 246)
+    /* background-image: url('../img/loginBg.png'); */
+    /* background-position: 0% 0% ; */
+    /* background-size: cover; */
+    /* background-repeat: no-repeat; */
   }
 
   #login-form > fieldset {
-    border:none;
+    position: absolute;
+    top: 80px;
+    left: 15px;
+    width: 450px;
+    border: none;
   }
-
+  
+  .login-title {
+    position: absolute;
+    top: -60px;
+    font-size: 35px;
+  }
+  
   .login-idContainer,
   .login-pwContainer {
     position: relative;
+    margin-top: 20px;
   }
 
   [for^="login"] {
     position: absolute;
-    top: 0;
-    font-size: 20px;
-    color: rgb(68, 64, 63);
+    transform: translateY(-80%);
+    color: rgb(122, 117, 116);
   }
 
   #login-id,
@@ -49,7 +63,7 @@
     padding: 10px 0;
     background-color: rgb(41, 59, 83);
     border-radius: 10px;
-    margin-top: 5px;
+    margin-top: 10px;
   }
 
   .btn-login:hover {

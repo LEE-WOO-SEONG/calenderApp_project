@@ -1,5 +1,6 @@
 // functions
 const pageMove = url => location.replace(url);
+const removeToken = () => localStorage.removeItem('userTk');
 
 function Calendar() {
   this.container = document.querySelector('.container');
@@ -113,8 +114,13 @@ function Calendar() {
     $monthAndYear.textContent = `${this.currentYear + '년 ' + this.months[this.currentMonth]}`;
 
     $btnLogout.textContent = '로그아웃';
-    $btnLogout.onclick = () => {
-      pageMove('http://akakqogk.dothome.co.kr');
+    $btnLogout.onclick = async () => {
+      try {
+        await removeToken();
+        await pageMove('http://localhost:3000');
+      } catch (err) {
+        console.error(err);
+      }
     };
 
     $headerContainer.appendChild($currentMonth);
