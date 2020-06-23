@@ -1,6 +1,7 @@
 /* variables */
 // dom
 const $loginForm = document.getElementById('login-form');
+const $inputContainer = document.querySelector('.login-container');
 const $inputId = document.getElementById('login-id');
 const $inputPw = document.getElementById('login-pw');
 const $btnKakao = document.querySelector('.btn-kakao');
@@ -23,7 +24,7 @@ const validateUserinfo = async (userid, userpw) => {
     const userPw = user.pw;
 
     if (userPw === userpw) {
-      pageMove('http://akakqogk.dothome.co.kr/calender.html');
+      pageMove('http://localhost:3000/calender.html');
       saveToken(user.token);
     }
   } catch (err) {
@@ -35,19 +36,16 @@ const validateUserinfo = async (userid, userpw) => {
 const insertUserinfo = async (token, id) => {
   try {
     // 등록된 회원인지 확인
-    const res = await axios('http://localhost:3000/users');
+    const res = await axios.get('http://localhost:3000/users');
     const users = await res.data;
     const loginedId = users.find(user => user.id === id);
     if (loginedId) return;
 
-    await axios('http://localhost:3000/users', {
-      method: 'POST',
-      data: {
-        "id": id,
-        "token": token,
-        "title": [],
-        "calender": []
-      }
+    await axios.post('http://localhost:3000/users', {
+      id,
+      token,
+      title: [],
+      calender: []
     });
   } catch (err) {
     console.error(err);
@@ -63,10 +61,10 @@ const loginKakao = () => {
       const kakaoToken = Kakao.Auth.getAccessToken();
       localStorage.removeItem('kakao_c40e0085c128623f6673bddf89c54ff6');
 
-      Kakao.API.request({url: '/v2/user/me'})
+      Kakao.API.request({ url: '/v2/user/me' })
         .then(({ kakao_account }) => insertUserinfo(kakaoToken, kakao_account.email))
         .then(() => saveToken(kakaoToken))
-        .then(() => pageMove('http://akakqogk.dothome.co.kr/calender.html'))
+        .then(() => pageMove('http://localhost:3000/calender.html'))
         .catch(console.error);
     },
     fail(err) {
@@ -88,7 +86,7 @@ const loginGoogle = async () => {
 
       await insertUserinfo(googleToken, googleEmail);
       saveToken(googleToken);
-      pageMove('http://akakqogk.dothome.co.kr/calender.html');
+      pageMove('http://localhost:3000/calender.html');
     });
   } catch (err) {
     console.error(err);
@@ -98,10 +96,9 @@ const loginGoogle = async () => {
 /* event */
 // 로그아웃 확인
 window.addEventListener('load', () => {
-  if (!localStorage.getItem('userTk')) return;
-  pageMove('http://akakqogk.dothome.co.kr/calender.html');
-  // removeToken();
-  // $modalContainer.classList.add('active');
+  if (localStorage.getItem('userTk')) {
+    pageMove('http://localhost:3000/calender.html');
+  } else $modalContainer.classList.add('active');
 });
 
 // 회원정보로 로그인
