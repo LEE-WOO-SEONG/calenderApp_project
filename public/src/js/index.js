@@ -39,14 +39,18 @@ const insertUserinfo = async (token, id) => {
     const res = await axios.get('http://localhost:3000/users');
     const users = await res.data;
     const loginedId = users.find(user => user.id === id);
-    if (loginedId) return;
-
-    await axios.post('http://localhost:3000/users', {
-      id,
-      token,
-      title: [],
-      calender: []
-    });
+    if (loginedId) {
+      await axios.patch(`http://localhost:3000/users/${id}`, {
+        token
+      });
+    } else {
+      await axios.post('http://localhost:3000/users', {
+        id,
+        token,
+        title: [],
+        calender: []
+      });
+    }
   } catch (err) {
     console.error(err);
   }
