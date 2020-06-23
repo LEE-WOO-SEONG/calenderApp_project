@@ -71,11 +71,9 @@ function Calendar() {
   // YYYYmmdd() = YYYY-MM-DD
   this.YYYYmmdd = date => {
     const d = new Date(date);
-    let month = '' + (d.getMonth() + 1);
-    let day = '' + d.getDate();
-    const year = d.getFullYear();
-    if (month.length < 2) month = '0' + month;
-    if (day.length < 2) day = '0' + day;
+    const year = '' + d.getFullYear();
+    const month = (d.getMonth() + 1) < 10 ? '0' + (d.getMonth() + 1) : '' + (d.getMonth() + 1);
+    const day = d.getDate() < 10 ? '0' + d.getDate() : '' + d.getDate();
     return [year, month, day].join('');
   };
 
@@ -204,6 +202,8 @@ function Calendar() {
             $selected.classList.remove('selected');
           }
           $cell.classList.add('selected');
+          document.getElementById('start-date').value = `${num.id.substring(0, 4)}-${num.id.substring(4, 6)}-${num.id.substring(6, 8)}`;
+          document.getElementById('end-date').value = `${num.id.substring(0, 4)}-${num.id.substring(4, 6)}-${num.id.substring(6, 8)}`;
         });
 
         $cell.addEventListener('mousedown', () => {
@@ -213,6 +213,10 @@ function Calendar() {
         $cell.addEventListener('mouseup', () => {
           document.getElementById('end-date').value = `${num.id.substring(0, 4)}-${num.id.substring(4, 6)}-${num.id.substring(6, 8)}`;
           document.querySelector('.modal-container').classList.remove('hidden');
+          if (document.getElementById('start-date').value > document.getElementById('end-date').value) {
+            document.getElementById('end-date').value = document.getElementById('start-date').value;
+            document.getElementById('start-date').value = `${num.id.substring(0, 4)}-${num.id.substring(4, 6)}-${num.id.substring(6, 8)}`;
+          }
         });
 
         // eslint-disable-next-line no-unused-expressions
@@ -240,13 +244,63 @@ function Calendar() {
   this.showCalendar();
 }
 
-new Calendar();
+const calendar = new Calendar();
 
 const $scheduleModalClose = document.querySelector('.schedule-modal-close');
 const $schedueleModalSave = document.querySelector('.schedule-modal-save');
 $scheduleModalClose.onclick = () => {
   document.querySelector('.modal-container').classList.add('hidden');
 };
-$schedueleModalSave.onclick = () => {
 
+let schedule = [];
+
+const getScheduleID = () => (schedule.length ? Math.max(...schedule.map(list => list.id)) + 1 : 1);
+
+$schedueleModalSave.onclick = () => {
+  const startDate = new Date(document.getElementById('start-date').value);
+  const endDate = new Date(document.getElementById('end-date').value);
+  const titleValue = document.getElementById('schedule-name').value;
+  const memoValue = document.getElementById('schedule-memo').value;
+  const dateDiff = (endDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24);
+  // for (let i = 0; i <= dateDiff; i++) {
+  //   const d = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate() + i);
+  //   const YYYYmmdd = calendar.YYYYmmdd(d);
+  //   const $cell = document.getElementById(`${YYYYmmdd}`);
+  //   console.log($cell.querySelector('.schedule-inner-container').innerHTML);
+  //   $cell.querySelector('.schedule-inner-container').innerHTML += `<div class="schedule-list ${YYYYmmdd}" role="button">${dateDiff}</div>`
+  // }
+  schedule = [...schedule, { id: getScheduleID(), from: calendar.YYYYmmdd(startDate), to: calendar.YYYYmmdd(endDate), title: titleValue, memo: memoValue, length: dateDiff }];
+  document.querySelector('.modal-container').classList.add('hidden');
+  document.getElementById('schedule-name').value = '';
+  document.getElementById('schedule-memo').value = '';
+  console.log(schedule);
 };
+
+// async function fetchTodo() {
+//   const url = 'http://localhost:3000/users';
+
+//   const response = await fetch(url);
+//   const todo = await response.json();
+//   console.log(todo);
+// }
+// console.log(fetchTodo());
+
+
+axios.get('/users')
+  .then(response => {
+    // console.log(response.data);
+    return response.data;
+  }).then(users => {
+    // console.log(users.find(users => users.id === 'wooseong'));
+    return users.find(users => users.id === 'wooseong');
+  }).then(users => {
+    // console.log(users.calendar);
+    return users.calendar;
+  })
+  .catch(err => console.error(err));
+
+axios.post('users', schedule)
+  .then(response => {
+    console.log(response.date);
+    return response.date;
+  })
