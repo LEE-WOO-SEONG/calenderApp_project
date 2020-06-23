@@ -2,6 +2,7 @@
 #sidemenu {
   /* background-color:blue; */
   padding:20px 20px;
+  /* background-color:red; */
 }
 
 .add-calender-list-box {
@@ -33,6 +34,7 @@
   background-color: #fff;
   border: 1px solid #cfdadd;
 }
+
 .checkbox:checked + label:after {
   content: "";
   position: absolute;
@@ -41,5 +43,5 @@
   transform: translate3d(0, -50%, 0);
   width: 9px;
   height: 9px;
-  background-color: #e58a23;
+  /* background-color: #e58a23; */
 }

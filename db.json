@@ -7,11 +7,13 @@
       "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Indvb3Nlb25nIiwicHciOiJkbGRudGpkIn0.63MuIIELRLur7rTsxhYr7ALe7Gy4UKVVpZZcBEjVSuk",
       "sidePanel": [
         {
+          "order": 1,
           "class": "이우성",
           "color": "red",
           "checked": "true"
         },
         {
+          "order": 2,
           "class": "류동우",
           "color": "blue",
           "checked": "true"
