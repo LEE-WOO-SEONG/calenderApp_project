@@ -7,45 +7,42 @@
       "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Indvb3Nlb25nIiwicHciOiJkbGRudGpkIn0.63MuIIELRLur7rTsxhYr7ALe7Gy4UKVVpZZcBEjVSuk",
       "tables": [
         {
-          "id": 1,
+          "order": 1,
           "class": "이우성",
+          "color": "red",
+          "checked": false
+        },
+        {
+          "order": 2,
+          "class": "이11",
           "color": "red",
           "checked": true
         },
         {
-          "id": 2,
-          "class": "류동우",
-          "color": "blue",
-          "checked": true
+          "order": 3,
+          "class": "이22",
+          "color": "red",
+          "checked": false
         }
       ],
       "schedules": [
         {
-          "id": "1",
+          "id": 1,
           "from": "20200626",
           "to": "20200627",
           "title": "미니프로젝트 발표",
           "memo": "",
           "length": 1,
-          "fk-table": 1
+          "fkTable": 1
         },
         {
-          "id": "2",
-          "from": "20200603",
-          "to": "20200605",
-          "title": "집에 가고 싶다",
-          "memo": "",
-          "length": 2,
-          "fk-table": 2
-        },
-        {
-          "id": "3",
+          "id": 3,
           "from": "20200605",
           "to": "20200605",
           "title": "살려줘",
           "memo": "",
           "length": 0,
-          "fk-table": 2
+          "fkTable": 2
         }
       ]
     },
@@ -56,17 +53,13 @@
       "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImppaHllb24iLCJwdyI6ImVod2xndXMifQ.Ukhn9ofMxnh2ibymwtIdOU-txscUHKja0b8Dm25FTt4",
       "tables": [
         {
-          "id": 1,
+          "order": 1,
           "class": "도지현",
-          "color": "red",
+          "color": "brown",
           "checked": true
         }
       ],
-      "schedules": [
-        {
-          "date": "yy:mm:dd"
-        }
-      ]
+      "schedules": []
     },
     {
       "id": "dongwoo",
@@ -75,36 +68,28 @@
       "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImRvbmd3b28iLCJwdyI6ImdiZWhkZG4ifQ.LJn7kfgFCAv_q3alUeyG-yVHczgk4jepWH4GZjrziLM",
       "tables": [
         {
-          "id": 1,
+          "order": 1,
           "class": "류동우",
-          "color": "red",
+          "color": "brown",
           "checked": true
         }
       ],
-      "schedules": [
-        {
-          "date": "yy:mm:dd"
-        }
-      ]
+      "schedules": []
     },
     {
       "id": "yerin",
       "pw": "chldPfls",
       "gender": "female",
       "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InllcmluIiwicHciOiJjaGxkUGZscyJ9.mNqULwX20ah502qL-PgTuwubjXAOEVM90UTrkQMWp6o",
-      "title": [
+      "tables": [
         {
-          "id": 1,
+          "order": 1,
           "class": "최예린",
-          "color": "red",
+          "color": "brown",
           "checked": true
         }
       ],
-      "calendar": [
-        {
-          "date": "yy:mm:dd"
-        }
-      ]
+      "schedules": []
     }
   ]
 }

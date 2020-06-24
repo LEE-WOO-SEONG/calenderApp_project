@@ -5,7 +5,6 @@ const $input = document.getElementById('add-calender');
 const $addListSubmit = document.querySelector('.add-list-submit');
 const $addCalenderListBox = document.querySelector('.add-calender-list-box');
 
-
 // function
 const render = () => {
   let sideNav = '';
@@ -36,7 +35,7 @@ const addListCalender = content => {
   // console.log(calenderList);
   const dayObject = { order: getNextId(), content, completed: true };
   calenderList = [...calenderList, dayObject];
-  document.getElementById('select-schedule').innerHTML += `<option value="${dayObject.id}">${dayObject.content}</option>`
+  document.getElementById('select-schedule').innerHTML += `<option value="${dayObject.id}">${dayObject.content}</option>`;
   console.log(dayObject, calenderList);
   render();
 };
@@ -49,25 +48,22 @@ const changeCompleted = id => {
 };
 
 const showOnload = matchingUser => {
-  const { sidePanel } = matchingUser;
-  calenderList = sidePanel;
+  const { tables } = matchingUser;
+  calenderList = tables;
   console.log(calenderList);
   render();
 };
 
 window.onload = () => {
-  // calenderList = [
-  //   { id: 2, content: '지현', completed: true },
-  //   { id: 3, content: '예린', completed: true }
-  // ]
-  localStorage.setItem('userTk', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Indvb3Nlb25nIiwicHciOiJkbGRudGpkIn0.63MuIIELRLur7rTsxhYr7ALe7Gy4UKVVpZZcBEjVSuk');
+  // localStorage.setItem('userTk', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Indvb3Nlb25nIiwicHciOiJkbGRudGpkIn0.63MuIIELRLur7rTsxhYr7ALe7Gy4UKVVpZZcBEjVSuk');
 
   async function getList() {
     try {
       // const sendUrl = 'users';
-      const response = await axios.get('users');
-      const _calenderList = await response.data;
-      const matchingUser = await _calenderList.find(item => item.token === localStorage.getItem('userTk'));
+      const response = await axios.get(`/users/${localStorage.getItem('userTk')}`);
+      const matchingUser = await response.data;
+      console.log(matchingUser);
+      // const matchingUser = await _calenderList.find(item => item.token === localStorage.getItem('userTk'));
       // console.log(matchingUser);
       showOnload(matchingUser);
     } catch (err) {
@@ -97,4 +93,3 @@ $addCalenderListBox.onchange = e => {
   const ParentNodeId = e.target.parentNode.id;
   changeCompleted(ParentNodeId);
 };
-

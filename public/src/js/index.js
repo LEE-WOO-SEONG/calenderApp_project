@@ -1,7 +1,6 @@
 /* variables */
 // dom
 const $loginForm = document.getElementById('login-form');
-// const $inputContainer = document.querySelector('.login-container');
 const $inputId = document.getElementById('login-id');
 const $inputPw = document.getElementById('login-pw');
 const $btnKakao = document.querySelector('.btn-kakao');
@@ -10,7 +9,6 @@ const $modalContainer = document.querySelector('.modal-container');
 
 /* functions */
 const pageMove = url => location.replace(url);
-// const removeToken = () => localStorage.removeItem('userTk');
 const saveToken = value => localStorage.setItem('userTk', value);
 
 // 회원정보로 로그인 시 userinfo 확인
@@ -49,8 +47,8 @@ const insertUserinfo = async (token, id) => {
         token,
         tables: [{
           id: 1,
-          class: "할일",
-          color: "red",
+          class: '할일',
+          color: 'red',
           checked: true
         }],
         schedules: []
