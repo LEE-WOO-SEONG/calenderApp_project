@@ -5,32 +5,44 @@
       "pw": "dldntjd",
       "gender": "male",
       "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Indvb3Nlb25nIiwicHciOiJkbGRudGpkIn0.63MuIIELRLur7rTsxhYr7ALe7Gy4UKVVpZZcBEjVSuk",
-      "sidePanel": [
+      "tables": [
         {
-          "order": 1,
+          "id": 1,
           "class": "이우성",
           "color": "red",
-          "checked": "true"
+          "checked": false
+        },
+        {
+          "id": 2,
+          "class": "이11",
+          "color": "red",
+          "checked": true
+        },
+        {
+          "id": 3,
+          "class": "이22",
+          "color": "red",
+          "checked": false
         }
       ],
-      "calendar": [
+      "schedules": [
         {
-          "date": "20200626",
-          "content": "미니프로젝트 발표",
-          "class": "류동우",
-          "color": "blue"
+          "id": 1,
+          "from": "20200626",
+          "to": "20200627",
+          "title": "미니프로젝트 발표",
+          "memo": "",
+          "length": 1,
+          "fk-table": 1
         },
         {
-          "date": "20200622",
-          "content": "족발 먹기",
-          "class": "이우성",
-          "color": "red"
-        },
-        {
-          "date": "20200623",
-          "content": "발표 준비",
-          "class": "이우성",
-          "color": "red"
+          "id": 3,
+          "from": "20200605",
+          "to": "20200605",
+          "title": "살려줘",
+          "memo": "",
+          "length": 0,
+          "fk-table": 2
         }
       ]
     },
@@ -39,88 +51,91 @@
       "pw": "ehwlgus",
       "gender": "female",
       "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImppaHllb24iLCJwdyI6ImVod2xndXMifQ.Ukhn9ofMxnh2ibymwtIdOU-txscUHKja0b8Dm25FTt4",
-      "title": [
+      "tables": [
         {
+          "id": 1,
           "class": "도지현",
-          "color": "brown"
+          "color": "brown",
+          "checked": true
+        },
+        {
+          "id": 2,
+          "class": "ㄴㅇㄹㄴㅇㄹㄴㅇㄹㄴㅇ",
+          "checked": true
+        },
+        {
+          "id": 3,
+          "class": "ㄴㅁㅇㅁㄴㅇㅁㄴㅇ",
+          "checked": true
+        },
+        {
+          "id": 4,
+          "class": "ㅁㄴㅇㄴㅁㅇ",
+          "checked": true
+        },
+        {
+          "id": 5,
+          "class": "ㅌㅋㅊㄴㅇㅁㄴㅇ",
+          "checked": true
         }
       ],
-      "calendar": [
-        {
-          "date": "yy:mm:dd"
-        }
-      ]
+      "schedules": []
     },
     {
       "id": "dongwoo",
       "pw": "gbehddn",
       "gender": "male",
       "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImRvbmd3b28iLCJwdyI6ImdiZWhkZG4ifQ.LJn7kfgFCAv_q3alUeyG-yVHczgk4jepWH4GZjrziLM",
-      "title": [
+      "tables": [
         {
+          "id": 1,
           "class": "류동우",
-          "color": "blue"
+          "color": "brown",
+          "checked": true
         }
       ],
-      "calendar": [
-        {
-          "date": "yy:mm:dd"
-        }
-      ]
+      "schedules": []
     },
     {
       "id": "yerin",
       "pw": "chldPfls",
       "gender": "female",
       "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InllcmluIiwicHciOiJjaGxkUGZscyJ9.mNqULwX20ah502qL-PgTuwubjXAOEVM90UTrkQMWp6o",
-      "title": [
+      "tables": [
         {
+          "id": 1,
           "class": "최예린",
-          "color": "purple"
+          "color": "brown",
+          "checked": true
         }
       ],
-      "calendar": [
-        {
-          "date": "yy:mm:dd"
-        }
-      ]
+      "schedules": []
     },
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    [],
-    []
+    {
+      "id": "ehwlgus22@gmail.com",
+      "token": "eyJhbGciOiJSUzI1NiIsImtpZCI6ImUyMDI4MmY0NDE1NjdjNWVjYjYwNjQ4ODc2ODU3ZjdiOGM1MWM0M2EiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJhY2NvdW50cy5nb29nbGUuY29tIiwiYXpwIjoiMTE0NDkzMDI1NDYtMW1waHVjdThqa2l1Y25wMHI0bmM2bWhkMDlmb2FyaXIuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJhdWQiOiIxMTQ0OTMwMjU0Ni0xbXBodWN1OGpraXVjbnAwcjRuYzZtaGQwOWZvYXJpci5hcHBzLmdvb2dsZXVzZXJjb250ZW50LmNvbSIsInN1YiI6IjExNTM2OTI2ODU1NTg1NDA2NTcwMSIsImVtYWlsIjoiZWh3bGd1czIyQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJhdF9oYXNoIjoiQ0JtMDVqZlktTUU1dGM3VEhRTENwZyIsIm5hbWUiOiLsp4DtmIQiLCJwaWN0dXJlIjoiaHR0cHM6Ly9saDQuZ29vZ2xldXNlcmNvbnRlbnQuY29tLy1OaEFVQWJrYS1NYy9BQUFBQUFBQUFBSS9BQUFBQUFBQUFBQS9BTVp1dWNua1hIbUdyYVVtOS1BaE8wSHV5NUVtVmtPRmp3L3M5Ni1jL3Bob3RvLmpwZyIsImdpdmVuX25hbWUiOiLtmIQiLCJmYW1pbHlfbmFtZSI6IuyngCIsImxvY2FsZSI6ImtvIiwiaWF0IjoxNTkyOTk4Mzg0LCJleHAiOjE1OTMwMDE5ODQsImp0aSI6Ijg4NDYyNTgzMTk0ZjYyZjFlNGQwNzhmMzg4MjkzMzYwYmJlNTFlMjMifQ.QjOyIJ-VcO0AXUA3jOjBvix7Arv1Ct9Gv9INWfopq4-dK_KldHKYGBeUg17x93bfaioDrhvWh62eZKRTPJTjASqG2tePnA8eCxCE0ltH7WojOmuO1Azv34-f6PiV8py8f03EXHP6IZIe74G7-A7jlPj08G_cJZ58waIsiqzX5SZdBfggIVAMCVAzuqIpuRzkyNWUcTqM61OLqDHbzk40h7dc0UHcgyNgvkqV7fQC--XCF0dAvjNWe8MG_4UFehXq989q3FxAEIiYImUE2-EY_LktGZE_dZfkiiMFRH5e6AfoKfrpt7GYK02tE-6x78nt1iAoR9IKDDvYHV896do1wg",
+      "tables": [
+        {
+          "id": 1,
+          "class": "할일",
+          "color": "red",
+          "checked": true
+        }
+      ],
+      "schedules": []
+    },
+    {
+      "id": "wlgus_57@naver.com",
+      "token": "9h3OBtMyE0bnLCcnONxz9GCRTuwocWb1Y517tQo9dVsAAAFy5hrjbg",
+      "tables": [
+        {
+          "id": 1,
+          "class": "할일",
+          "color": "red",
+          "checked": true
+        }
+      ],
+      "schedules": []
+    }
   ]
 }

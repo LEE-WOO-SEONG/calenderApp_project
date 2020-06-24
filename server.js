@@ -1,4 +1,6 @@
 const jsonServer = require('json-server');
+const bodyParser = require('body-parser');
+const cors = require("cors");
 const server = jsonServer.create();
 const router = jsonServer.router('db.json');
 const middlewares = jsonServer.defaults();
@@ -7,8 +9,10 @@ const low = require('lowdb');
 const FileSync = require('lowdb/adapters/FileSync');
 const adapter = new FileSync('db.json');
 const db = low(adapter);
-// Set default middlewares (logger, static, cors and no-cache)
 server.use(middlewares);
+server.use(jsonServer.bodyParser);
+server.use(bodyParser.urlencoded({ extended: false }));
+server.use(cors());
 /* get 요청 */
 // server.get('/users', (req, res) => {
 //   res.send(db.get('users').value());
@@ -29,18 +33,60 @@ server.get('/users/:token/tables', (req, res) => {
   res.send(db.get('users').find({ token }).value().tables);
 });
 /* post 요청 */
-// server.post('/users', (req, res) => {
-//   // const { token } = req.params;
-//   // const { id, from, to, title, memo, length, fkTable } = req.body;
-//   // const { data } = req.body;
-//   db.get('users')
-//     // .find({ token })
-//     // .value()
-//     // .value()
-//     .push(req.params.name)
-//     .write();
-//   res.send(db.get('users').value());
-// });
+// token -> schedules post 
+server.post('/users/:token/schedules', (req, res) => {
+  const { token } = req.params;
+  db.get('users')
+    .find({ token })
+    .value().schedules
+    .push(req.body);
+  db.write();
+  res.send(db.get('users').find({ token }).value().schedules);
+});
+// token -> tables post
+server.post('/users/:token/tables', (req, res) => {
+  const { token } = req.params;
+  db.get('users')
+    .find({ token })
+    .value().tables
+    .push(req.body);
+  db.write();
+  res.send(db.get('users').find({ token }).value().tables);
+});
+/* patch 요청 */
+// token -> tables/id patch
+server.patch('/users/:token/tables/:id', (req, res) => {
+  const { token, id } = req.params;
+  const { tables } = db.get('users').find({ token }).value();
+  const index = tables.findIndex(table => table.id === +id);
+  const newTable = { ...tables[index], ...req.body };
+  tables.splice(index, 1, newTable);
+  db.write();
+  res.send(db.get('users').find({ token }).value().tables);
+});
+/* delete 요청 */
+// token -> tables/id delete
+server.delete('/users/:token/tables/:id', (req, res) => {
+  const { token, id } = req.params;
+  const { tables } = db.get('users').find({ token }).value();
+  const index = tables.findIndex(table => table.id === +id);
+  if (index !== -1) {
+    tables.splice(index, 1);
+    db.write();
+  }
+  res.send(db.get('users').find({ token }).value().tables);
+});
+// token -> schedules/id delete
+server.delete('/users/:token/schedules/:id', (req, res) => {
+  const { token, id } = req.params;
+  const { schedules } = db.get('users').find({ token }).value();
+  const index = schedules.findIndex(table => table.id === +id);
+  if (index !== -1) {
+    schedules.splice(index, 1);
+    db.write();
+  }
+  res.send(db.get('users').find({ token }).value().schedules);
+});
 // Use default router
 server.use(router);
 server.listen(3000, () => {
