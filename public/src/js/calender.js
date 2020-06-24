@@ -305,7 +305,6 @@ $scheduleRemove.onclick = () => {
 
 document.getElementById('calendar').addEventListener('click', e => {
   if (!e.target.matches('#calendar .schedule-list')) return;
-
 });
 
 window.addEventListener('load', () => {

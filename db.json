@@ -7,45 +7,60 @@
       "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Indvb3Nlb25nIiwicHciOiJkbGRudGpkIn0.63MuIIELRLur7rTsxhYr7ALe7Gy4UKVVpZZcBEjVSuk",
       "tables": [
         {
-          "id": 1,
+          "order": 1,
           "class": "이우성",
+          "color": "red",
+          "checked": false
+        },
+        {
+          "order": 2,
+          "class": "이11",
           "color": "red",
           "checked": true
         },
         {
-          "id": 2,
-          "class": "류동우",
-          "color": "blue",
-          "checked": true
+          "order": 3,
+          "class": "이22",
+          "color": "red",
+          "checked": false
         }
       ],
       "schedules": [
         {
-          "id": "1",
+          "id": 1,
           "from": "20200626",
           "to": "20200627",
           "title": "미니프로젝트 발표",
           "memo": "",
           "length": 1,
-          "fk-table": 1
+          "fkTable": 1
         },
         {
-          "id": "2",
-          "from": "20200603",
-          "to": "20200605",
-          "title": "집에 가고 싶다",
-          "memo": "",
-          "length": 2,
-          "fk-table": 2
-        },
-        {
-          "id": "3",
+          "id": 3,
           "from": "20200605",
           "to": "20200605",
           "title": "살려줘",
           "memo": "",
           "length": 0,
-          "fk-table": 2
+          "fkTable": 2
+        },
+        {
+          "id": 4,
+          "from": "20200601",
+          "to": "20200628",
+          "title": "hellow",
+          "memo": "",
+          "length": 27,
+          "fkTable": 2
+        },
+        {
+          "id": 5,
+          "from": "20200626",
+          "to": "20200626",
+          "title": "실험",
+          "memo": "",
+          "length": 0,
+          "fkTable": 2
         }
       ]
     },
@@ -56,17 +71,13 @@
       "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImppaHllb24iLCJwdyI6ImVod2xndXMifQ.Ukhn9ofMxnh2ibymwtIdOU-txscUHKja0b8Dm25FTt4",
       "tables": [
         {
-          "id": 1,
+          "order": 1,
           "class": "도지현",
-          "color": "red",
+          "color": "brown",
           "checked": true
         }
       ],
-      "schedules": [
-        {
-          "date": "yy:mm:dd"
-        }
-      ]
+      "schedules": []
     },
     {
       "id": "dongwoo",
@@ -75,613 +86,28 @@
       "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImRvbmd3b28iLCJwdyI6ImdiZWhkZG4ifQ.LJn7kfgFCAv_q3alUeyG-yVHczgk4jepWH4GZjrziLM",
       "tables": [
         {
-          "id": 1,
+          "order": 1,
           "class": "류동우",
-          "color": "red",
+          "color": "brown",
           "checked": true
         }
       ],
-      "schedules": [
-        {
-          "date": "yy:mm:dd"
-        }
-      ]
+      "schedules": []
     },
     {
       "id": "yerin",
       "pw": "chldPfls",
       "gender": "female",
       "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InllcmluIiwicHciOiJjaGxkUGZscyJ9.mNqULwX20ah502qL-PgTuwubjXAOEVM90UTrkQMWp6o",
-      "title": [
-        {
-          "id": 1,
-          "class": "최예린",
-          "color": "red",
-          "checked": true
-        }
-      ],
-      "calendar": [
-        {
-          "date": "yy:mm:dd"
-        }
-      ]
-    },
-    {
-      "id": "detrox2020@gmail.com",
-      "token": "eyJhbGciOiJSUzI1NiIsImtpZCI6ImUyMDI4MmY0NDE1NjdjNWVjYjYwNjQ4ODc2ODU3ZjdiOGM1MWM0M2EiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJhY2NvdW50cy5nb29nbGUuY29tIiwiYXpwIjoiMTE0NDkzMDI1NDYtMW1waHVjdThqa2l1Y25wMHI0bmM2bWhkMDlmb2FyaXIuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJhdWQiOiIxMTQ0OTMwMjU0Ni0xbXBodWN1OGpraXVjbnAwcjRuYzZtaGQwOWZvYXJpci5hcHBzLmdvb2dsZXVzZXJjb250ZW50LmNvbSIsInN1YiI6IjEwMDE1NjYxNDc5NTg4MDE5MzU0NyIsImVtYWlsIjoiZGV0cm94MjAyMEBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiYXRfaGFzaCI6IllvbzhuSnFZVzF3OVJhZVlZa19Ib0EiLCJuYW1lIjoiRGV0cm94IFJ5dSIsInBpY3R1cmUiOiJodHRwczovL2xoNS5nb29nbGV1c2VyY29udGVudC5jb20vLTNXN0tNSmR1T1BFL0FBQUFBQUFBQUFJL0FBQUFBQUFBQUFBL0FNWnV1Y25SVy1nVnVFSEZEQVlQRkxKWXhKR1hsV2FtQncvczk2LWMvcGhvdG8uanBnIiwiZ2l2ZW5fbmFtZSI6IkRldHJveCIsImZhbWlseV9uYW1lIjoiUnl1IiwibG9jYWxlIjoia28iLCJpYXQiOjE1OTI5ODE0NjIsImV4cCI6MTU5Mjk4NTA2MiwianRpIjoiODFhZGY0MmQ5YWE5NzM2ODgzYTA2NTgyYTczOTAzMzZiOGRjNThlZiJ9.I7xklLrjLc5yhKz_SA_LpsEOHfVXkPIgXFmUX-NFK4-Xk0GwmRknzLFsfvi7DcQnlONkmbZPyxE8ILxvLo1RXzGroxnpKA2qveWpmdd2NJJ8GYQLu2k0iIYcdb-QUFJMOJ573qMhiHLOdtbI0NphvjPgP4covNSfeRrxs4lbvKQ7DccM7xMMWrImwVfuRIzCXvbrc3LqsCjrawVdodBprZ6vfAbxbP0R1_PU00-3DJiKEa-O_XJhpEZosD3id-ZX0cLWETkjHW_yFr-j1v1Fevz7EMBLO8NgeWg-NDMR8LpsYY5YAEAPhGBTn5_l3A6LRRWqQKIqHl_vSpp24KWi6A",
       "tables": [
         {
           "order": 1,
-          "class": "수업",
-          "color": "red",
-          "checked": true
-        },
-        {
-          "order": 2,
-          "class": "휴식",
-          "color": "blue",
-          "checked": true
-        },
-        {
-          "order": 3,
-          "class": "asdasd",
-          "checked": true
-        },
-        {
-          "order": 4,
-          "class": "123123",
-          "checked": true
-        },
-        {
-          "order": 5,
-          "class": "123123",
-          "checked": true
-        },
-        {
-          "order": 6,
-          "class": "123123",
-          "checked": true
-        },
-        {
-          "order": 7,
-          "class": "123123",
-          "checked": true
-        },
-        {
-          "order": 8,
-          "class": "123123",
-          "checked": true
-        },
-        {
-          "order": 9,
-          "class": "adasdsad",
-          "checked": true
-        },
-        {
-          "order": 10,
-          "class": "123123",
+          "class": "최예린",
+          "color": "brown",
           "checked": true
         }
       ],
-      "schedules": [
-        {
-          "id": 1,
-          "from": "20200531",
-          "to": "20200608",
-          "title": "",
-          "memo": "",
-          "length": 8,
-          "fktable": 1
-        },
-        {
-          "id": 2,
-          "from": "20200614",
-          "to": "20200622",
-          "title": "",
-          "memo": "",
-          "length": 8,
-          "fktable": 1
-        },
-        {
-          "id": 3,
-          "from": "20200614",
-          "to": "20200622",
-          "title": "",
-          "memo": "",
-          "length": 8,
-          "fktable": 1
-        },
-        {
-          "id": 4,
-          "from": "20200614",
-          "to": "20200621",
-          "title": "",
-          "memo": "",
-          "length": 7,
-          "fktable": 1
-        },
-        {
-          "id": 5,
-          "from": "20200607",
-          "to": "20200615",
-          "title": "",
-          "memo": "",
-          "length": 8,
-          "fktable": 1
-        },
-        {
-          "id": 6,
-          "from": "20200608",
-          "to": "20200616",
-          "title": "",
-          "memo": "",
-          "length": 8,
-          "fktable": 1
-        },
-        {
-          "id": 7,
-          "from": "20200607",
-          "to": "20200615",
-          "title": "",
-          "memo": "",
-          "length": 8,
-          "fktable": 1
-        },
-        {
-          "id": 8,
-          "from": "20200607",
-          "to": "20200615",
-          "title": "",
-          "memo": "",
-          "length": 8,
-          "fktable": 1
-        },
-        {
-          "id": 9,
-          "from": "20200609",
-          "to": "20200609",
-          "title": "asdasd",
-          "memo": "adsads",
-          "length": 0,
-          "fktable": 1
-        },
-        {
-          "id": 10,
-          "from": "20200615",
-          "to": "20200623",
-          "title": "",
-          "memo": "",
-          "length": 8,
-          "fktable": 1
-        },
-        {
-          "id": 11,
-          "from": "20200607",
-          "to": "20200615",
-          "title": "",
-          "memo": "",
-          "length": 8,
-          "fkTable": 1
-        },
-        {
-          "id": 12,
-          "from": "20200621",
-          "to": "20200622",
-          "title": "2122",
-          "memo": "",
-          "length": 1,
-          "fkTable": 1
-        },
-        {
-          "id": 13,
-          "from": "20200707",
-          "to": "20200707",
-          "title": "",
-          "memo": "",
-          "length": 0,
-          "fkTable": 1
-        },
-        {
-          "id": 14,
-          "from": "20200617",
-          "to": "20200617",
-          "title": "",
-          "memo": "",
-          "length": 0,
-          "fkTable": 1
-        },
-        {
-          "id": 15,
-          "from": "20200617",
-          "to": "20200617",
-          "title": "",
-          "memo": "",
-          "length": 0,
-          "fkTable": 1
-        },
-        {
-          "id": 16,
-          "from": "20200616",
-          "to": "20200616",
-          "title": "",
-          "memo": "",
-          "length": 0,
-          "fkTable": 1
-        },
-        {
-          "id": 17,
-          "from": "20200406",
-          "to": "20200407",
-          "title": "",
-          "memo": "",
-          "length": 1,
-          "fkTable": 1
-        },
-        {
-          "id": 18,
-          "from": "20200426",
-          "to": "20200428",
-          "title": "",
-          "memo": "",
-          "length": 2,
-          "fkTable": 1
-        },
-        [
-          {
-            "id": 1,
-            "from": "20200531",
-            "to": "20200608",
-            "title": "",
-            "memo": "",
-            "length": 8,
-            "fktable": 1
-          },
-          {
-            "id": 2,
-            "from": "20200614",
-            "to": "20200622",
-            "title": "",
-            "memo": "",
-            "length": 8,
-            "fktable": 1
-          },
-          {
-            "id": 3,
-            "from": "20200614",
-            "to": "20200622",
-            "title": "",
-            "memo": "",
-            "length": 8,
-            "fktable": 1
-          },
-          {
-            "id": 4,
-            "from": "20200614",
-            "to": "20200621",
-            "title": "",
-            "memo": "",
-            "length": 7,
-            "fktable": 1
-          },
-          {
-            "id": 5,
-            "from": "20200607",
-            "to": "20200615",
-            "title": "",
-            "memo": "",
-            "length": 8,
-            "fktable": 1
-          },
-          {
-            "id": 6,
-            "from": "20200608",
-            "to": "20200616",
-            "title": "",
-            "memo": "",
-            "length": 8,
-            "fktable": 1
-          },
-          {
-            "id": 7,
-            "from": "20200607",
-            "to": "20200615",
-            "title": "",
-            "memo": "",
-            "length": 8,
-            "fktable": 1
-          },
-          {
-            "id": 8,
-            "from": "20200607",
-            "to": "20200615",
-            "title": "",
-            "memo": "",
-            "length": 8,
-            "fktable": 1
-          },
-          {
-            "id": 9,
-            "from": "20200609",
-            "to": "20200609",
-            "title": "asdasd",
-            "memo": "adsads",
-            "length": 0,
-            "fktable": 1
-          },
-          {
-            "id": 10,
-            "from": "20200615",
-            "to": "20200623",
-            "title": "",
-            "memo": "",
-            "length": 8,
-            "fktable": 1
-          },
-          {
-            "id": 11,
-            "from": "20200607",
-            "to": "20200615",
-            "title": "",
-            "memo": "",
-            "length": 8,
-            "fkTable": 1
-          },
-          {
-            "id": 12,
-            "from": "20200621",
-            "to": "20200622",
-            "title": "2122",
-            "memo": "",
-            "length": 1,
-            "fkTable": 1
-          },
-          {
-            "id": 13,
-            "from": "20200707",
-            "to": "20200707",
-            "title": "",
-            "memo": "",
-            "length": 0,
-            "fkTable": 1
-          },
-          {
-            "id": 14,
-            "from": "20200617",
-            "to": "20200617",
-            "title": "",
-            "memo": "",
-            "length": 0,
-            "fkTable": 1
-          },
-          {
-            "id": 15,
-            "from": "20200617",
-            "to": "20200617",
-            "title": "",
-            "memo": "",
-            "length": 0,
-            "fkTable": 1
-          },
-          {
-            "id": 16,
-            "from": "20200616",
-            "to": "20200616",
-            "title": "",
-            "memo": "",
-            "length": 0,
-            "fkTable": 1
-          },
-          {
-            "id": 17,
-            "from": "20200406",
-            "to": "20200407",
-            "title": "",
-            "memo": "",
-            "length": 1,
-            "fkTable": 1
-          },
-          {
-            "id": 18,
-            "from": "20200426",
-            "to": "20200428",
-            "title": "",
-            "memo": "",
-            "length": 2,
-            "fkTable": 1
-          },
-          {
-            "id": 19,
-            "from": "20200601",
-            "to": "20200616",
-            "title": "",
-            "memo": "",
-            "length": 15,
-            "fkTable": "1"
-          }
-        ],
-        [
-          {
-            "id": 1,
-            "from": "20200531",
-            "to": "20200608",
-            "title": "",
-            "memo": "",
-            "length": 8,
-            "fktable": 1
-          },
-          {
-            "id": 2,
-            "from": "20200614",
-            "to": "20200622",
-            "title": "",
-            "memo": "",
-            "length": 8,
-            "fktable": 1
-          },
-          {
-            "id": 3,
-            "from": "20200614",
-            "to": "20200622",
-            "title": "",
-            "memo": "",
-            "length": 8,
-            "fktable": 1
-          },
-          {
-            "id": 4,
-            "from": "20200614",
-            "to": "20200621",
-            "title": "",
-            "memo": "",
-            "length": 7,
-            "fktable": 1
-          },
-          {
-            "id": 5,
-            "from": "20200607",
-            "to": "20200615",
-            "title": "",
-            "memo": "",
-            "length": 8,
-            "fktable": 1
-          },
-          {
-            "id": 6,
-            "from": "20200608",
-            "to": "20200616",
-            "title": "",
-            "memo": "",
-            "length": 8,
-            "fktable": 1
-          },
-          {
-            "id": 7,
-            "from": "20200607",
-            "to": "20200615",
-            "title": "",
-            "memo": "",
-            "length": 8,
-            "fktable": 1
-          },
-          {
-            "id": 8,
-            "from": "20200607",
-            "to": "20200615",
-            "title": "",
-            "memo": "",
-            "length": 8,
-            "fktable": 1
-          },
-          {
-            "id": 9,
-            "from": "20200609",
-            "to": "20200609",
-            "title": "asdasd",
-            "memo": "adsads",
-            "length": 0,
-            "fktable": 1
-          },
-          {
-            "id": 10,
-            "from": "20200615",
-            "to": "20200623",
-            "title": "",
-            "memo": "",
-            "length": 8,
-            "fktable": 1
-          },
-          {
-            "id": 11,
-            "from": "20200607",
-            "to": "20200615",
-            "title": "",
-            "memo": "",
-            "length": 8,
-            "fkTable": 1
-          },
-          {
-            "id": 12,
-            "from": "20200621",
-            "to": "20200622",
-            "title": "2122",
-            "memo": "",
-            "length": 1,
-            "fkTable": 1
-          },
-          {
-            "id": 13,
-            "from": "20200707",
-            "to": "20200707",
-            "title": "",
-            "memo": "",
-            "length": 0,
-            "fkTable": 1
-          },
-          {
-            "id": 14,
-            "from": "20200617",
-            "to": "20200617",
-            "title": "",
-            "memo": "",
-            "length": 0,
-            "fkTable": 1
-          },
-          {
-            "id": 15,
-            "from": "20200617",
-            "to": "20200617",
-            "title": "",
-            "memo": "",
-            "length": 0,
-            "fkTable": 1
-          },
-          {
-            "id": 16,
-            "from": "20200616",
-            "to": "20200616",
-            "title": "",
-            "memo": "",
-            "length": 0,
-            "fkTable": 1
-          },
-          {
-            "id": 17,
-            "from": "20200406",
-            "to": "20200407",
-            "title": "",
-            "memo": "",
-            "length": 1,
-            "fkTable": 1
-          },
-          {
-            "id": 18,
-            "from": "20200426",
-            "to": "20200428",
-            "title": "",
-            "memo": "",
-            "length": 2,
-            "fkTable": 1
-          },
-          {
-            "id": 19,
-            "from": "20200601",
-            "to": "20200616",
-            "title": "",
-            "memo": "",
-            "length": 15,
-            "fkTable": "1"
-          },
-          {
-            "id": 20,
-            "from": "20200618",
-            "to": "20200625",
-            "title": "",
-            "memo": "",
-            "length": 7,
-            "fkTable": "1"
-          }
-        ]
-      ]
+      "schedules": []
     }
   ]
 }
