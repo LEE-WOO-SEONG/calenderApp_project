@@ -5,7 +5,7 @@ const $input = document.getElementById('add-calender');
 const $addListSubmit = document.querySelector('.add-list-submit');
 const $addCalenderListBox = document.querySelector('.add-calender-list-box');
 
-
+// function
 const render = () => {
   let sidePanel = '';
   calenderList.forEach(list => {

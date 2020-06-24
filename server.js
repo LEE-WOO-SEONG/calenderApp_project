@@ -33,7 +33,7 @@ server.get('/users/:token/tables', (req, res) => {
   res.send(db.get('users').find({ token }).value().tables);
 });
 /* post 요청 */
-// token -> schedules post 
+// token -> schedules post
 server.post('/users/:token/schedules', (req, res) => {
   const { token } = req.params;
   db.get('users')
