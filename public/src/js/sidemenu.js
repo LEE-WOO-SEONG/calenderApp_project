@@ -5,7 +5,6 @@ const $input = document.getElementById('add-calender');
 const $addListSubmit = document.querySelector('.add-list-submit');
 const $addCalenderListBox = document.querySelector('.add-calender-list-box');
 
-
 // function
 const render = () => {
   let sideNav = '';
@@ -36,7 +35,7 @@ const addListCalender = content => {
   // console.log(calenderList);
   const dayObject = { order: getNextId(), content, completed: true };
   calenderList = [...calenderList, dayObject];
-  document.getElementById('select-schedule').innerHTML += `<option value="${dayObject.id}">${dayObject.content}</option>`
+  document.getElementById('select-schedule').innerHTML += `<option value="${dayObject.id}">${dayObject.content}</option>`;
   console.log(dayObject, calenderList);
   render();
 };
@@ -60,7 +59,6 @@ window.onload = () => {
   //   { id: 2, content: '지현', completed: true },
   //   { id: 3, content: '예린', completed: true }
   // ]
-  localStorage.setItem('userTk', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Indvb3Nlb25nIiwicHciOiJkbGRudGpkIn0.63MuIIELRLur7rTsxhYr7ALe7Gy4UKVVpZZcBEjVSuk');
 
   async function getList() {
     try {
@@ -97,4 +95,3 @@ $addCalenderListBox.onchange = e => {
   const ParentNodeId = e.target.parentNode.id;
   changeCompleted(ParentNodeId);
 };
-

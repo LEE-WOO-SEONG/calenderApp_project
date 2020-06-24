@@ -153,7 +153,7 @@ function Calendar() {
 
     [...daysPrevMonth, ...daysThisMonth, ...daysNextMonth]
       .forEach(num => {
-        // 날짜의 가장 바깥 컨테이너 생성
+      // 날짜의 가장 바깥 컨테이너 생성
         // 요소가 확정되면 정리할 것
         const $cell = document.createElement('div');
         $cell.setAttribute('id', num.id);
@@ -269,7 +269,9 @@ $schedueleModalSave.onclick = () => {
   //   console.log($cell.querySelector('.schedule-inner-container').innerHTML);
   //   $cell.querySelector('.schedule-inner-container').innerHTML += `<div class="schedule-list ${YYYYmmdd}" role="button">${dateDiff}</div>`
   // }
-  schedule = [...schedule, { id: getScheduleID(), from: calendar.YYYYmmdd(startDate), to: calendar.YYYYmmdd(endDate), title: titleValue, memo: memoValue, length: dateDiff }];
+  schedule = [...schedule, {
+    id: getScheduleID(), from: calendar.YYYYmmdd(startDate), to: calendar.YYYYmmdd(endDate), title: titleValue, memo: memoValue, length: dateDiff
+  }];
   document.querySelector('.modal-container').classList.add('hidden');
   document.getElementById('schedule-name').value = '';
   document.getElementById('schedule-memo').value = '';
@@ -284,7 +286,6 @@ $schedueleModalSave.onclick = () => {
 //   console.log(todo);
 // }
 // console.log(fetchTodo());
-
 
 // axios.get('/users')
 //   .then(response => {
