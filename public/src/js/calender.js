@@ -290,6 +290,7 @@ $schedueleModalSave.onclick = () => {
     try {
       const sendUrl = `/users/${localStorage.getItem('userTk')}/schedules`;
       await axios.post(sendUrl, schedules);
+      console.log(schedules);
     } catch (err) {
       console.error(err);
     }
