@@ -15,6 +15,7 @@ server.use(middlewares);
 server.use(jsonServer.bodyParser);
 server.use(bodyParser.urlencoded({ extended: false }));
 server.use(cors());
+
 /* get 요청 */
 // server.get('/users', (req, res) => {
 //   res.send(db.get('users').value());
@@ -37,9 +38,7 @@ server.get('/users/:token/tables', (req, res) => {
   const { token } = req.params;
   res.send(db.get('users').find({ token }).value().tables);
 });
-
 /* post 요청 */
-
 // token -> schedules post
 server.post('/users/:token/schedules', (req, res) => {
   const { token } = req.params;
@@ -63,7 +62,7 @@ server.post('/users/:token/tables', (req, res) => {
 });
 
 /* patch 요청 */
-// token -> tables/id patch
+// token -> tables/order patch
 server.patch('/users/:token/tables/:order', (req, res) => {
   const { token, order } = req.params;
   const { tables } = db.get('users').find({ token }).value();
@@ -75,7 +74,7 @@ server.patch('/users/:token/tables/:order', (req, res) => {
 });
 
 /* delete 요청 */
-// token -> tables/id delete
+// token -> tables/order delete
 server.delete('/users/:token/tables/:order', (req, res) => {
   const { token, order } = req.params;
   const { tables } = db.get('users').find({ token }).value();

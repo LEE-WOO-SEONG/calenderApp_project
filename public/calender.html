@@ -20,13 +20,13 @@
   <link rel="stylesheet" href="./src/css/calender.css">
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <!-- <script src="../dist/js/bundle.js"></script> -->
-  <script src="src/js/function.js" defer></script>
-  <script src="./src/js/calender.js" defer></script>
-  <script src="./src/js/sidemenu.js" defer></script>
+  <script type="module" src="./src/js/calender.js" defer></script>
+  <script type="module" src="./src/js/sidemenu.js" defer></script>
+  <script src="./src/js/function.js" defer></script>
 </head>
 
 <body>
-  <button class="api-btn">로그아웃</button>
+  <!-- <button class="api-btn">로그아웃</button> -->
   <main class="container">
     <!-- <h1 class="a11y-hidden">일정관리 </h1> -->
     <section id="header">
@@ -136,8 +136,6 @@
           </div>
           <div class="input-select-container input-container">
             <select id="select-schedule">
-              <option value="color">일정1</option>
-              <option value="schedule">일정2</option>
             </select>
           </div>
         </div>
