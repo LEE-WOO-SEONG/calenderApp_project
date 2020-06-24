@@ -64,6 +64,6 @@ async function getUser() {
 
 // event
 // 1. 토큰이 들어오면
-window.onload = () => {
+window.addEventListener('load', () => {
   getUser();
-};
+});

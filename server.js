@@ -1,12 +1,14 @@
 const jsonServer = require('json-server');
 const bodyParser = require('body-parser');
-const cors = require("cors");
+const cors = require('cors');
+
 const server = jsonServer.create();
 const router = jsonServer.router('db.json');
 const middlewares = jsonServer.defaults();
 // db.json를 조작하기 위해 lowdb를 사용
 const low = require('lowdb');
 const FileSync = require('lowdb/adapters/FileSync');
+
 const adapter = new FileSync('db.json');
 const db = low(adapter);
 server.use(middlewares);
@@ -55,10 +57,10 @@ server.post('/users/:token/tables', (req, res) => {
 });
 /* patch 요청 */
 // token -> tables/id patch
-server.patch('/users/:token/tables/:id', (req, res) => {
-  const { token, id } = req.params;
+server.patch('/users/:token/tables/:order', (req, res) => {
+  const { token, order } = req.params;
   const { tables } = db.get('users').find({ token }).value();
-  const index = tables.findIndex(table => table.id === +id);
+  const index = tables.findIndex(table => table.order === +order);
   const newTable = { ...tables[index], ...req.body };
   tables.splice(index, 1, newTable);
   db.write();
@@ -66,10 +68,10 @@ server.patch('/users/:token/tables/:id', (req, res) => {
 });
 /* delete 요청 */
 // token -> tables/id delete
-server.delete('/users/:token/tables/:id', (req, res) => {
-  const { token, id } = req.params;
+server.delete('/users/:token/tables/:order', (req, res) => {
+  const { token, order } = req.params;
   const { tables } = db.get('users').find({ token }).value();
-  const index = tables.findIndex(table => table.id === +id);
+  const index = tables.findIndex(table => table.order === +order);
   if (index !== -1) {
     tables.splice(index, 1);
     db.write();

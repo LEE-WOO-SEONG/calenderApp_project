@@ -34,10 +34,10 @@ const render = () => {
 //   arrColor = ['#AD1457', '#F4511E', ]
 // }
 
-const getNextId = () => Math.max(0, ...calenderList.map(({ order }) => order)) + 1;
+const getNextOrder = () => Math.max(0, ...calenderList.map(({ order }) => order)) + 1;
 
 const addListCalender = content => {
-  const newCalenderList = { id: getNextId(), class: content, checked: true };
+  const newCalenderList = { order: getNextOrder(), class: content, checked: true };
   calenderList = [...calenderList, newCalenderList];
   document.getElementById('select-schedule').innerHTML += `<option value="${newCalenderList.order}">${newCalenderList.class}</option>`;
 
@@ -72,11 +72,11 @@ const showOnload = matchingUser => {
   document.getElementById('select-schedule').innerHTML = option;
 };
 
-const removeCalenderList = id => {
-  calenderList = calenderList.filter(list => +id !== list.order);
+const removeCalenderList = order => {
+  calenderList = calenderList.filter(list => +order !== list.order);
   async function deleteList() {
     try {
-      const response = await axios.delete(`users/${localStorage.getItem('userTk')}/tables/${id}`);
+      const response = await axios.delete(`users/${localStorage.getItem('userTk')}/tables/${order}`);
       const matchingUser = await response.data;
       calenderList = await matchingUser;
       showOnload(calenderList);
