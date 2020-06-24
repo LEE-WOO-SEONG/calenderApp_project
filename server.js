@@ -29,18 +29,18 @@ server.get('/users/:token/tables', (req, res) => {
   res.send(db.get('users').find({ token }).value().tables);
 });
 /* post 요청 */
-server.post('/users', (req, res) => {
-  // const { token } = req.params;
-  // const { id, from, to, title, memo, length, fkTable } = req.body;
-  // const { data } = req.body;
-  db.get('users')
-    // .find({ token })
-    // .value()
-    // .value()
-    .push(req.params.name)
-    .write();
-  res.send(db.get('users').value());
-});
+// server.post('/users', (req, res) => {
+//   // const { token } = req.params;
+//   // const { id, from, to, title, memo, length, fkTable } = req.body;
+//   // const { data } = req.body;
+//   db.get('users')
+//     // .find({ token })
+//     // .value()
+//     // .value()
+//     .push(req.params.name)
+//     .write();
+//   res.send(db.get('users').value());
+// });
 // Use default router
 server.use(router);
 server.listen(3000, () => {
