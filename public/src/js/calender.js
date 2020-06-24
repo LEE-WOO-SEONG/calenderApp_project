@@ -252,8 +252,6 @@ $scheduleModalClose.onclick = () => {
   document.querySelector('.modal-container').classList.add('hidden');
 };
 
-let schedule = [];
-
 const getScheduleID = () => (schedule.length ? Math.max(...schedule.map(list => list.id)) + 1 : 1);
 
 $schedueleModalSave.onclick = () => {
@@ -285,22 +283,25 @@ $schedueleModalSave.onclick = () => {
 // }
 // console.log(fetchTodo());
 
+// let responseData = [];
+// let schedule = [];
 
-axios.get('/users')
-  .then(response => {
-    // console.log(response.data);
-    return response.data;
-  }).then(users => {
-    // console.log(users.find(users => users.id === 'wooseong'));
-    return users.find(users => users.id === 'wooseong');
-  }).then(users => {
-    // console.log(users.calendar);
-    return users.calendar;
-  })
-  .catch(err => console.error(err));
+// axios.get(`/users/${localStorage.getItem('userTk')}`)
+//   .then(response => {
+//     responseData = response.data;
+//     console.log(responseData);
+//     return response.data;
+//   }).then(users => {
+//     // console.log(users.find(users => users.id === 'wooseong'));
+//     return users.find(users => users.id === 'wooseong');
+//   }).then(users => {
+//     // console.log(users.calendar);
+//     return users.calendar;
+//   })
+//   .catch(err => console.error(err));
 
-axios.post('users', schedule)
-  .then(response => {
-    console.log(response.date);
-    return response.date;
-  })
+// axios.post('users', schedule)
+//   .then(response => {
+//     console.log(response.date);
+//     return response.date;
+//   })
