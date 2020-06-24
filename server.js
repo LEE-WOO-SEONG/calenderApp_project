@@ -14,7 +14,7 @@ const adapter = new FileSync('db.json');
 const db = low(adapter);
 
 server.use(middlewares);
-server.use(jsonServer.bodyParser)
+server.use(jsonServer.bodyParser);
 server.use(bodyParser.urlencoded({ extended: false }));
 server.use(cors());
 
@@ -68,7 +68,7 @@ server.post('/users/:token/tables', (req, res) => {
   db.get('users')
     .find({ token })
     .value().tables
-    .push(req.body)
+    .push(req.body);
 
   db.write();
 
