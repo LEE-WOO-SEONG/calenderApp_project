@@ -42,7 +42,7 @@
           "title": "살려줘",
           "memo": "",
           "length": 0,
-          "fk-table": 2
+          "fkTable": 2
         },
         {
           "id": 4,
@@ -51,7 +51,7 @@
           "title": "hellow",
           "memo": "",
           "length": 27,
-          "fk-table": 2
+          "fkTable": 2
         },
         {
           "id": 5,

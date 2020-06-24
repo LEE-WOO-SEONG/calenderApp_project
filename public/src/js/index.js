@@ -117,7 +117,7 @@ $loginForm.onclick = ({ target }) => {
 
   if (!userId || !userId.trim()) {
     alert('ID를 입력하세요');
-  } else if(!userPw) {
+  } else if (!userPw) {
     alert('Password를 입력하세요');
   } else {
     $inputId.value = '';

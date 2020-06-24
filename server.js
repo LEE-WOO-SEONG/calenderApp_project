@@ -15,7 +15,6 @@ server.use(middlewares);
 server.use(jsonServer.bodyParser);
 server.use(bodyParser.urlencoded({ extended: false }));
 server.use(cors());
-
 /* get 요청 */
 // server.get('/users', (req, res) => {
 //   res.send(db.get('users').value());
@@ -38,6 +37,7 @@ server.get('/users/:token/tables', (req, res) => {
   const { token } = req.params;
   res.send(db.get('users').find({ token }).value().tables);
 });
+
 /* post 요청 */
 // token -> schedules post
 server.post('/users/:token/schedules', (req, res) => {
@@ -97,7 +97,6 @@ server.delete('/users/:token/schedules/:id', (req, res) => {
   }
   res.send(db.get('users').find({ token }).value().schedules);
 });
-
 // Use default router
 server.use(router);
 server.listen(3000, () => {

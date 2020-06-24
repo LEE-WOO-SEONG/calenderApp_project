@@ -1,6 +1,4 @@
-// functions
-const pageMove = url => location.replace(url);
-const removeToken = () => localStorage.removeItem('userTk');
+let schedules = [];
 
 function Calendar() {
   this.container = document.querySelector('.container');
@@ -153,7 +151,7 @@ function Calendar() {
 
     [...daysPrevMonth, ...daysThisMonth, ...daysNextMonth]
       .forEach(num => {
-      // 날짜의 가장 바깥 컨테이너 생성
+        // 날짜의 가장 바깥 컨테이너 생성
         // 요소가 확정되면 정리할 것
         const $cell = document.createElement('div');
         $cell.setAttribute('id', num.id);
@@ -175,13 +173,17 @@ function Calendar() {
         $scheduleInnerContainer.setAttribute('class', 'schedule-inner-container');
         $scheduleContainer.appendChild($scheduleInnerContainer);
 
-        // const li1 = document.createElement('div');
+        const li1 = document.createElement('div');
         // const li2 = document.createElement('div');
         // const li3 = document.createElement('div');
         // const li4 = document.createElement('div');
         // const li5 = document.createElement('div');
         // li1.setAttribute('class', 'schedule-list left');
         // li1.setAttribute('role', 'button');
+        // const span = document.createElement('span');
+        // span.setAttribute('class', 'schedule-id');
+        // li1.appendChild(span);
+        // console.log(document.querySelector('.schedule-list'));
         // li2.setAttribute('class', 'schedule-list right');
         // li2.setAttribute('role', 'button');
         // li3.setAttribute('class', 'schedule-list');
@@ -210,7 +212,8 @@ function Calendar() {
           document.getElementById('start-date').value = `${num.id.substring(0, 4)}-${num.id.substring(4, 6)}-${num.id.substring(6, 8)}`;
         });
 
-        $cell.addEventListener('mouseup', () => {
+        $cell.addEventListener('mouseup', e => {
+          if (e.target.matches('.schedule-inner-container > .schedule-list')) return;
           document.getElementById('end-date').value = `${num.id.substring(0, 4)}-${num.id.substring(4, 6)}-${num.id.substring(6, 8)}`;
           document.querySelector('.modal-container').classList.remove('hidden');
           if (document.getElementById('start-date').value > document.getElementById('end-date').value) {
@@ -252,9 +255,7 @@ $scheduleModalClose.onclick = () => {
   document.querySelector('.modal-container').classList.add('hidden');
 };
 
-let schedule = [];
-
-const getScheduleID = () => (schedule.length ? Math.max(...schedule.map(list => list.id)) + 1 : 1);
+const getScheduleID = () => (schedules.length ? Math.max(...schedules.map(list => list.id)) + 1 : 1);
 
 $schedueleModalSave.onclick = () => {
   const startDate = new Date(document.getElementById('start-date').value);
@@ -269,39 +270,52 @@ $schedueleModalSave.onclick = () => {
   //   console.log($cell.querySelector('.schedule-inner-container').innerHTML);
   //   $cell.querySelector('.schedule-inner-container').innerHTML += `<div class="schedule-list ${YYYYmmdd}" role="button">${dateDiff}</div>`
   // }
-  schedule = [...schedule, {
-    id: getScheduleID(), from: calendar.YYYYmmdd(startDate), to: calendar.YYYYmmdd(endDate), title: titleValue, memo: memoValue, length: dateDiff
-  }];
+  const newSchedule = {
+    id: getScheduleID(),
+    from: calendar.YYYYmmdd(startDate),
+    to: calendar.YYYYmmdd(endDate),
+    title: titleValue,
+    memo: memoValue,
+    length: dateDiff,
+    fkTable: document.getElementById('select-schedule').value
+    // fkTable: document.getElementById('select-schedule').selectedIndex
+  };
+
+  schedules = [...schedules, newSchedule];
   document.querySelector('.modal-container').classList.add('hidden');
   document.getElementById('schedule-name').value = '';
   document.getElementById('schedule-memo').value = '';
-  console.log(schedule);
+  // console.log(schedules);
+  async function postList() {
+    try {
+      const sendUrl = `/users/${localStorage.getItem('userTk')}/schedules`;
+      await axios.post(sendUrl, schedules);
+      console.log(schedules);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+  postList();
 };
 
-// async function fetchTodo() {
-//   const url = 'http://localhost:3000/users';
+const $scheduleRemove = document.getElementById('schedule-remove');
+$scheduleRemove.onclick = () => {
 
-//   const response = await fetch(url);
-//   const todo = await response.json();
-//   console.log(todo);
-// }
-// console.log(fetchTodo());
+};
 
-// axios.get('/users')
-//   .then(response => {
-//     // console.log(response.data);
-//     return response.data;
-//   }).then(users => {
-//     // console.log(users.find(users => users.id === 'wooseong'));
-//     return users.find(users => users.id === 'wooseong');
-//   }).then(users => {
-//     // console.log(users.calendar);
-//     return users.calendar;
-//   })
-//   .catch(err => console.error(err));
+document.getElementById('calendar').addEventListener('click', e => {
+  if (!e.target.matches('#calendar .schedule-list')) return;
+});
 
-// axios.post('users', schedule)
-//   .then(response => {
-//     console.log(response.date);
-//     return response.date;
-//   })
+window.addEventListener('load', () => {
+  async function getScheduleList() {
+    try {
+      const response = await axios.get(`/users/${localStorage.getItem('userTk')}`);
+      const _schedules = await response.data;
+      schedules = _schedules.schedules;
+    } catch (err) {
+      console.error(err);
+    }
+  }
+  getScheduleList();
+});
