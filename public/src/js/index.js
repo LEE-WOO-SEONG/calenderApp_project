@@ -1,7 +1,7 @@
 /* variables */
 // dom
 const $loginForm = document.getElementById('login-form');
-const $inputContainer = document.querySelector('.login-container');
+// const $inputContainer = document.querySelector('.login-container');
 const $inputId = document.getElementById('login-id');
 const $inputPw = document.getElementById('login-pw');
 const $btnKakao = document.querySelector('.btn-kakao');
@@ -10,7 +10,7 @@ const $modalContainer = document.querySelector('.modal-container');
 
 /* functions */
 const pageMove = url => location.replace(url);
-const removeToken = () => localStorage.removeItem('userTk');
+// const removeToken = () => localStorage.removeItem('userTk');
 const saveToken = value => localStorage.setItem('userTk', value);
 
 // 회원정보로 로그인 시 userinfo 확인
@@ -39,14 +39,23 @@ const insertUserinfo = async (token, id) => {
     const res = await axios.get('http://localhost:3000/users');
     const users = await res.data;
     const loginedId = users.find(user => user.id === id);
-    if (loginedId) return;
-
-    await axios.post('http://localhost:3000/users', {
-      id,
-      token,
-      title: [],
-      calender: []
-    });
+    if (loginedId) {
+      await axios.patch(`http://localhost:3000/users/${id}`, {
+        token
+      });
+    } else {
+      await axios.post('http://localhost:3000/users', {
+        id,
+        token,
+        tables: [{
+          id: 1,
+          class: "할일",
+          color: "red",
+          checked: true
+        }],
+        schedules: []
+      });
+    }
   } catch (err) {
     console.error(err);
   }
@@ -85,8 +94,8 @@ const loginGoogle = async () => {
       const googleEmail = await res.getBasicProfile().getEmail();
 
       await insertUserinfo(googleToken, googleEmail);
-      saveToken(googleToken);
-      pageMove('http://localhost:3000/calender.html');
+      await saveToken(googleToken);
+      await pageMove('http://localhost:3000/calender.html');
     });
   } catch (err) {
     console.error(err);
