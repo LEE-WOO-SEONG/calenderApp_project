@@ -46,7 +46,7 @@ const insertUserinfo = async (token, id) => {
         id,
         token,
         tables: [{
-          id: 1,
+          order: 1,
           class: '할일',
           color: 'red',
           checked: true
@@ -117,7 +117,7 @@ $loginForm.onclick = ({ target }) => {
 
   if (!userId || !userId.trim()) {
     alert('ID를 입력하세요');
-  } else if(!userPw) {
+  } else if (!userPw) {
     alert('Password를 입력하세요');
   } else {
     $inputId.value = '';

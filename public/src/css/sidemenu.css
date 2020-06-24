@@ -4,15 +4,12 @@
   padding:20px 20px;
   /* background-color:red; */
 }
-
 .add-calender-list-box {
  position: relative;
 }
-
 .checkbox {
   display: none;
 }
-
 .checkbox + label { 
   transform: translate3d(0, -50%, 0);
   margin-top:15px;  
