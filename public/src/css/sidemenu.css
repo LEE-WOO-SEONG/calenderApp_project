@@ -17,11 +17,12 @@
   transform: translate3d(0, -50%, 0);
   margin-top:15px;  
   display: inline-block;
-  width: 90%;
+  /* width: 90%; */
   line-height: 2em;
   padding-left: 35px;
   cursor: pointer;
   user-select: none;
+  position: relative;
 }
 .checkbox + label:before {
   content: "";
@@ -35,7 +36,7 @@
   border: 1px solid #cfdadd;
 }
 
-.checkbox:checked + label:after {
+/* .checkbox:checked + label:after {
   content: "";
   position: absolute;
   top: 50%;
@@ -43,5 +44,15 @@
   transform: translate3d(0, -50%, 0);
   width: 9px;
   height: 9px;
-  /* background-color: #e58a23; */
+  /* background-color: #e58a23; 
+} */
+
+.reset-checkbox {
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  transform: translate3d(0, -50%, 0);
+  width: 9px;
+  height: 9px;
 }
+
