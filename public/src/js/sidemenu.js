@@ -1,6 +1,5 @@
 // State
 let calenderList = [];
-console.log(calenderList);
 // DOM Node
 const $input = document.getElementById('add-calender');
 const $addListSubmit = document.querySelector('.add-list-submit');
@@ -27,21 +26,16 @@ const getNextId = () => Math.max(0, ...calenderList.map(({ order }) => order)) +
 const addListCalender = content => {
   const newCalenderList = { order: getNextId(), class: content, checked: true };
   calenderList = [...calenderList, newCalenderList];
-  document.getElementById('select-schedule').innerHTML += `<option value="${newCalenderList.order}">${newCalenderList.class}</option>`;
-  // async function postList() {
-  //   try {
-  //     const sendUrl = 'users';
-  //     const response = await axios.post(sendUrl, newCalenderList);
-  //     const _calenderList = await response.data;
-  //     console.log(_calenderList);
-  //     // const matchingUser = await _calenderList.find(item => item.token === localStorage.getItem('userTk'));
-  //     // console.log(matchingUser);
-  //     // showOnload(matchingUser);
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // }
-  // postList();
+  document.getElementById('select-schedule').innerHTML += `<option value="${newCalenderList.order}"><div>안녕<div>${newCalenderList.class}</option>`;
+  async function postList() {
+    try {
+      const sendUrl = `/users/${localStorage.getItem('userTk')}/tables`;
+      const response = await axios.post(sendUrl, newCalenderList);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+  postList();
   render();
 };
 const changeCompleted = id => {
@@ -55,46 +49,50 @@ const removeCalenderList = id => {
   render();
 };
 const settingChange = id => {
-}
+};
+
 const showOnload = matchingUser => {
-  const { sidePanel } = matchingUser;
-  console.log(sidePanel);
-  calenderList = sidePanel;
+  calenderList = matchingUser;
+  let option = '';
+  matchingUser.forEach(list => {
+    option += `<option value="${list.order}">${list.class}</option>`;
+  });
+  document.getElementById('select-schedule').innerHTML = option;
   render();
 };
 
-window.onload = () => {
-  localStorage.setItem('userTk', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Indvb3Nlb25nIiwicHciOiJkbGRudGpkIn0.63MuIIELRLur7rTsxhYr7ALe7Gy4UKVVpZZcBEjVSuk');
+// window.onload = () => {
+//   localStorage.setItem('userTk', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Indvb3Nlb25nIiwicHciOiJkbGRudGpkIn0.63MuIIELRLur7rTsxhYr7ALe7Gy4UKVVpZZcBEjVSuk');
+//   async function getList() {
+//     try {
+//       const response = await axios.get(`/users/${localStorage.getItem('userTk')}`);
+//       const _calenderList = await response.data;
+//       console.log(_calenderList);
+//       const matchingUser = await _calenderList.find(item => item.token === localStorage.getItem('userTk'));
+//       console.log(matchingUser);
+//       showOnload(matchingUser);
+//     } catch (err) {
+//       console.error(err);
+//     }
+//   }
+//   getList();
+// };
+
+window.addEventListener('load', () => {
+  // localStorage.setItem('userTk', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Indvb3Nlb25nIiwicHciOiJkbGRudGpkIn0.63MuIIELRLur7rTsxhYr7ALe7Gy4UKVVpZZcBEjVSuk');
   async function getList() {
     try {
-      const response = await axios.get('/users');
+      const response = await axios.get(`/users/${localStorage.getItem('userTk')}`);
       const _calenderList = await response.data;
-      console.log(_calenderList);
-      const matchingUser = await _calenderList.find(item => item.token === localStorage.getItem('userTk'));
-      console.log(matchingUser);
+      const matchingUser = await _calenderList.tables;
       showOnload(matchingUser);
     } catch (err) {
       console.error(err);
     }
   }
   getList();
-};
+});
 
-// axios.get(`/users/${localStorage.getItem('userTk')}`)
-//   .then(response => {
-//     responseData = response.data;
-//     console.log(responseData);
-//     return response.data;
-//   }).then(users => {
-//     // console.log(users.find(users => users.id === 'wooseong'));
-//     return users.find(users => users.id === 'wooseong');
-//   }).then(users => {
-//     // console.log(users.calendar);
-//     return users.calendar;
-//   })
-//   .catch(err => console.error(err));
-
-// event handler
 $input.onkeyup = e => {
   const content = e.target.value.trim();
   if (!content || e.keyCode !== 13) return;

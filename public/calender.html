@@ -50,6 +50,21 @@
       <section id="calendar">
         <!-- <h2 class="a11y-hidden">캘린더</h2> -->
       </section>
+      <div class="check-schedule">
+        <div class="schedule-check-container">
+          <div role="button" id="schedule-remove">
+            <svg width="28" height="28" viewBox="0 0 24 24" focusable="false" class=" NMm5M svg-remove">
+              <path d="M15 4V3H9v1H4v2h1v13c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V6h1V4h-5zm2 15H7V6h10v13z"></path>
+              <path d="M9 8h2v9H9zm4 0h2v9h-2z"></path>
+            </svg>
+          </div>
+          <div role="button" id="schedule-check-close"></div>
+        </div>
+        <div class="schedule-check-container" id="schedule-check-title"></div>
+        <div class="schedule-check-container" id="schedule-check-date"></div>
+        <div class="schedule-check-container" id="schedule-check-class"></div>
+        <div class="schedule-check-container" id="schedule-check-memo"></div>
+      </div>
     </div>
     <div class="modal-container hidden">
       <div class="modal-flex">
@@ -136,8 +151,6 @@
           </div>
           <div class="input-select-container input-container">
             <select id="select-schedule">
-              <option value="color">일정1</option>
-              <option value="schedule">일정2</option>
             </select>
           </div>
         </div>
@@ -145,7 +158,6 @@
           <button class="schedule-modal-save">저장</button>
         </div>
         <div role="button" class="schedule-modal-close"></div>
-
       </div>
     </div>
   </main>
