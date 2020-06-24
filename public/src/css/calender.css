@@ -200,20 +200,22 @@ body {
   /* width: 233.84px; */
   width: 235px;
   height: 110px;
-  overflow: hidden;
   /* border-top: 1px solid dodgerblue; */
 }
 
 .schedule-inner-container {
   width: 100%;
+  position: relative;
 }
 
 /* list 기본 */
 .schedule-list {
-  width: 100%;
+  position: absolute;
+  width: 80%;
   height: 16px;
   background-color: dodgerblue;
   margin-bottom: 5px;
+  border-radius: 5px;
 }
 
 .schedule-list:hover {

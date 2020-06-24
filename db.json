@@ -5,40 +5,47 @@
       "pw": "dldntjd",
       "gender": "male",
       "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Indvb3Nlb25nIiwicHciOiJkbGRudGpkIn0.63MuIIELRLur7rTsxhYr7ALe7Gy4UKVVpZZcBEjVSuk",
-      "sidePanel": [
+      "tables": [
         {
+          "id": 1,
           "class": "이우성",
           "color": "red",
           "checked": "true"
         },
         {
+          "id": 2,
           "class": "류동우",
           "color": "blue",
           "checked": "true"
         }
       ],
-      "calendar": [
+      "schedules": [
         {
-          "date": "20200626",
-          "content": "미니프로젝트 발표",
-          "class": "류동우",
-          "color": "blue"
+          "id": "1",
+          "from": "20200626",
+          "to": "20200627",
+          "title": "미니프로젝트 발표",
+          "memo": "",
+          "length": 1,
+          "fk-table": 1
         },
         {
-          "date": "20200622",
-          "content": "족발 먹기",
-          "class": "이우성",
-          "color": "red"
+          "id": "2",
+          "from": "20200603",
+          "to": "20200605",
+          "title": "집에 가고 싶다",
+          "memo": "",
+          "length": 2,
+          "fk-table": 2
         },
         {
-          "date": "20200623",
-          "content": "발표 준비",
-          "class": "이우성",
-          "color": "red"
-        },
-        {
-          "date": "2020063",
-          "content": "발표 준비"
+          "id": "3",
+          "from": "20200605",
+          "to": "20200605",
+          "title": "살려줘",
+          "memo": "",
+          "length": 0,
+          "fk-table": 2
         }
       ]
     },
