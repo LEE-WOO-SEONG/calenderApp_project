@@ -34,10 +34,10 @@ const render = () => {
 //   arrColor = ['#AD1457', '#F4511E', ]
 // }
 
-const getNextId = () => Math.max(0, ...calenderList.map(({ order }) => order)) + 1;
+const getNextOrder = () => Math.max(0, ...calenderList.map(({ order }) => order)) + 1;
 
 const addListCalender = content => {
-  const newCalenderList = { id: getNextId(), class: content, checked: true };
+  const newCalenderList = { order: getNextOrder(), class: content, checked: true };
   calenderList = [...calenderList, newCalenderList];
   document.getElementById('select-schedule').innerHTML += `<option value="${newCalenderList.order}">${newCalenderList.class}</option>`;
 
@@ -55,16 +55,12 @@ const addListCalender = content => {
   postList();
 };
 
-const changeCompleted = id => {
-  calenderList = calenderList.map(list => (+id === list.order
-    ? ({ ...list, checked: !list.checked })
-    : list));
-  console.log(calenderList);
+const changeCompleted = order => {
+  calenderList = calenderList.map(list => (+order === list.order ? ({ ...list, checked: !list.checked }) : list));
   render();
 };
 
 const showOnload = matchingUser => {
-  // calenderList = matchingUser;
   let option = '';
   matchingUser.forEach(list => {
     option += `<option value="${list.order}">${list.class}</option>`;
@@ -72,15 +68,14 @@ const showOnload = matchingUser => {
   document.getElementById('select-schedule').innerHTML = option;
 };
 
-const removeCalenderList = id => {
-  calenderList = calenderList.filter(list => +id !== list.order);
+const removeCalenderList = order => {
+  calenderList = calenderList.filter(list => +order !== list.order);
   async function deleteList() {
     try {
-      const response = await axios.delete(`users/${localStorage.getItem('userTk')}/tables/${id}`);
+      const response = await axios.delete(`users/${localStorage.getItem('userTk')}/tables/${order}`);
       const matchingUser = await response.data;
       calenderList = await matchingUser;
       showOnload(calenderList);
-      console.log(calenderList);
       render();
     } catch (err) {
       console.error(err);
@@ -123,7 +118,6 @@ $addListSubmit.onclick = () => {
 $addCalenderListBox.onchange = e => {
   if (!e.target.matches('.add-calender-list-box .checkbox')) return;
   const ParentNodeId = e.target.parentNode.classList[0];
-  // console.log(ParentNodeId);
   changeCompleted(ParentNodeId);
 };
 
