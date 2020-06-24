@@ -283,6 +283,7 @@ $schedueleModalSave.onclick = () => {
 // }
 // console.log(fetchTodo());
 
+<<<<<<< HEAD
 // let responseData = [];
 // let schedule = [];
 
@@ -290,6 +291,12 @@ $schedueleModalSave.onclick = () => {
 //   .then(response => {
 //     responseData = response.data;
 //     console.log(responseData);
+=======
+
+// axios.get('/users')
+//   .then(response => {
+//     // console.log(response.data);
+>>>>>>> 21cc1286b85324bd6f9f5e0bec91b3640f2679a8
 //     return response.data;
 //   }).then(users => {
 //     // console.log(users.find(users => users.id === 'wooseong'));
