@@ -1,8 +1,9 @@
 {
   "name": "calenderApp_project",
   "version": "1.0.0",
+  "main": "index.js",
   "scripts": {
-    "start": "json-server --watch db.json",
+    "start": "nodemon server",
     "build": "webpack -w"
   },
   "devDependencies": {
@@ -21,19 +22,7 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.10.1",
-    "json-server": "^0.16.1"
-  },
-  "description": "- 팀명: 우린현성",
-  "main": ".eslintrc.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/jihyeon-Do/calenderApp_project.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/jihyeon-Do/calenderApp_project/issues"
-  },
-  "homepage": "https://github.com/jihyeon-Do/calenderApp_project#readme"
+    "json-server": "^0.16.1",
+    "lowdb": "^1.0.0"
+  }
 }

@@ -286,21 +286,21 @@ $schedueleModalSave.onclick = () => {
 // console.log(fetchTodo());
 
 
-axios.get('/users')
-  .then(response => {
-    // console.log(response.data);
-    return response.data;
-  }).then(users => {
-    // console.log(users.find(users => users.id === 'wooseong'));
-    return users.find(users => users.id === 'wooseong');
-  }).then(users => {
-    // console.log(users.calendar);
-    return users.calendar;
-  })
-  .catch(err => console.error(err));
+// axios.get('/users')
+//   .then(response => {
+//     // console.log(response.data);
+//     return response.data;
+//   }).then(users => {
+//     // console.log(users.find(users => users.id === 'wooseong'));
+//     return users.find(users => users.id === 'wooseong');
+//   }).then(users => {
+//     // console.log(users.calendar);
+//     return users.calendar;
+//   })
+//   .catch(err => console.error(err));
 
-axios.post('users', schedule)
-  .then(response => {
-    console.log(response.date);
-    return response.date;
-  })
+// axios.post('users', schedule)
+//   .then(response => {
+//     console.log(response.date);
+//     return response.date;
+//   })
