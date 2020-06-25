@@ -19,21 +19,25 @@ server.use(cors());
 // server.get('/users', (req, res) => {
 //   res.send(db.get('users').value());
 // });
+
 // token get
 server.get('/users/:token', (req, res) => {
   const { token } = req.params;
   res.send(db.get('users').find({ token }).value());
 });
+
 // token -> schedules get
 server.get('/users/:token/schedules', (req, res) => {
   const { token } = req.params;
   res.send(db.get('users').find({ token }).value().schedules);
 });
+
 // token -> tables get
 server.get('/users/:token/tables', (req, res) => {
   const { token } = req.params;
   res.send(db.get('users').find({ token }).value().tables);
 });
+
 /* post 요청 */
 // token -> schedules post
 server.post('/users/:token/schedules', (req, res) => {
@@ -45,6 +49,7 @@ server.post('/users/:token/schedules', (req, res) => {
   db.write();
   res.send(db.get('users').find({ token }).value().schedules);
 });
+
 // token -> tables post
 server.post('/users/:token/tables', (req, res) => {
   const { token } = req.params;
@@ -55,29 +60,32 @@ server.post('/users/:token/tables', (req, res) => {
   db.write();
   res.send(db.get('users').find({ token }).value().tables);
 });
+
 /* patch 요청 */
-// token -> tables/id patch
-server.patch('/users/:token/tables/:id', (req, res) => {
-  const { token, id } = req.params;
+// token -> tables/order patch
+server.patch('/users/:token/tables/:order', (req, res) => {
+  const { token, order } = req.params;
   const { tables } = db.get('users').find({ token }).value();
-  const index = tables.findIndex(table => table.id === +id);
+  const index = tables.findIndex(table => table.order === +order);
   const newTable = { ...tables[index], ...req.body };
   tables.splice(index, 1, newTable);
   db.write();
   res.send(db.get('users').find({ token }).value().tables);
 });
+
 /* delete 요청 */
-// token -> tables/id delete
-server.delete('/users/:token/tables/:id', (req, res) => {
-  const { token, id } = req.params;
+// token -> tables/order delete
+server.delete('/users/:token/tables/:order', (req, res) => {
+  const { token, order } = req.params;
   const { tables } = db.get('users').find({ token }).value();
-  const index = tables.findIndex(table => table.id === +id);
+  const index = tables.findIndex(table => table.order === +order);
   if (index !== -1) {
     tables.splice(index, 1);
     db.write();
   }
   res.send(db.get('users').find({ token }).value().tables);
 });
+
 // token -> schedules/id delete
 server.delete('/users/:token/schedules/:id', (req, res) => {
   const { token, id } = req.params;

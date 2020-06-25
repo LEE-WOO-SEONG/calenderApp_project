@@ -24,7 +24,6 @@ body {
 
 /* 헤더 */
 #header {
-  height: 65px;
   position: relative;
 }
 
@@ -35,19 +34,16 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  padding: 15px 15px 15px 198px;
+  padding: 15px 15px 15px 270px;
   border-bottom: 1px solid #DDDDDD;
 }
 
 .calendar-header .month-year {
-  margin-right: auto;
-  margin: 0;
   padding-left: 10px;
-  width: 100%;
-  height: 34px;
-  font-size: 20px;
-  text-transform: uppercase;
-  color: rgb(10, 115, 190);
+  font-size: 25px;
+  display: inline-block;
+  color: rgb(54, 54, 54);
+  transform: translateY(-4px);
 }
 
 .calendar-header button {
@@ -59,13 +55,8 @@ body {
   text-align: center;
   border: none;
   cursor: pointer;
-}
-
-.api-btn {
-  width:auto !important;
-  position: absolute;
-  top:15px;
-  right:15px;
+  color: rgb(54, 54, 54);
+  vertical-align: text-top;
 }
 
 .calendar-header button:active {
@@ -73,7 +64,7 @@ body {
 }
 
 .calendar-header .arrow {
-  border: solid #AAAAAA;
+  border: solid rgb(54, 54, 54);
   border-width: 0 2px 2px 0;
   display: inline-block;
   padding: 5px;
@@ -197,7 +188,7 @@ body {
   user-select: none;
 }
 
-.calendar-body .day span {
+.calendar-body .day .digit-container span {
   width: 20px;
   height: 20px;
   display: inline-block;
@@ -221,8 +212,11 @@ body {
 /* list 기본 */
 .schedule-list {
   position: absolute;
+  text-align: left;
+  text-indent: 15px;
+  color: white;
   width: 80%;
-  height: 16px;
+  height: 20px;
   background-color: dodgerblue;
   margin-bottom: 5px;
   border-radius: 5px;
@@ -263,19 +257,25 @@ body {
   left: calc(50vw - 200px);
   width: 500px;
   height: 300px;
-  background-color: rgb(100, 165, 211);
+  background-color: rgb(255, 255, 255);
+  border-radius: 5px;
+  box-shadow: 0 0 2px 2px rgb(219, 218, 218);
+  z-index: 2;
 }
 
 .modal-flex {
-  padding-top: 40px;
+  padding-top: 10px;
   display: flex;
   flex-flow: column nowrap;
 }
 
 .modal-box-container {
-  /* height: 40px; */
-  border: 2px solid purple;
-  margin: 5px 10px;
+  /* border: 2px solid purple; */
+  margin: 15px 20px;
+}
+
+.input-container.input-name-container {
+  padding-left: 35px;
 }
 
 .icon-container {
@@ -284,57 +284,157 @@ body {
 
 .input-container {
   display: inline-block;
+  width: 400px;
+  padding-left: 10px;
+}
+
+.input-container > input {
+  border: none;
+  outline: none;
+  font-size: 15px;
+}
+
+#schedule-name {
+  height: 30px;
+  width: 350px;
+  font-size: 25px;
+  border-bottom: 1px solid #ddd;
+}
+
+#schedule-name:focus {
+  border-bottom: 1px solid rgb(26, 115, 232);
 }
 
 .date-input {
-  width: 125px;
+  width: 140px;
 }
 
-#start-time, #end-time {
+.date-inputSign {
+  vertical-align: top;
+}
+
+/* #start-time, #end-time {
   height: 24.5px;
+} */
+
+#start-date:hover,
+#end-date:hover {
+  background-color: rgb(241, 238, 238);
 }
 
-.schedule-modal-close {
+#schedule-memo:focus {
+  background-color: rgb(241, 238, 238);
+}
+
+#select-schedule {
+  height: 30px;
+  border: none;
+}
+
+#select-schedule:hover {
+  background-color: rgb(241, 238, 238);
+}
+
+.schedule-modal-close, .schedule-check-close {
   position: absolute;
   top: 10px;
   right: 10px;
-  width: 26px;
-  height: 26px;
-  border: 1px solid #444;
-  opacity: 0.3;
+  width: 31px;
+  height: 31px;
+  opacity: 0.5;
   cursor: pointer;
 }
 
-.schedule-modal-close:hover {
+.schedule-modal-close:hover, .schedule-check-close:hover {
   opacity: 1;
 }
 
-.schedule-modal-close:before, .schedule-modal-close:after {
+.schedule-modal-close:before, .schedule-modal-close:after,
+.schedule-check-close:before, .schedule-check-close:after {
   position: absolute;
-  left: 10px;
+  left: 15px;
   content: ' ';
   height: 26px;
-  width: 5px;
+  width: 2px;
   background-color: #333;
 }
-.schedule-modal-close:before {
+.schedule-modal-close:before, .schedule-check-close:before {
   transform: rotate(45deg);
 }
-.schedule-modal-close:after {
+.schedule-modal-close:after, .schedule-check-close:after {
   transform: rotate(-45deg);
 }
 
-.modal-btn-container {
-  display: flex;
-  justify-content: center;
+.schedule-modal-save {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  font-size: 15px;
+  color: #fff;
+  border-radius: 3px;
+  background-color: rgb(26, 115, 232);
+  padding: 10px 25px;
 }
 
-.schedule-modal-save {
-  width: 50px;
-  font-size: 18px;
-  border: 1px solid #333;
+/* 스케줄 확인 버튼 */
+.check-schedule {
+  position: absolute;
+  top: 20px;
+  left: calc(50vw - 125px);
+  width: 300px;
+  height: 230px;
+  background-color: purple;
+  padding: 10px;
+  z-index: 2;
+}
+
+#schedule-remove {
+  position: absolute;
+  left: 230px;
+  width: 100%;
+  color: #444;
+  cursor: pointer;
+}
+
+.schedule-check-container {
+  width: 100%;
+  height: 40px;
+  line-height: 20px;
+  padding: 0px;
+  border: 1px solid gray;
+}
+
+.schedule-date {
+  height: 40px;
+}
+
+.schedule-class {
+  height: 40px;
+}
+
+.schedule-memo {
+  width: 100%;
+  height: 40px;
+  background-color: rgb(10, 115, 190);
 }
 
 .hidden {
   display: none;
+}
+
+
+.schedule-id, .schedule-check-id {
+  display: none;
+}
+
+.btn-logout {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: rgb(41, 59, 83);
+  color: #fff;
+  font-weight: 700;
+  z-index: 1;
 }

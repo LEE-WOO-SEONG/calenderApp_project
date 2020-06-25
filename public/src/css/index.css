@@ -10,11 +10,7 @@
     height: 400px;
     margin: 0 auto;
     border-radius: 10px;
-    background-color: rgb(250, 246, 246)
-    /* background-image: url('../img/loginBg.png'); */
-    /* background-position: 0% 0% ; */
-    /* background-size: cover; */
-    /* background-repeat: no-repeat; */
+    background-color: rgb(246, 247, 250)
   }
 
   #login-form > fieldset {
@@ -39,7 +35,7 @@
 
   [for^="login"] {
     position: absolute;
-    transform: translateY(-80%);
+    transform: translateY(-100%);
     color: rgb(122, 117, 116);
   }
 

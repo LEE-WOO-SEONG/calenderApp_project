@@ -1,7 +1,10 @@
-// functions
+let schedules = [];
+let tablesClass = [];
 
 const pageMove = url => location.replace(url);
 const removeToken = () => localStorage.removeItem('userTk');
+
+const $btnLogout = document.querySelector('.btn-logout');
 
 function Calendar() {
   this.container = document.querySelector('.container');
@@ -85,12 +88,11 @@ function Calendar() {
     const $prevMonth = document.createElement('button');
     const $nextMonth = document.createElement('button');
     const $monthAndYear = document.createElement('h3');
-    const $btnLogout = document.createElement('button');
 
     $currentMonth.classList.add('today-btn');
     $headerContainer.classList.add('calendar-header');
     $monthAndYear.classList.add('month-year');
-    $btnLogout.classList.add('api-btn');
+    // $btnLogout.classList.add('api-btn');
 
     $currentMonth.innerHTML = '<i class="current-month"></i>';
     $currentMonth.onclick = () => {
@@ -105,31 +107,25 @@ function Calendar() {
       console.log(this.currentMonth);
       this.prevMonth();
       $monthAndYear.textContent = `${this.currentYear + '년 ' + this.months[this.currentMonth]}`;
+      schedulesRender();
     };
 
     $nextMonth.innerHTML = '<i class="arrow next-month"></i>';
     $nextMonth.onclick = () => {
       this.nextMonth();
       $monthAndYear.textContent = `${this.currentYear + '년 ' + this.months[this.currentMonth]}`;
+      schedulesRender();
     };
 
     $monthAndYear.textContent = `${this.currentYear + '년 ' + this.months[this.currentMonth]}`;
 
-    $btnLogout.textContent = '로그아웃';
-    $btnLogout.onclick = async () => {
-      try {
-        await removeToken();
-        await pageMove('http://localhost:3000');
-      } catch (err) {
-        console.error(err);
-      }
-    };
+    // $btnLogout.textContent = '로그아웃';
 
     $headerContainer.appendChild($currentMonth);
     $headerContainer.appendChild($prevMonth);
     $headerContainer.appendChild($nextMonth);
     $headerContainer.appendChild($monthAndYear);
-    $headerContainer.appendChild($btnLogout);
+    // $headerContainer.appendChild($btnLogout);
     $header.appendChild($headerContainer);
   };
 
@@ -155,7 +151,7 @@ function Calendar() {
 
     [...daysPrevMonth, ...daysThisMonth, ...daysNextMonth]
       .forEach(num => {
-      // 날짜의 가장 바깥 컨테이너 생성
+        // 날짜의 가장 바깥 컨테이너 생성
         // 요소가 확정되면 정리할 것
         const $cell = document.createElement('div');
         $cell.setAttribute('id', num.id);
@@ -184,6 +180,12 @@ function Calendar() {
         // const li5 = document.createElement('div');
         // li1.setAttribute('class', 'schedule-list left');
         // li1.setAttribute('role', 'button');
+        // const span = document.createElement('span');
+        // span.setAttribute('class', 'schedule-id');
+        // li1.appendChild(span);
+        // span.textContent = '10';
+
+        // console.log(document.querySelector('.schedule-list'));
         // li2.setAttribute('class', 'schedule-list right');
         // li2.setAttribute('role', 'button');
         // li3.setAttribute('class', 'schedule-list');
@@ -212,7 +214,8 @@ function Calendar() {
           document.getElementById('start-date').value = `${num.id.substring(0, 4)}-${num.id.substring(4, 6)}-${num.id.substring(6, 8)}`;
         });
 
-        $cell.addEventListener('mouseup', () => {
+        $cell.addEventListener('mouseup', e => {
+          if (e.target.matches('.schedule-inner-container > .schedule-list')) return;
           document.getElementById('end-date').value = `${num.id.substring(0, 4)}-${num.id.substring(4, 6)}-${num.id.substring(6, 8)}`;
           document.querySelector('.modal-container').classList.remove('hidden');
           if (document.getElementById('start-date').value > document.getElementById('end-date').value) {
@@ -254,15 +257,16 @@ $scheduleModalClose.onclick = () => {
   document.querySelector('.modal-container').classList.add('hidden');
 };
 
-let schedule = [];
-
-const getScheduleID = () => (schedule.length ? Math.max(...schedule.map(list => list.id)) + 1 : 1);
+const getScheduleID = () => (schedules.length
+  ? Math.max(...schedules.map(list => list.id)) + 1 : 1);
 
 $schedueleModalSave.onclick = () => {
   const startDate = new Date(document.getElementById('start-date').value);
   const endDate = new Date(document.getElementById('end-date').value);
-  const titleValue = document.getElementById('schedule-name').value;
-  const memoValue = document.getElementById('schedule-memo').value;
+  const $inputTitle = document.getElementById('schedule-name');
+  const $inputMemo = document.getElementById('schedule-memo');
+  const titleValue = $inputTitle.value ? $inputTitle.value : '(제목 없음)';
+  const memoValue = $inputMemo.value ? $inputMemo.value : '(설명 없음)';
   const dateDiff = (endDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24);
   // for (let i = 0; i <= dateDiff; i++) {
   //   const d = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate() + i);
@@ -271,39 +275,229 @@ $schedueleModalSave.onclick = () => {
   //   console.log($cell.querySelector('.schedule-inner-container').innerHTML);
   //   $cell.querySelector('.schedule-inner-container').innerHTML += `<div class="schedule-list ${YYYYmmdd}" role="button">${dateDiff}</div>`
   // }
-  schedule = [...schedule, {
-    id: getScheduleID(), from: calendar.YYYYmmdd(startDate), to: calendar.YYYYmmdd(endDate), title: titleValue, memo: memoValue, length: dateDiff
-  }];
+  const newSchedule = {
+    id: getScheduleID(),
+    from: calendar.YYYYmmdd(startDate),
+    to: calendar.YYYYmmdd(endDate),
+    title: titleValue,
+    memo: memoValue,
+    length: dateDiff,
+    fkTable: +document.getElementById('select-schedule').value
+    // fkTable: document.getElementById('select-schedule').selectedIndex
+  };
+
+  schedules = [...schedules, newSchedule];
   document.querySelector('.modal-container').classList.add('hidden');
   document.getElementById('schedule-name').value = '';
   document.getElementById('schedule-memo').value = '';
-  console.log(schedule);
+  // console.log(schedules);
+  async function postScheduleList() {
+    try {
+      const sendUrl = `/users/${localStorage.getItem('userTk')}/schedules`;
+      await axios.post(sendUrl, newSchedule);
+      console.log(schedules);
+      schedulesRender();
+    } catch (err) {
+      console.error(err);
+    }
+  }
+  postScheduleList();
 };
 
-// async function fetchTodo() {
-//   const url = 'http://localhost:3000/users';
+// 일정 확인 닫기
+const $scheduleCheckClose = document.querySelector('.schedule-check-close');
+$scheduleCheckClose.onclick = () => {
+  document.querySelector('.check-schedule').classList.add('hidden');
+  const scheduleData = document.querySelector('.check-schedule').children;
+  scheduleData[1].textContent = '';
+  scheduleData[2].textContent = '';
+  scheduleData[3].textContent = '';
+  scheduleData[4].textContent = '';
+};
 
-//   const response = await fetch(url);
-//   const todo = await response.json();
-//   console.log(todo);
-// }
-// console.log(fetchTodo());
+// 일정 확인창 띄우기
+document.getElementById('calendar').addEventListener('click', e => {
+  if (!e.target.matches('#calendar .schedule-list')) return;
+  document.querySelector('.check-schedule').classList.remove('hidden');
+  const scheduleId = +e.target.id;
+  const selectedList = schedules.find(list => list.id === scheduleId);
+  const scheduleData = document.querySelector('.check-schedule').children;
+  scheduleData[1].textContent = selectedList.title;
+  scheduleData[2].textContent = `${selectedList.from.substring(0, 4)}년
+    ${selectedList.from.substring(4, 6)}월
+    ${selectedList.from.substring(6, 8)}일
+    ~ ${selectedList.to.substring(0, 4)}년
+    ${selectedList.to.substring(4, 6)}월
+    ${selectedList.to.substring(6, 8)}일`;
+  scheduleData[3].textContent = tablesClass.find(table => table.order === +selectedList.fkTable).class;
+  scheduleData[4].textContent = selectedList.memo;
+  scheduleData[5].textContent = selectedList.id;
+});
 
-// axios.get('/users')
-//   .then(response => {
-//     // console.log(response.data);
-//     return response.data;
-//   }).then(users => {
-//     // console.log(users.find(users => users.id === 'wooseong'));
-//     return users.find(users => users.id === 'wooseong');
-//   }).then(users => {
-//     // console.log(users.calendar);
-//     return users.calendar;
-//   })
-//   .catch(err => console.error(err));
+// 일정 지우기
+const $checkScheduleRemove = document.getElementById('schedule-remove');
+$checkScheduleRemove.onclick = () => {
+  const id = document.querySelector('.schedule-check-id').textContent;
+  document.getElementById(`${id}`).parentNode.removeChild(document.getElementById(`${id}`));
+  async function deleteScheduleList() {
+    try {
+      const response = await axios.delete(`users/${localStorage.getItem('userTk')}/schedules/${id}`);
+      const matchingList = await response.data;
+      schedules = matchingList;
+      schedulesRender();
+    } catch (err) {
+      console.error(err);
+    }
+  }
+  deleteScheduleList();
+  document.querySelector('.check-schedule').classList.add('hidden');
+};
 
-// axios.post('users', schedule)
-//   .then(response => {
-//     console.log(response.date);
-//     return response.date;
-//   })
+function schedulesRender() {
+  // rander를 담당하는 변수
+  const _schedules = [...schedules];
+
+  // 토요일이 있는지 확인
+  // function searchSaturday() {
+  //   const saturday = [];
+  //   const $monthYear = document.querySelector('.month-year');
+  //   const year = +$monthYear.textContent.substring(0, 4);
+  //   const month = isNaN(+$monthYear.textContent.substring(6, 8)) ? +$monthYear.textContent.substring(6, 7) : +$monthYear.textContent.substring(6, 8);
+  //   const newDay = new Date(year, month - 1);
+  //   const firstSaturday = 7 - newDay.getDay();
+  //   let saturdaySchedules = [];
+  //   // 첫 토요일
+  //   for (let i = 0; i < 4; i++) {
+  //     if (firstSaturday + i * 7 < 32) {
+  //       saturday.push(firstSaturday + i * 7);
+  //     }
+  //   }
+  //   console.log(saturday, '[saturdaySchedules]');
+  //   // console.log(saturday);
+  //   // 토요일들을 구함
+  //   for (let i = 0; i < saturday.length; i++) {
+  //     saturdaySchedules = _schedules.filter(schedule => {
+  //       const from = +schedule.from.substring(6, 8);
+  //       const to = +schedule.to.substring(6, 8);
+  //       return from < saturday[i] && to > saturday[i];
+  //     });
+  //   }
+  //   // 토요일이 있으면 새로 만듦
+  //   function craeteSaturdaySchedules() {
+  //     saturdaySchedules.forEach(schedule => {
+  //       for (let i = 0; i <= saturday.length; i++) {
+  //         const from = +schedule.from.substring(6, 8);
+  //         const to = +schedule.to.substring(6, 8);
+  //         if ((from <= saturday[i] && to >= saturday[i]) || saturday[i] === undefined) {
+  //           if (i === 0) {
+  //             _schedules.push({
+  //               id: schedule.id,
+  //               from: schedule.from,
+  //               to: saturday[i] < 10 ? schedule.to.substring(0, 6) + '0' + saturday[i] : schedule.to.substring(0, 6) + saturday[i],
+  //               title: schedule.title,
+  //               length: (saturday[i] < 10 ? schedule.to.substring(0, 6) + '0' + saturday[i] : schedule.to.substring(0, 6) + saturday[i]) - schedule.from
+  //             });
+  //           } else if (!(saturday[i - 1] < to && saturday[i] === undefined ? 32 : saturday[i] > to)) {
+  //             // console.log(saturday[i], 'saturday[i]');
+  //             _schedules.push({
+  //               id: schedule.id,
+  //               from: saturday[i - 1] < 10 ? schedule.to.substring(0, 6) + '0' + (saturday[i - 1] + 1) : schedule.to.substring(0, 6) + (saturday[i - 1] + 1),
+  //               to: saturday[i] < 10 ? schedule.to.substring(0, 6) + '0' + saturday[i] : schedule.to.substring(0, 6) + saturday[i],
+  //               title: schedule.title,
+  //               length: (saturday[i] < 10 ? schedule.to.substring(0, 6) + '0' + saturday[i] : schedule.to.substring(0, 6) + saturday[i]) - (saturday[i - 1] < 10 ? schedule.to.substring(0, 6) + '0' + (saturday[i - 1] + 1) : schedule.to.substring(0, 6) + (saturday[i - 1] + 1))
+  //             });
+  //           } else {
+  //             // console.log('[확인]', saturday[i]);
+  //             _schedules.push({
+  //               id: schedule.id,
+  //               from: saturday[i - 1] < 10 ? schedule.to.substring(0, 6) + '0' + (saturday[i - 1] + 1) : schedule.to.substring(0, 6) + (saturday[i - 1] + 1),
+  //               to: schedule.to,
+  //               title: schedule.title,
+  //               length: schedule.to - (saturday[i - 1] < 10 ? schedule.to.substring(0, 6) + '0' + (saturday[i - 1] + 1) : schedule.to.substring(0, 6) + (saturday[i - 1] + 1))
+  //             });
+  //           }
+  //         }
+  //       }
+  //       // console.log('_schedules.indexOf(schedule)', _schedules.indexOf(schedule));
+  //       _schedules.splice(_schedules.indexOf(schedule), 1);
+  //     });
+  //   }
+  //   // console.log(saturdaySchedules);
+  //   craeteSaturdaySchedules();
+  //   console.log('_schedules', _schedules);
+  //   console.log('schedules', schedules);
+  // }
+  // searchSaturday();
+  // length값으로 sort
+  function compare(length) {
+    return (a, b) => (a[length] < b[length] ? 1 : a[length] > b[length] ? -1 : 0);
+  }
+  _schedules.sort(compare('length'));
+  // dep 조정
+  function schedulesOrder() {
+    let dep = 0;
+    for (let i = 0; i < _schedules.length; i++) {
+      if (i === 0) {
+        render(_schedules[i]);
+      } else {
+        for (let k = 1; k < i + 1; k++) {
+          if (_schedules[i - k].from <= _schedules[i].from && _schedules[i].from <= _schedules[i - k].to) {
+            ++dep;
+          }
+        }
+        // console.log('[dep조정]', dep, _schedules[i]);
+        render(_schedules[i], dep);
+        dep = 0;
+      }
+    }
+  }
+  // render
+  function render(schedule, dep) {
+    if (!document.getElementById(`${schedule.from}`)) return;
+    const color ;
+
+    async function getUser() {
+      try {
+        const response = await axios.get(`/users/${localStorage.getItem('userTk')}/tables`);
+        schedules = response.data.;
+        schedulesRender();
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    getUser()
+
+    const $inner = document.getElementById(`${schedule.from}`);
+    $inner.querySelector('.schedule-inner-container').innerHTML = '';
+    $inner.querySelector('.schedule-inner-container').innerHTML += `<div id="${schedule.id}" class="schedule-list" role="button">${
+      schedule.title}</div>`;
+    document.getElementById(`${schedule.id}`).style.width = `${95 * (schedule.length + 1)}%`;
+    document.getElementById(`${schedule.id}`).style.transform = `translateY(${dep * 110}%)`;
+  }
+  console.log(_schedules);
+  schedulesOrder();
+}
+
+window.addEventListener('load', () => {
+  async function getScheduleList() {
+    try {
+      const response = await axios.get(`/users/${localStorage.getItem('userTk')}`);
+      const _schedules = await response.data;
+      schedules = _schedules.schedules;
+      tablesClass = _schedules.tables;
+      schedulesRender();
+    } catch (err) {
+      console.error(err);
+    }
+  }
+  getScheduleList();
+});
+
+$btnLogout.onclick = async () => {
+  try {
+    await removeToken();
+    await pageMove('http://localhost:3000');
+  } catch (err) {
+    console.error(err);
+  }
+};
