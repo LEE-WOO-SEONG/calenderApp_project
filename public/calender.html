@@ -12,29 +12,27 @@
   <meta property="og:image" content="">
   <meta property="og:url" content="">
   <title>Private Calender</title>
-  <link rel="stylesheet" type="text/css"
-    href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="shortcut icon" href="">
   <link rel="stylesheet" href="./src/css/common.css">
   <link rel="stylesheet" href="./src/css/sidemenu.css">
   <link rel="stylesheet" href="./src/css/calender.css">
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="https://kit.fontawesome.com/33179a3595.js" crossorigin="anonymous"></script>
   <!-- <script src="../dist/js/bundle.js"></script> -->
-  <script src="src/js/function.js" defer></script>
+  <script src="./src/js/function.js" defer></script>
   <script src="./src/js/calender.js" defer></script>
   <script src="./src/js/sidemenu.js" defer></script>
 </head>
 
 <body>
-  <button class="api-btn">로그아웃</button>
   <main class="container">
-    <!-- <h1 class="a11y-hidden">일정관리 </h1> -->
+    <h1 class="a11y-hidden">일정관리 </h1>
     <section id="header">
-      <!-- <h2 class="a11y-hidden">캘린더 년/월 이동</h2> -->
+      <h2 class="a11y-hidden">캘린더 년/월 이동</h2>
     </section>
     <div class="body-container">
       <section id="sidemenu">
-        <!-- <h2 class="a11y-hidden">일정제목</h2> -->
+        <h2 class="a11y-hidden">일정제목</h2>
         <div class="add-calender-list-input">
           <input type="text" placeholder="캘린더 추가" id="add-calender">
           <!-- <label for="add-calender" class="a11y-hidden">캘린더 추가</label> -->
@@ -50,7 +48,7 @@
       <section id="calendar">
         <!-- <h2 class="a11y-hidden">캘린더</h2> -->
       </section>
-      <div class="check-schedule">
+      <div class="check-schedule hidden">
         <div class="schedule-check-container">
           <div role="button" id="schedule-remove">
             <svg width="28" height="28" viewBox="0 0 24 24" focusable="false" class=" NMm5M svg-remove">
@@ -58,22 +56,23 @@
               <path d="M9 8h2v9H9zm4 0h2v9h-2z"></path>
             </svg>
           </div>
-          <div role="button" id="schedule-check-close"></div>
+          <div role="button" class="schedule-check-close"></div>
         </div>
         <div class="schedule-check-container" id="schedule-check-title"></div>
         <div class="schedule-check-container" id="schedule-check-date"></div>
         <div class="schedule-check-container" id="schedule-check-class"></div>
         <div class="schedule-check-container" id="schedule-check-memo"></div>
+        <div class="schedule-check-id"></div>
       </div>
     </div>
     <div class="modal-container hidden">
       <div class="modal-flex">
         <div class="modal-box-container">
-          <div class="icon-container">
-            <span><i class="fa fa-camera fa-lg"></i></span>
-          </div>
+          <!-- <div class="icon-container"> -->
+            <!-- <span><i class="fa fa-camera fa-lg"></i></span> -->
+          <!-- </div> -->
           <div class="input-name-container input-container">
-            <input type="text" id="schedule-name">
+            <input type="text" id="schedule-name" placeholder="제목 및 시간추가">
           </div>
         </div>
         <div class="modal-box-container">
@@ -82,7 +81,7 @@
           </div>
           <div class="input-date-container input-container">
             <input type="date" class="date-input" id="start-date">
-            ~
+            <span class="date-inputSign"> ~ </span>
             <input type="date" class="date-input" id="end-date">
             <!-- <select name="end-time" id="end-time">
               <option value="00:00">00:00</option>
@@ -142,7 +141,7 @@
             <span><i class="fa fa-pencil fa-fw"></i></span>
           </div>
           <div class="input-memo-container input-container">
-            <input type="text" id="schedule-memo">
+            <input type="text" id="schedule-memo" placeholder="설명추가">
           </div>
         </div>
         <div class="modal-box-container">
@@ -154,12 +153,11 @@
             </select>
           </div>
         </div>
-        <div class="modal-box-container modal-btn-container">
           <button class="schedule-modal-save">저장</button>
-        </div>
         <div role="button" class="schedule-modal-close"></div>
       </div>
     </div>
+    <button class="btn-logout">로그아웃</button>
   </main>
 </body>
 

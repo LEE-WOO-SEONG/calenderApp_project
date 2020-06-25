@@ -125,6 +125,7 @@ window.addEventListener('load', function () {
   }
   getList();
 });
+
 // event handler
 $input.onkeyup = e => {
   const content = e.target.value.trim();
@@ -145,6 +146,7 @@ $addCalenderListBox.onchange = e => {
 };
 $addCalenderListBox.onclick = e => {
   const ParentNodeClass = e.target.parentNode.classList[0];
+  console.log(e.target);
   if (e.target.matches('.remove-calendar-list')) {
     removeCalenderList(ParentNodeClass);
   } else if (e.target.matches('.setting-change')) {
