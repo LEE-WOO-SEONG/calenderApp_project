@@ -280,6 +280,8 @@ $schedueleModalSave.onclick = () => {
   //   console.log($cell.querySelector('.schedule-inner-container').innerHTML);
   //   $cell.querySelector('.schedule-inner-container').innerHTML += `<div class="schedule-list ${YYYYmmdd}" role="button">${dateDiff}</div>`
   // }
+
+  $overlay.style.display = 'none';
   
   const newSchedule = {
     id: getScheduleID(),
