@@ -196,17 +196,7 @@
           "checked": true
         }
       ],
-      "schedules": [
-        {
-          "id": 1,
-          "from": "20200602",
-          "to": "20200602",
-          "title": "(제목 없음)",
-          "memo": "(설명 없음)",
-          "length": 0,
-          "fkTable": 1
-        }
-      ]
+      "schedules": []
     },
     {
       "id": "akakqogk@nate.com",
