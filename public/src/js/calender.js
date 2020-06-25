@@ -302,6 +302,7 @@ $schedueleModalSave.onclick = () => {
     }
   }
   postScheduleList();
+  location.reload();
 };
 
 // 일정 확인 닫기
@@ -350,12 +351,13 @@ $checkScheduleRemove.onclick = () => {
     }
   }
   deleteScheduleList();
+  location.reload();
   document.querySelector('.check-schedule').classList.add('hidden');
 };
 
 function schedulesRender() {
-  // rander를 담당하는 변수
   const _schedules = [...schedules];
+  console.log(document.querySelectorAll('.schedule-list'));
 
   // 토요일이 있는지 확인
   // function searchSaturday() {
@@ -454,21 +456,25 @@ function schedulesRender() {
   // render
   function render(schedule, dep) {
     if (!document.getElementById(`${schedule.from}`)) return;
-    const color ;
 
     async function getUser() {
       try {
         const response = await axios.get(`/users/${localStorage.getItem('userTk')}/tables`);
-        schedules = response.data.;
-        schedulesRender();
+        await response.data.forEach(data => {
+          // console.log(Boolean(schedule.fkTable === data.order));
+          if (schedule.fkTable === data.order) {
+            console.log(data.color, '[color]');
+            const { color } = data;
+            document.getElementById(`${schedule.id}`).style.backgroundColor = `${color}`;
+          }
+        });
       } catch (error) {
         console.error(error);
       }
     }
-    getUser()
+    getUser();
 
     const $inner = document.getElementById(`${schedule.from}`);
-    $inner.querySelector('.schedule-inner-container').innerHTML = '';
     $inner.querySelector('.schedule-inner-container').innerHTML += `<div id="${schedule.id}" class="schedule-list" role="button">${
       schedule.title}</div>`;
     document.getElementById(`${schedule.id}`).style.width = `${95 * (schedule.length + 1)}%`;

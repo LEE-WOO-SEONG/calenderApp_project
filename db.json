@@ -221,7 +221,62 @@
           "checked": true
         }
       ],
-      "schedules": []
+      "schedules": [
+        {
+          "id": 2,
+          "from": "20200622",
+          "to": "20200624",
+          "title": "(제목 없음)",
+          "memo": "(설명 없음)",
+          "length": 2,
+          "fkTable": 1
+        },
+        {
+          "id": 5,
+          "from": "20200615",
+          "to": "20200615",
+          "title": "afsafsafsdf",
+          "memo": "(설명 없음)",
+          "length": 0,
+          "fkTable": 1
+        },
+        {
+          "id": 6,
+          "from": "20200629",
+          "to": "20200630",
+          "title": "afasfasfsaf",
+          "memo": "(설명 없음)",
+          "length": 1,
+          "fkTable": 16
+        },
+        {
+          "id": 7,
+          "from": "20200615",
+          "to": "20200620",
+          "title": "afsfafasdf",
+          "memo": "(설명 없음)",
+          "length": 5,
+          "fkTable": 1
+        },
+        {
+          "id": 8,
+          "from": "20210503",
+          "to": "20210506",
+          "title": "ㅇㄻㄹㄴㅁㄹ",
+          "memo": "(설명 없음)",
+          "length": 3,
+          "fkTable": 1
+        },
+        {
+          "id": 9,
+          "from": "20201207",
+          "to": "20201211",
+          "title": "ㅁㄻㄴㄹㄴㅇㄹ",
+          "memo": "(설명 없음)",
+          "length": 4,
+          "fkTable": 1
+        }
+      ]
     },
     {
       "id": "dongwoo",
