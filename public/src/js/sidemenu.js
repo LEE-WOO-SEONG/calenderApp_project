@@ -13,7 +13,6 @@ const render = () => {
     <label id="listLabel" class="checkboxLabel${list.order}" for="add-calender-list${list.order}">${list.class}
     <div class="reset-checkbox reset-checkbox${list.order}"></div></label>
     ${list.order !== 1 ? '<i class="remove-calendar-list far fa-times-circle"></i>' : ''}
-    <i class="setting-change fas fa-ellipsis-v"></i>
     </li>`;
   });
   $addCalenderListBox.innerHTML = sidePanel;
@@ -27,12 +26,48 @@ const render = () => {
     }
   });
 };
+
+// let arrColor = ['#AD1457', '#F4511E', '#E4C441', '#0B8043', '#3F51B5', '#8E24AA', '#D81B60', '#EF6C00', '#C0CA33', '#009688', '#7986CB', '#795548'];
 // const randomColor = () => {
-//   arrColor = ['#AD1457', '#F4511E', ]
-// }
+//   let colorIndex = Math.floor((Math.random() * arrColor.length));
+//   let ColorRandom = arrColor[colorIndex];
+//   let _arrColor = arrColor.filter(item => item !== ColorRandom);
+//   arrColor = _arrColor;
+ 
+//   if (arrColor.length === 0) {
+//     alert('캘린더 추가는 10개까지 가능합니다');
+//   }
+//   return ColorRandom;
+// };
+
+let colorArray = [];
+
+const randomColor = () => {
+  const str = 'abcdef0123456789';
+  let random = '';
+  for (let i = 0; i < 6; i++) {
+    const count = Math.floor(Math.random() * str.length);
+    random += str[count];
+  }
+  let rc = '#' + random;
+
+  if (colorArray.includes(rc)) {
+    for (let i = 0; i < 6; i++) {
+      const count = Math.floor(Math.random() * str.length);
+      random += str[count];
+    }
+  } else {
+    colorArray.push(rc);
+    return rc;
+  }
+};
+
 const getNextOrder = () => Math.max(0, ...calenderList.map(({ order }) => order)) + 1;
+
 const addListCalender = content => {
-  const newCalenderList = { order: getNextOrder(), class: content, checked: true };
+  const newCalenderList = {
+    order: getNextOrder(), class: content, color: randomColor(), checked: true
+  };
   calenderList = [...calenderList, newCalenderList];
   document.getElementById('select-schedule').innerHTML += `<option value="${newCalenderList.order}">${newCalenderList.class}</option>`;
   async function postList() {
@@ -59,6 +94,7 @@ const showOnload = matchingUser => {
   });
   document.getElementById('select-schedule').innerHTML = option;
 };
+
 const removeCalenderList = order => {
   calenderList = calenderList.filter(list => +order !== list.order);
   async function deleteList() {
