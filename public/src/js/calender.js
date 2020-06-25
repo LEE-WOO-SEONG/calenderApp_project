@@ -485,4 +485,4 @@ window.addEventListener('load', () => {
     } catch (err) {
       console.error(err);
     }
-  }
+  };
