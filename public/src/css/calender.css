@@ -188,7 +188,7 @@ body {
   user-select: none;
 }
 
-.calendar-body .day span {
+.calendar-body .day .digit-container span {
   width: 20px;
   height: 20px;
   display: inline-block;
@@ -385,7 +385,7 @@ body {
   z-index: 2;
 }
 
-.schedule-remove {
+#schedule-remove {
   position: absolute;
   left: 230px;
   width: 100%;
@@ -419,7 +419,8 @@ body {
   display: none;
 }
 
-#schedule-id {
+
+.schedule-id, .schedule-check-id {
   display: none;
 }
 
