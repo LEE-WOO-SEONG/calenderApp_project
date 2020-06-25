@@ -388,7 +388,6 @@ body {
 #schedule-remove {
   position: absolute;
   left: 230px;
-  width: 100%;
   color: #444;
   cursor: pointer;
 }

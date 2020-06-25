@@ -1,5 +1,6 @@
 // State
-let calenderList = [];
+export let calenderList = [];
+
 // DOM Node
 const $input = document.getElementById('add-calender');
 const $addListSubmit = document.querySelector('.add-list-submit');
@@ -83,10 +84,24 @@ const addListCalender = content => {
   }
   postList();
 };
-const changeCompleted = order => {
+
+const changeCompleted = (order, checked) => {
   calenderList = calenderList.map(list => (+order === list.order ? ({ ...list, checked: !list.checked }) : list));
+  // console.log(calenderList);
+  const newChecked = { checked };
+
+  async function patchChecked(order, newChecked) {
+    try {
+      const sendUrl = `users/${localStorage.getItem('userTk')}/tables/${order}`;
+      await axios.patch(sendUrl, newChecked);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+  patchChecked(order, newChecked);
   render();
 };
+
 const showOnload = matchingUser => {
   let option = '';
   matchingUser.forEach(list => {
@@ -142,11 +157,12 @@ $addListSubmit.onclick = () => {
 $addCalenderListBox.onchange = e => {
   if (!e.target.matches('.add-calender-list-box .checkbox')) return;
   const ParentNodeId = e.target.parentNode.classList[0];
-  changeCompleted(ParentNodeId);
+  console.log(e.target.checked);
+  changeCompleted(ParentNodeId, e.target.checked);
 };
 $addCalenderListBox.onclick = e => {
   const ParentNodeClass = e.target.parentNode.classList[0];
-  console.log(e.target);
+  // console.log(e.target);
   if (e.target.matches('.remove-calendar-list')) {
     removeCalenderList(ParentNodeClass);
   } else if (e.target.matches('.setting-change')) {
