@@ -1,4 +1,5 @@
 // functions
+
 const pageMove = url => location.replace(url);
 const removeToken = () => localStorage.removeItem('userTk');
 
@@ -101,6 +102,7 @@ function Calendar() {
 
     $prevMonth.innerHTML = '<i class="arrow prev-month"></i>';
     $prevMonth.onclick = () => {
+      console.log(this.currentMonth);
       this.prevMonth();
       $monthAndYear.textContent = `${this.currentYear + '년 ' + this.months[this.currentMonth]}`;
     };
