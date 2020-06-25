@@ -10,6 +10,7 @@ const pageMove = url => location.replace(url);
 const removeToken = () => localStorage.removeItem('userTk');
 
 const $btnLogout = document.querySelector('.btn-logout');
+const $overlay = document.querySelector('.overlay');
 
 function Calendar() {
   this.container = document.querySelector('.container');
@@ -99,7 +100,8 @@ function Calendar() {
     $monthAndYear.classList.add('month-year');
     // $btnLogout.classList.add('api-btn');
 
-    $currentMonth.innerHTML = '<i class="current-month"></i>';
+    // $currentMonth.innerHTML = '<i class="current-month"></i>';
+    $currentMonth.innerHTML = '<span class="current-month">today</span>';
     $currentMonth.onclick = () => {
       this.currentYear = new Date().getFullYear();
       this.currentMonth = new Date().getMonth();
@@ -205,12 +207,15 @@ function Calendar() {
         // $scheduleInnerContainer.appendChild(li4);
         // $scheduleInnerContainer.appendChild(li5);
 
-        $cell.addEventListener('click', () => {
+        $cell.addEventListener('click', e => {
           const $selected = document.querySelector('.selected');
           if ($selected) {
             $selected.classList.remove('selected');
           }
           $cell.classList.add('selected');
+          if (!e.target.matches('.schedule-list')) {
+            $overlay.style.display = 'block';
+          }
           document.getElementById('start-date').value = `${num.id.substring(0, 4)}-${num.id.substring(4, 6)}-${num.id.substring(6, 8)}`;
           document.getElementById('end-date').value = `${num.id.substring(0, 4)}-${num.id.substring(4, 6)}-${num.id.substring(6, 8)}`;
         });
@@ -260,6 +265,8 @@ const $scheduleModalClose = document.querySelector('.schedule-modal-close');
 const $schedueleModalSave = document.querySelector('.schedule-modal-save');
 $scheduleModalClose.onclick = () => {
   document.querySelector('.modal-container').classList.add('hidden');
+  $overlay.style.display = 'none';
+
 };
 
 const getScheduleID = () => (schedules.length ? Math.max(...schedules.map(list => list.id)) + 1 : 1);
@@ -279,6 +286,9 @@ $schedueleModalSave.onclick = () => {
   //   console.log($cell.querySelector('.schedule-inner-container').innerHTML);
   //   $cell.querySelector('.schedule-inner-container').innerHTML += `<div class="schedule-list ${YYYYmmdd}" role="button">${dateDiff}</div>`
   // }
+
+  $overlay.style.display = 'none';
+
   const newSchedule = {
     id: getScheduleID(),
     from: calendar.YYYYmmdd(startDate),

@@ -28,18 +28,6 @@ const render = () => {
   });
 };
 
-// let arrColor = ['#AD1457', '#F4511E', '#E4C441', '#0B8043', '#3F51B5', '#8E24AA', '#D81B60', '#EF6C00', '#C0CA33', '#009688', '#7986CB', '#795548'];
-// const randomColor = () => {
-//   let colorIndex = Math.floor((Math.random() * arrColor.length));
-//   let ColorRandom = arrColor[colorIndex];
-//   let _arrColor = arrColor.filter(item => item !== ColorRandom);
-//   arrColor = _arrColor;
- 
-//   if (arrColor.length === 0) {
-//     alert('캘린더 추가는 10개까지 가능합니다');
-//   }
-//   return ColorRandom;
-// };
 
 let colorArray = [];
 
@@ -87,7 +75,6 @@ const addListCalender = content => {
 
 const changeCompleted = (order, checked) => {
   calenderList = calenderList.map(list => (+order === list.order ? ({ ...list, checked: !list.checked }) : list));
-  // console.log(calenderList);
   const newChecked = { checked };
 
   async function patchChecked(order, newChecked) {
@@ -162,7 +149,6 @@ $addCalenderListBox.onchange = e => {
 };
 $addCalenderListBox.onclick = e => {
   const ParentNodeClass = e.target.parentNode.classList[0];
-  // console.log(e.target);
   if (e.target.matches('.remove-calendar-list')) {
     removeCalenderList(ParentNodeClass);
   } else if (e.target.matches('.setting-change')) {
