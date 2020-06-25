@@ -19,21 +19,25 @@ server.use(cors());
 // server.get('/users', (req, res) => {
 //   res.send(db.get('users').value());
 // });
+
 // token get
 server.get('/users/:token', (req, res) => {
   const { token } = req.params;
   res.send(db.get('users').find({ token }).value());
 });
+
 // token -> schedules get
 server.get('/users/:token/schedules', (req, res) => {
   const { token } = req.params;
   res.send(db.get('users').find({ token }).value().schedules);
 });
+
 // token -> tables get
 server.get('/users/:token/tables', (req, res) => {
   const { token } = req.params;
   res.send(db.get('users').find({ token }).value().tables);
 });
+
 /* post 요청 */
 // token -> schedules post
 server.post('/users/:token/schedules', (req, res) => {
@@ -45,6 +49,7 @@ server.post('/users/:token/schedules', (req, res) => {
   db.write();
   res.send(db.get('users').find({ token }).value().schedules);
 });
+
 // token -> tables post
 server.post('/users/:token/tables', (req, res) => {
   const { token } = req.params;
@@ -55,8 +60,9 @@ server.post('/users/:token/tables', (req, res) => {
   db.write();
   res.send(db.get('users').find({ token }).value().tables);
 });
+
 /* patch 요청 */
-// token -> tables/id patch
+// token -> tables/order patch
 server.patch('/users/:token/tables/:order', (req, res) => {
   const { token, order } = req.params;
   const { tables } = db.get('users').find({ token }).value();
@@ -66,8 +72,9 @@ server.patch('/users/:token/tables/:order', (req, res) => {
   db.write();
   res.send(db.get('users').find({ token }).value().tables);
 });
+
 /* delete 요청 */
-// token -> tables/id delete
+// token -> tables/order delete
 server.delete('/users/:token/tables/:order', (req, res) => {
   const { token, order } = req.params;
   const { tables } = db.get('users').find({ token }).value();
@@ -78,6 +85,7 @@ server.delete('/users/:token/tables/:order', (req, res) => {
   }
   res.send(db.get('users').find({ token }).value().tables);
 });
+
 // token -> schedules/id delete
 server.delete('/users/:token/schedules/:id', (req, res) => {
   const { token, id } = req.params;

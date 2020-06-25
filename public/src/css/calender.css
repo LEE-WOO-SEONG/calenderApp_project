@@ -294,7 +294,7 @@ body {
   height: 24.5px;
 }
 
-.schedule-modal-close {
+.schedule-modal-close, .schedule-check-close {
   position: absolute;
   top: 10px;
   right: 10px;
@@ -305,11 +305,12 @@ body {
   cursor: pointer;
 }
 
-.schedule-modal-close:hover {
+.schedule-modal-close:hover, .schedule-check-close:hover {
   opacity: 1;
 }
 
-.schedule-modal-close:before, .schedule-modal-close:after {
+.schedule-modal-close:before, .schedule-modal-close:after,
+.schedule-check-close:before, .schedule-check-close:after {
   position: absolute;
   left: 10px;
   content: ' ';
@@ -317,10 +318,10 @@ body {
   width: 5px;
   background-color: #333;
 }
-.schedule-modal-close:before {
+.schedule-modal-close:before, .schedule-check-close:before {
   transform: rotate(45deg);
 }
-.schedule-modal-close:after {
+.schedule-modal-close:after, .schedule-check-close:after {
   transform: rotate(-45deg);
 }
 
@@ -335,6 +336,51 @@ body {
   border: 1px solid #333;
 }
 
+/* 스케줄 확인 버튼 */
+.check-schedule {
+  position: absolute;
+  top: 20px;
+  left: calc(50vw - 125px);
+  width: 300px;
+  height: 230px;
+  background-color: purple;
+  padding: 10px;
+}
+
+.schedule-remove {
+  position: absolute;
+  left: 230px;
+  width: 100%;
+  color: #444;
+  cursor: pointer;
+}
+
+.schedule-check-container {
+  width: 100%;
+  height: 40px;
+  line-height: 20px;
+  padding: 0px;
+  border: 1px solid gray;
+}
+
+.schedule-date {
+  height: 40px;
+}
+
+.schedule-class {
+  height: 40px;
+}
+
+.schedule-memo {
+  width: 100%;
+  height: 40px;
+  background-color: rgb(10, 115, 190);
+}
+
 .hidden {
+  display: none;
+}
+
+#schedule-id {
   display: none;
 }
