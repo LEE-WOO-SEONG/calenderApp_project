@@ -1,5 +1,10 @@
 let schedules = [];
 
+const $btnLogout = document.querySelector('.btn-logout');
+
+const removeToken = () => localStorage.removeItem('userTk');
+const pageMove = url => location.replace(url);
+
 function Calendar() {
   this.container = document.querySelector('.container');
   this.container.classList.add('wlhs-calendar');
@@ -82,12 +87,11 @@ function Calendar() {
     const $prevMonth = document.createElement('button');
     const $nextMonth = document.createElement('button');
     const $monthAndYear = document.createElement('h3');
-    const $btnLogout = document.createElement('button');
 
     $currentMonth.classList.add('today-btn');
     $headerContainer.classList.add('calendar-header');
     $monthAndYear.classList.add('month-year');
-    $btnLogout.classList.add('api-btn');
+    // $btnLogout.classList.add('api-btn');
 
     $currentMonth.innerHTML = '<i class="current-month"></i>';
     $currentMonth.onclick = () => {
@@ -111,21 +115,13 @@ function Calendar() {
 
     $monthAndYear.textContent = `${this.currentYear + '년 ' + this.months[this.currentMonth]}`;
 
-    $btnLogout.textContent = '로그아웃';
-    $btnLogout.onclick = async () => {
-      try {
-        await removeToken();
-        await pageMove('http://localhost:3000');
-      } catch (err) {
-        console.error(err);
-      }
-    };
+    // $btnLogout.textContent = '로그아웃';
 
     $headerContainer.appendChild($currentMonth);
     $headerContainer.appendChild($prevMonth);
     $headerContainer.appendChild($nextMonth);
     $headerContainer.appendChild($monthAndYear);
-    $headerContainer.appendChild($btnLogout);
+    // $headerContainer.appendChild($btnLogout);
     $header.appendChild($headerContainer);
   };
 
@@ -277,7 +273,7 @@ $schedueleModalSave.onclick = () => {
     title: titleValue,
     memo: memoValue,
     length: dateDiff,
-    fkTable: document.getElementById('select-schedule').value
+    fkTable: +document.getElementById('select-schedule').value
     // fkTable: document.getElementById('select-schedule').selectedIndex
   };
 
@@ -289,7 +285,7 @@ $schedueleModalSave.onclick = () => {
   async function postList() {
     try {
       const sendUrl = `/users/${localStorage.getItem('userTk')}/schedules`;
-      await axios.post(sendUrl, schedules);
+      await axios.post(sendUrl, newSchedule);
       console.log(schedules);
     } catch (err) {
       console.error(err);
@@ -319,3 +315,12 @@ window.addEventListener('load', () => {
   }
   getScheduleList();
 });
+
+$btnLogout.onclick = async () => {
+  try {
+    await removeToken();
+    await pageMove('http://localhost:3000');
+  } catch (err) {
+    console.error(err);
+  }
+};

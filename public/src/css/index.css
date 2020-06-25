@@ -11,10 +11,6 @@
     margin: 0 auto;
     border-radius: 10px;
     background-color: rgb(246, 247, 250)
-    /* background-image: url('../img/loginBg.png'); */
-    /* background-position: 0% 0% ; */
-    /* background-size: cover; */
-    /* background-repeat: no-repeat; */
   }
 
   #login-form > fieldset {
