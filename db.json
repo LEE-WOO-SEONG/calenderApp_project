@@ -47,36 +47,6 @@
           "checked": true
         },
         {
-          "order": 2,
-          "class": "sfasdf",
-          "color": "#bd392d",
-          "checked": true
-        },
-        {
-          "order": 3,
-          "class": "dkssud",
-          "color": "#fbbd58",
-          "checked": true
-        },
-        {
-          "order": 4,
-          "class": "sdkjf",
-          "color": "#9093b8",
-          "checked": true
-        },
-        {
-          "order": 5,
-          "class": "fdkj",
-          "color": "#2fe984",
-          "checked": true
-        },
-        {
-          "order": 6,
-          "class": "slkdfj",
-          "color": "#372ae5",
-          "checked": true
-        },
-        {
           "order": 7,
           "class": "alskdjf",
           "color": "#942bb6",
@@ -106,6 +76,33 @@
           "id": 3,
           "from": "20200513",
           "to": "20200513",
+          "title": "(제목 없음)",
+          "memo": "(설명 없음)",
+          "length": 0,
+          "fkTable": 1
+        },
+        {
+          "id": 1,
+          "from": "20200531",
+          "to": "20200531",
+          "title": "(제목 없음)",
+          "memo": "(설명 없음)",
+          "length": 0,
+          "fkTable": 1
+        },
+        {
+          "id": 1,
+          "from": "20200531",
+          "to": "20200531",
+          "title": "(제목 없음)",
+          "memo": "(설명 없음)",
+          "length": 0,
+          "fkTable": 1
+        },
+        {
+          "id": 1,
+          "from": "20200531",
+          "to": "20200531",
           "title": "(제목 없음)",
           "memo": "(설명 없음)",
           "length": 0,
