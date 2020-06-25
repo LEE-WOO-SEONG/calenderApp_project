@@ -260,7 +260,6 @@ const $schedueleModalSave = document.querySelector('.schedule-modal-save');
 $scheduleModalClose.onclick = () => {
   document.querySelector('.modal-container').classList.add('hidden');
   $overlay.style.display = 'none';
-
 };
 
 const getScheduleID = () => (schedules.length
@@ -281,7 +280,6 @@ $schedueleModalSave.onclick = () => {
   //   console.log($cell.querySelector('.schedule-inner-container').innerHTML);
   //   $cell.querySelector('.schedule-inner-container').innerHTML += `<div class="schedule-list ${YYYYmmdd}" role="button">${dateDiff}</div>`
   // }
-
   
   const newSchedule = {
     id: getScheduleID(),
