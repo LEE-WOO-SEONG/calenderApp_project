@@ -335,7 +335,7 @@ document.getElementById('calendar').addEventListener('click', e => {
   scheduleData[2].textContent = `${selectedList.from.substring(0, 4)}년
     ${selectedList.from.substring(4, 6)}월
     ${selectedList.from.substring(6, 8)}일
-    ~ ${selectedList.to.substring(0, 4)}년
+    ${selectedList.to.substring(0, 4)}년
     ${selectedList.to.substring(4, 6)}월
     ${selectedList.to.substring(6, 8)}일`;
   scheduleData[3].textContent = tablesClass.find(table => table.order === +selectedList.fkTable).class;
