@@ -78,6 +78,48 @@
           "class": "도지현",
           "color": "brown",
           "checked": true
+        },
+        {
+          "order": 12,
+          "class": "ds",
+          "color": "#8d9080",
+          "checked": true
+        },
+        {
+          "order": 15,
+          "class": "sadf",
+          "color": "#be6c7c",
+          "checked": true
+        },
+        {
+          "order": 16,
+          "class": "sda",
+          "color": "#8fdb4a",
+          "checked": true
+        },
+        {
+          "order": 17,
+          "class": "f",
+          "color": "#ee97da",
+          "checked": true
+        },
+        {
+          "order": 18,
+          "class": "sd",
+          "color": "#562a31",
+          "checked": true
+        },
+        {
+          "order": 19,
+          "class": "sad",
+          "color": "#382658",
+          "checked": true
+        },
+        {
+          "order": 20,
+          "class": "asd",
+          "color": "#a56d23",
+          "checked": true
         }
       ],
       "schedules": []
