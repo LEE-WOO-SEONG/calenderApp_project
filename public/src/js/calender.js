@@ -211,6 +211,11 @@ function Calendar() {
 
     document.querySelector('#calendar').appendChild($weekDays);
     document.querySelector('#calendar').appendChild($calendarBody);
+
+    // const $nthChildContainer = document.querySelector('.calendar-body');
+    // const $nthChildContainer = document.querySelectorAll('.calendar-body .day:nth-child(7n)');
+    // // console.log($nthChildContainer);
+    // if ($nthChildContainer.)
   };
 
   this.showCalendar = () => {
@@ -326,7 +331,6 @@ $checkScheduleRemove.onclick = () => {
 // 랜더
 function schedulesRender() {
   const _schedules = [...schedules];
-
   // length값으로 sort
   function compare(length) {
     return (a, b) => (a[length] < b[length] ? 1 : a[length] > b[length] ? -1 : 0);
