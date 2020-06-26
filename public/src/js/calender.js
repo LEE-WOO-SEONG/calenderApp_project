@@ -106,6 +106,7 @@ function Calendar() {
 
     $prevMonth.innerHTML = '<i class="arrow prev-month"></i>';
     $prevMonth.onclick = () => {
+      console.log(this.currentMonth);
       this.prevMonth();
       $monthAndYear.textContent = `${this.currentYear + '년 ' + this.months[this.currentMonth]}`;
       schedulesRender();
@@ -229,7 +230,6 @@ const $schedueleModalSave = document.querySelector('.schedule-modal-save');
 $scheduleModalClose.onclick = () => {
   document.querySelector('.modal-container').classList.add('hidden');
   $overlay.style.display = 'none';
-
 };
 
 const getScheduleID = () => (schedules.length ? Math.max(...schedules.map(list => list.id)) + 1 : 1);
@@ -262,12 +262,14 @@ $schedueleModalSave.onclick = () => {
     try {
       const sendUrl = `/users/${localStorage.getItem('userTk')}/schedules`;
       await axios.post(sendUrl, newSchedule);
-      schedulesRender();
+      // console.log(schedules, 'schedules');
+      schedulesRender(schedules);
     } catch (err) {
       console.error(err);
     }
   }
   postScheduleList();
+  // location.reload();
 };
 
 // 일정 확인 닫기
@@ -305,6 +307,8 @@ async function deleteScheduleList(id) {
     const response = await axios.delete(`users/${localStorage.getItem('userTk')}/schedules/${id}`);
     const matchingList = await response.data;
     schedules = matchingList;
+    // console.log(schedules);
+    schedulesRender();
   } catch (err) {
     console.error(err);
   }
@@ -314,13 +318,13 @@ async function deleteScheduleList(id) {
 const $checkScheduleRemove = document.getElementById('schedule-remove');
 $checkScheduleRemove.onclick = () => {
   const id = +document.querySelector('.schedule-check-id').textContent;
-  document.getElementById(`${id}`).parentNode.removeChild(document.getElementById(`${id}`));
+  // document.getElementById(`${id}`).parentNode.removeChild(document.getElementById(`${id}`));
   deleteScheduleList(id);
   document.querySelector('.check-schedule').classList.add('hidden');
 };
 
+// 랜더
 function schedulesRender() {
-  // rander를 담당하는 변수
   const _schedules = [...schedules];
 
   // length값으로 sort
@@ -328,42 +332,60 @@ function schedulesRender() {
     return (a, b) => (a[length] < b[length] ? 1 : a[length] > b[length] ? -1 : 0);
   }
   _schedules.sort(compare('length'));
-  // dep 조정
-  function schedulesOrder() {
+  // key dep 만들기
+  function createDep() {
     let dep = 0;
     for (let i = 0; i < _schedules.length; i++) {
       if (i === 0) {
-        render(_schedules[i], dep);
+        _schedules[i].dep = dep;
       } else {
         for (let k = 1; k < i + 1; k++) {
           if (_schedules[i - k].from <= _schedules[i].from && _schedules[i].from <= _schedules[i - k].to) ++dep;
         }
-        render(_schedules[i], dep);
+        // console.log('[dep조정]', dep, _schedules[i]);
+        _schedules[i].dep = dep;
         dep = 0;
       }
     }
   }
-  // render
-  function render(schedule, dep) {
-    if (!document.getElementById(`${schedule.from}`) || document.getElementById(`${schedule.id}`)) return;
-
-    async function paintSchedules() {
-      const $inner = document.getElementById(`${schedule.from}`);
-      $inner.querySelector('.schedule-inner-container').innerHTML += `<div id="${schedule.id}" class="schedule-list" role="button">${schedule.title}</div>`;
-
-      const response = await axios.get(`/users/${localStorage.getItem('userTk')}/tables`);
-      const tables = response.data;
-      const paintedSchedule = document.getElementById(`${schedule.id}`);
-      const bgcolor = tables.find(table => table.order === schedule.fkTable).color;
-
-      paintedSchedule.style.backgroundColor = `${bgcolor}`;
-      paintedSchedule.style.width = `${95 * (schedule.length + 1)}%`;
-      paintedSchedule.style.transform = `translateY(${dep * 110}%)`;
+  // 초기화 작업
+  function clear() {
+    const $monthYear = document.querySelector('.month-year');
+    const year = $monthYear.textContent.substring(0, 4);
+    const month = !isNaN(+$monthYear.textContent.substring(6, 8))
+      ? $monthYear.textContent.substring(6, 8)
+      : 0 + $monthYear.textContent.substring(6, 7);
+    const newDay = new Date(year, +month + 1, -1).getDate();
+    console.log(newDay);
+    for (let i = 1; i <= newDay; i++) {
+      const $clear = document.getElementById(`${year}${month}${i < 10 ? '0' + i : i}`);
+      $clear.querySelector('.schedule-inner-container').innerHTML = '';
     }
-
-    paintSchedules();
   }
-  schedulesOrder();
+  // render
+  function render() {
+    createDep();
+    clear();
+    _schedules.forEach(schedule => {
+      if (!document.getElementById(`${schedule.from}`) || document.getElementById(`${schedule.id}`)) return;
+
+      async function paintSchedules() {
+        const $inner = document.getElementById(`${schedule.from}`);
+        $inner.querySelector('.schedule-inner-container').innerHTML += `<div id="${schedule.id}" class="schedule-list" role="button">${schedule.title}</div>`;
+
+        const response = await axios.get(`/users/${localStorage.getItem('userTk')}/tables`);
+        const tables = response.data;
+        const paintedSchedule = document.getElementById(`${schedule.id}`);
+        const bgcolor = tables.find(table => table.order === schedule.fkTable).color;
+
+        paintedSchedule.style.backgroundColor = `${bgcolor}`;
+        paintedSchedule.style.width = `${99 * (schedule.length + 1)}%`;
+        paintedSchedule.style.transform = `translateY(${schedule.dep * 110}%)`;
+      }
+      paintSchedules();
+    });
+  }
+  render();
 }
 
 async function getScheduleList() {

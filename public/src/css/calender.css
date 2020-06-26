@@ -231,13 +231,14 @@ body {
 /* list 기본 */
 .schedule-list {
   position: absolute;
-  color: white;
   text-align: left;
   text-indent: 15px;
+  color: white;
   width: 80%;
   height: 20px;
   margin-bottom: 5px;
   border-radius: 5px;
+  transition: all 0.2s;
 }
 
 .schedule-list:hover {
