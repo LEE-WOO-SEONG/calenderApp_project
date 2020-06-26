@@ -161,7 +161,7 @@ body {
 }
 
 .wlhs-calendar .active {
-  border: 3px solid rgb(0, 64, 110) !important;
+  border: 2px solid rgb(0, 64, 110) !important;
   box-sizing: border-box !important;
 }
 
@@ -236,10 +236,8 @@ body {
   text-indent: 15px;
   width: 80%;
   height: 20px;
-  background-color: dodgerblue;
   margin-bottom: 5px;
   border-radius: 5px;
-  transform: translateY();
 }
 
 .schedule-list:hover {
@@ -291,6 +289,10 @@ body {
 .modal-box-container {
   /* border: 2px solid purple; */
   margin: 15px 20px;
+}
+
+.modal-box-container:nth-child(2) {
+  padding-left: 3px;
 }
 
 .input-container.input-name-container {
