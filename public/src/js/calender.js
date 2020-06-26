@@ -1,5 +1,8 @@
-let schedules = [];
-let tablesClass = [];
+import { tableList } from './sidemenu.js';
+
+export let schedules = [];
+
+// let tablesClass = [];
 
 const pageMove = url => location.replace(url);
 const removeToken = () => localStorage.removeItem('userTk');
@@ -102,6 +105,7 @@ function Calendar() {
       this.currentMonth = new Date().getMonth();
       $monthAndYear.textContent = `${this.currentYear + '년 ' + this.months[this.currentMonth]}`;
       this.showCalendar();
+      schedulesRender();
     };
 
     $prevMonth.innerHTML = '<i class="arrow prev-month"></i>';
@@ -263,8 +267,7 @@ $scheduleModalClose.onclick = () => {
   $overlay.style.display = 'none';
 };
 
-const getScheduleID = () => (schedules.length
-  ? Math.max(...schedules.map(list => list.id)) + 1 : 1);
+const getScheduleID = () => (schedules.length ? Math.max(...schedules.map(list => list.id)) + 1 : 1);
 
 $schedueleModalSave.onclick = () => {
   const startDate = new Date(document.getElementById('start-date').value);
@@ -304,14 +307,14 @@ $schedueleModalSave.onclick = () => {
     try {
       const sendUrl = `/users/${localStorage.getItem('userTk')}/schedules`;
       await axios.post(sendUrl, newSchedule);
-      console.log(schedules);
-      schedulesRender();
+      // console.log(schedules, 'schedules');
+      schedulesRender(schedules);
     } catch (err) {
       console.error(err);
     }
   }
   postScheduleList();
-  location.reload();
+  // location.reload();
 };
 
 // 일정 확인 닫기
@@ -339,172 +342,155 @@ document.getElementById('calendar').addEventListener('click', e => {
     ~ ${selectedList.to.substring(0, 4)}년
     ${selectedList.to.substring(4, 6)}월
     ${selectedList.to.substring(6, 8)}일`;
-  scheduleData[3].textContent = tablesClass.find(table => table.order === +selectedList.fkTable).class;
+  scheduleData[3].textContent = tableList.find(table => table.order === +selectedList.fkTable).class;
   scheduleData[4].textContent = selectedList.memo;
   scheduleData[5].textContent = selectedList.id;
 });
 
+async function deleteScheduleList(id) {
+  try {
+    const response = await axios.delete(`users/${localStorage.getItem('userTk')}/schedules/${id}`);
+    const matchingList = await response.data;
+    // console.log(matchingList);
+    schedules = matchingList;
+    // console.log(schedules);
+    schedulesRender();
+  } catch (err) {
+    console.error(err);
+  }
+}
+
 // 일정 지우기
 const $checkScheduleRemove = document.getElementById('schedule-remove');
 $checkScheduleRemove.onclick = () => {
-  const id = document.querySelector('.schedule-check-id').textContent;
-  document.getElementById(`${id}`).parentNode.removeChild(document.getElementById(`${id}`));
-  async function deleteScheduleList() {
-    try {
-      const response = await axios.delete(`users/${localStorage.getItem('userTk')}/schedules/${id}`);
-      const matchingList = await response.data;
-      schedules = matchingList;
-      schedulesRender();
-    } catch (err) {
-      console.error(err);
-    }
-  }
-  deleteScheduleList();
-  location.reload();
+  const id = +document.querySelector('.schedule-check-id').textContent;
+  // document.getElementById(`${id}`).parentNode.removeChild(document.getElementById(`${id}`));
+  deleteScheduleList(id);
   document.querySelector('.check-schedule').classList.add('hidden');
 };
 
+// 랜더
 function schedulesRender() {
   const _schedules = [...schedules];
-  console.log(document.querySelectorAll('.schedule-list'));
+  const saturday = [];
+  const $monthYear = document.querySelector('.month-year');
+  const year = +$monthYear.textContent.substring(0, 4);
+  const month = !isNaN(+$monthYear.textContent.substring(6, 8))
+    ? +$monthYear.textContent.substring(6, 8)
+    : +$monthYear.textContent.substring(6, 7);
+  const newDay = new Date(year, month - 1);
+  const firstSaturday = 7 - newDay.getDay();
+  // 토요일을 찾는 함수
+  function searchSaturday() {
+    const saturdaySchedules = [];
+    // 첫 토요일
+    for (let i = 0; i < 4; i++) {
+      if (firstSaturday + i * 7 < 30) {
+        saturday.push(firstSaturday + i * 7);
+      }
+    }
+    // console.log(saturday, 'saturday');
+    // 토요일들을 구함
+    _schedules.forEach(schedule => {
+      const _from = +schedule.from.substring(6, 8);
+      const _to = +schedule.to.substring(6, 8);
+      schedule.saturday = [];
+      for (let i = 0; i < saturday.length; i++) {
+        if (_from <= saturday[i] && _to >= saturday[i]) {
+          const sat = saturday[i];
+          schedule.saturday.push(sat);
+        }
+      }
+    });
+  }
 
-  // 토요일이 있는지 확인
-  // function searchSaturday() {
-  //   const saturday = [];
-  //   const $monthYear = document.querySelector('.month-year');
-  //   const year = +$monthYear.textContent.substring(0, 4);
-  //   const month = isNaN(+$monthYear.textContent.substring(6, 8)) ? +$monthYear.textContent.substring(6, 7) : +$monthYear.textContent.substring(6, 8);
-  //   const newDay = new Date(year, month - 1);
-  //   const firstSaturday = 7 - newDay.getDay();
-  //   let saturdaySchedules = [];
-  //   // 첫 토요일
-  //   for (let i = 0; i < 4; i++) {
-  //     if (firstSaturday + i * 7 < 32) {
-  //       saturday.push(firstSaturday + i * 7);
-  //     }
-  //   }
-  //   console.log(saturday, '[saturdaySchedules]');
-  //   // console.log(saturday);
-  //   // 토요일들을 구함
-  //   for (let i = 0; i < saturday.length; i++) {
-  //     saturdaySchedules = _schedules.filter(schedule => {
-  //       const from = +schedule.from.substring(6, 8);
-  //       const to = +schedule.to.substring(6, 8);
-  //       return from < saturday[i] && to > saturday[i];
-  //     });
-  //   }
-  //   // 토요일이 있으면 새로 만듦
-  //   function craeteSaturdaySchedules() {
-  //     saturdaySchedules.forEach(schedule => {
-  //       for (let i = 0; i <= saturday.length; i++) {
-  //         const from = +schedule.from.substring(6, 8);
-  //         const to = +schedule.to.substring(6, 8);
-  //         if ((from <= saturday[i] && to >= saturday[i]) || saturday[i] === undefined) {
-  //           if (i === 0) {
-  //             _schedules.push({
-  //               id: schedule.id,
-  //               from: schedule.from,
-  //               to: saturday[i] < 10 ? schedule.to.substring(0, 6) + '0' + saturday[i] : schedule.to.substring(0, 6) + saturday[i],
-  //               title: schedule.title,
-  //               length: (saturday[i] < 10 ? schedule.to.substring(0, 6) + '0' + saturday[i] : schedule.to.substring(0, 6) + saturday[i]) - schedule.from
-  //             });
-  //           } else if (!(saturday[i - 1] < to && saturday[i] === undefined ? 32 : saturday[i] > to)) {
-  //             // console.log(saturday[i], 'saturday[i]');
-  //             _schedules.push({
-  //               id: schedule.id,
-  //               from: saturday[i - 1] < 10 ? schedule.to.substring(0, 6) + '0' + (saturday[i - 1] + 1) : schedule.to.substring(0, 6) + (saturday[i - 1] + 1),
-  //               to: saturday[i] < 10 ? schedule.to.substring(0, 6) + '0' + saturday[i] : schedule.to.substring(0, 6) + saturday[i],
-  //               title: schedule.title,
-  //               length: (saturday[i] < 10 ? schedule.to.substring(0, 6) + '0' + saturday[i] : schedule.to.substring(0, 6) + saturday[i]) - (saturday[i - 1] < 10 ? schedule.to.substring(0, 6) + '0' + (saturday[i - 1] + 1) : schedule.to.substring(0, 6) + (saturday[i - 1] + 1))
-  //             });
-  //           } else {
-  //             // console.log('[확인]', saturday[i]);
-  //             _schedules.push({
-  //               id: schedule.id,
-  //               from: saturday[i - 1] < 10 ? schedule.to.substring(0, 6) + '0' + (saturday[i - 1] + 1) : schedule.to.substring(0, 6) + (saturday[i - 1] + 1),
-  //               to: schedule.to,
-  //               title: schedule.title,
-  //               length: schedule.to - (saturday[i - 1] < 10 ? schedule.to.substring(0, 6) + '0' + (saturday[i - 1] + 1) : schedule.to.substring(0, 6) + (saturday[i - 1] + 1))
-  //             });
-  //           }
-  //         }
-  //       }
-  //       // console.log('_schedules.indexOf(schedule)', _schedules.indexOf(schedule));
-  //       _schedules.splice(_schedules.indexOf(schedule), 1);
-  //     });
-  //   }
-  //   // console.log(saturdaySchedules);
-  //   craeteSaturdaySchedules();
-  //   console.log('_schedules', _schedules);
-  //   console.log('schedules', schedules);
-  // }
-  // searchSaturday();
-  // length값으로 sort
+  // dep을 위한 순서 정렬
   function compare(length) {
     return (a, b) => (a[length] < b[length] ? 1 : a[length] > b[length] ? -1 : 0);
   }
   _schedules.sort(compare('length'));
-  // dep 조정
-  function schedulesOrder() {
+  // key dep 만들기
+  function createDep() {
     let dep = 0;
     for (let i = 0; i < _schedules.length; i++) {
       if (i === 0) {
-        render(_schedules[i]);
+        _schedules[i].dep = dep;
       } else {
         for (let k = 1; k < i + 1; k++) {
-          if (_schedules[i - k].from <= _schedules[i].from && _schedules[i].from <= _schedules[i - k].to) {
-            ++dep;
-          }
+          if (_schedules[i - k].from <= _schedules[i].from && _schedules[i].from <= _schedules[i - k].to) ++dep;
         }
         // console.log('[dep조정]', dep, _schedules[i]);
-        render(_schedules[i], dep);
+        _schedules[i].dep = dep;
         dep = 0;
       }
     }
   }
-  // render
-  function render(schedule, dep) {
-    if (!document.getElementById(`${schedule.from}`)) return;
-
-    async function getUser() {
-      try {
-        const response = await axios.get(`/users/${localStorage.getItem('userTk')}/tables`);
-        await response.data.forEach(data => {
-          // console.log(Boolean(schedule.fkTable === data.order));
-          if (schedule.fkTable === data.order) {
-            console.log(data.color, '[color]');
-            const { color } = data;
-            document.getElementById(`${schedule.id}`).style.backgroundColor = `${color}`;
-          }
-        });
-      } catch (error) {
-        console.error(error);
-      }
+  // 초기화 작업
+  function clear() {
+    const $monthYear = document.querySelector('.month-year');
+    const year = $monthYear.textContent.substring(0, 4);
+    const month = !isNaN(+$monthYear.textContent.substring(6, 8))
+      ? $monthYear.textContent.substring(6, 8)
+      : 0 + $monthYear.textContent.substring(6, 7);
+    const newDay = new Date(year, +month + 1, -1).getDate();
+    console.log(newDay);
+    for (let i = 1; i <= newDay; i++) {
+      const $clear = document.getElementById(`${year}${month}${i < 10 ? '0' + i : i}`);
+      $clear.querySelector('.schedule-inner-container').innerHTML = '';
     }
-    getUser();
-
-    const $inner = document.getElementById(`${schedule.from}`);
-    $inner.querySelector('.schedule-inner-container').innerHTML += `<div id="${schedule.id}" class="schedule-list" role="button">${
-      schedule.title}</div>`;
-    document.getElementById(`${schedule.id}`).style.width = `${95 * (schedule.length + 1)}%`;
-    document.getElementById(`${schedule.id}`).style.transform = `translateY(${dep * 110}%)`;
   }
-  console.log(_schedules);
-  schedulesOrder();
+  // render
+  function render() {
+    searchSaturday();
+    createDep();
+    clear();
+
+    console.log(_schedules);
+    _schedules.forEach(schedule => {
+      const $inner = document.getElementById(`${schedule.from}`);
+      // 여러줄 생성
+      if (schedule.saturday.length) {
+        for (let i = 0; i < 5; i++) {
+          if (i === 0) {
+            const $sub = document.getElementById(`${schedule.from}`);
+            $sub.querySelector('.schedule-inner-container').innerHTML += `<div id="${schedule.id}" class="schedule-list sub1-${schedule.id}" role="button">${schedule.title}</div>`;
+            document.querySelector(`.sub1-${schedule.id}`).style.width = `${99 * (schedule.saturday[0] - schedule.from.substring(6, 8) + 1)}%`;
+            document.getElementById(`${schedule.id}`).style.transform = `translateY(${schedule.dep * 110}%)`;
+            document.getElementById(`${schedule.id}`).style.backgroundColor = `${tableList.find(table => table.order === schedule.fkTable).color}`;
+          } else if (schedule.saturday[i] && schedule.saturday[i] === schedule.saturday[schedule.saturday.length - 1]) {
+            const $sub = document.getElementById(`${schedule.to}`);
+            $sub.querySelector('.schedule-inner-container').innerHTML += `<div id="${schedule.id}" class="schedule-list subLast-${schedule.id}" role="button">${schedule.title}</div>`;
+            document.querySelector(`.subLast-${schedule.id}`).style.width = `${99 * (schedule.to.substring(6, 8) - schedule.saturday[i] + 1)}%`;
+            document.getElementById(`${schedule.id}`).style.transform = `translateY(${schedule.dep * 110}%)`;
+            document.getElementById(`${schedule.id}`).style.backgroundColor = `${tableList.find(table => table.order === schedule.fkTable).color}`;
+          }
+        }
+      } else {
+        if (!document.getElementById(`${schedule.from}`)) return;
+        // if (document.getElementById(`${schedule.id}`))
+        $inner.querySelector('.schedule-inner-container').innerHTML += `<div id="${schedule.id}" class="schedule-list" role="button">${schedule.title}</div>`;
+        document.getElementById(`${schedule.id}`).style.width = `${99 * (schedule.length + 1)}%`;
+        document.getElementById(`${schedule.id}`).style.transform = `translateY(${schedule.dep * 110}%)`;
+        document.getElementById(`${schedule.id}`).style.backgroundColor = `${tableList.find(table => table.order === schedule.fkTable).color}`;
+      }
+    });
+  }
+  render();
+}
+
+async function getScheduleList() {
+  try {
+    const response = await axios.get(`/users/${localStorage.getItem('userTk')}`);
+    const _schedules = await response.data;
+    schedules = _schedules.schedules;
+    // calenderList = _schedules.tables;
+    schedulesRender(schedules);
+  } catch (err) {
+    console.error(err);
+  }
 }
 
 window.addEventListener('load', () => {
-  async function getScheduleList() {
-    try {
-      const response = await axios.get(`/users/${localStorage.getItem('userTk')}`);
-      const _schedules = await response.data;
-      schedules = _schedules.schedules;
-      tablesClass = _schedules.tables;
-      schedulesRender();
-    } catch (err) {
-      console.error(err);
-    }
-  }
   getScheduleList();
 });
 

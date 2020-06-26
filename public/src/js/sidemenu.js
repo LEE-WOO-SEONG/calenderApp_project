@@ -1,5 +1,7 @@
-// State
-let calenderList = [];
+import { schedules } from './calender.js';
+
+export let tableList = [];
+
 // DOM Node
 const $input = document.getElementById('add-calender');
 const $addListSubmit = document.querySelector('.add-list-submit');
@@ -7,7 +9,7 @@ const $addCalenderListBox = document.querySelector('.add-calender-list-box');
 // function
 const render = () => {
   let sidePanel = '';
-  calenderList.forEach(list => {
+  tableList.forEach(list => {
     sidePanel += `<li class="${list.order} calendar-list">
     <input type="checkbox" id="add-calender-list${list.order}" class="checkbox" ${list.checked ? 'checked' : ''}>
     <label id="listLabel" class="checkboxLabel${list.order}" for="add-calender-list${list.order}">${list.class}
@@ -16,7 +18,7 @@ const render = () => {
     </li>`;
   });
   $addCalenderListBox.innerHTML = sidePanel;
-  calenderList.forEach(list => {
+  tableList.forEach(list => {
     const $resetCheckbox = document.querySelector(`.reset-checkbox${list.order}`);
     if (list.checked) {
       $resetCheckbox.style.background = list.color;
@@ -28,7 +30,6 @@ const render = () => {
 };
 
 const colorArray = [];
-
 const randomColor = () => {
   const str = 'abcdef0123456789';
   let random = '';
@@ -37,7 +38,6 @@ const randomColor = () => {
     random += str[count];
   }
   const rc = '#' + random;
-
   if (colorArray.includes(rc)) {
     for (let i = 0; i < 6; i++) {
       const count = Math.floor(Math.random() * str.length);
@@ -48,21 +48,19 @@ const randomColor = () => {
     return rc;
   }
 };
-
-const getNextOrder = () => Math.max(0, ...calenderList.map(({ order }) => order)) + 1;
-
+const getNextOrder = () => Math.max(0, ...tableList.map(({ order }) => order)) + 1;
 const addListCalender = content => {
   const newCalenderList = {
     order: getNextOrder(), class: content, color: randomColor(), checked: true
   };
-  calenderList = [...calenderList, newCalenderList];
+  tableList = [...tableList, newCalenderList];
   document.getElementById('select-schedule').innerHTML += `<option value="${newCalenderList.order}">${newCalenderList.class}</option>`;
   async function postList() {
     try {
       const sendUrl = `users/${localStorage.getItem('userTk')}/tables`;
       const response = await axios.post(sendUrl, newCalenderList);
       const _calenderList = await response.data;
-      calenderList = _calenderList;
+      tableList = _calenderList;
       render();
     } catch (err) {
       console.error(err);
@@ -70,20 +68,22 @@ const addListCalender = content => {
   }
   postList();
 };
-const changeCompleted = order => {
-  calenderList = calenderList.map(list => (+order === list.order ? ({ ...list, checked: !list.checked }) : list));
-  // async function patchList() {
-  //   try {
-  //     const sendUrl = `users/${localStorage.getItem('userTk')}/tables/order`;
-  //     const response = await axios.patch(sendUrl, );
-  //     const _calenderList = await response.data;
-  //     calenderList = _calenderList;
-  //     render();
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // }
-  // patchList();
+const changeCompleted = (order, checked) => {
+  tableList = tableList.map(list => (+order === list.order ? ({ ...list, checked: !list.checked }) : list));
+  const checkSchedules = schedules.filter(list => list.fkTable === +order);
+  checkSchedules.forEach(list => {
+    document.getElementById(`${list.id}`).classList.toggle('hidden');
+  });
+  const newChecked = { checked };
+  async function patchChecked(order, newChecked) {
+    try {
+      const sendUrl = `users/${localStorage.getItem('userTk')}/tables/${order}`;
+      await axios.patch(sendUrl, newChecked);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+  patchChecked(order, newChecked);
   render();
 };
 const showOnload = matchingUser => {
@@ -93,20 +93,31 @@ const showOnload = matchingUser => {
   });
   document.getElementById('select-schedule').innerHTML = option;
 };
-
 const removeCalenderList = order => {
-  calenderList = calenderList.filter(list => +order !== list.order);
+  tableList = tableList.filter(list => +order !== list.order);
+  const deleteSchedules = schedules.filter(list => list.fkTable === +order);
+  function deleteAllScheduleList() {
+    deleteSchedules.forEach(async list => {
+      try {
+        await axios.delete(`users/${localStorage.getItem('userTk')}/schedules/fkTable/${list.fkTable}`);
+        document.getElementById(`${list.id}`).parentNode.removeChild(document.getElementById(`${list.id}`));
+      } catch (err) {
+        console.error(err);
+      }
+    });
+  }
   async function deleteList() {
     try {
       const response = await axios.delete(`users/${localStorage.getItem('userTk')}/tables/${order}`);
       const matchingUser = await response.data;
-      calenderList = await matchingUser;
-      showOnload(calenderList);
+      tableList = await matchingUser;
+      showOnload(tableList);
       render();
     } catch (err) {
       console.error(err);
     }
   }
+  deleteAllScheduleList();
   deleteList();
   render();
 };
@@ -115,8 +126,8 @@ window.addEventListener('load', function () {
     try {
       const response = await axios.get(`users/${localStorage.getItem('userTk')}/tables`);
       const matchingUser = await response.data;
-      calenderList = await matchingUser;
-      showOnload(calenderList);
+      tableList = await matchingUser;
+      showOnload(tableList);
       render();
     } catch (err) {
       console.error(err);
@@ -124,7 +135,6 @@ window.addEventListener('load', function () {
   }
   getList();
 });
-
 // event handler
 $input.onkeyup = e => {
   const content = e.target.value.trim();
@@ -141,13 +151,10 @@ $addListSubmit.onclick = () => {
 $addCalenderListBox.onchange = e => {
   if (!e.target.matches('.add-calender-list-box .checkbox')) return;
   const ParentNodeId = e.target.parentNode.classList[0];
-  changeCompleted(ParentNodeId);
+  changeCompleted(ParentNodeId, e.target.checked);
 };
 $addCalenderListBox.onclick = e => {
   const ParentNodeClass = e.target.parentNode.classList[0];
-  if (e.target.matches('.remove-calendar-list')) {
-    removeCalenderList(ParentNodeClass);
-  } else if (e.target.matches('.setting-change')) {
-    // settingChange(ParentNodeId);
-  }
+  if (!e.target.matches('.remove-calendar-list')) return;
+  removeCalenderList(ParentNodeClass);
 };
