@@ -18,6 +18,14 @@
     height: 100vh;
     background: url(../img/roman-bozhko-PypjzKTUqLo-unsplash.jpg) no-repeat -100px 0;
     background-size: contain;
+    position: relative;
+  }
+
+  .calendar-text-img {
+    position: absolute;
+    top:170px;
+    display:block;
+    width:900px;
   }
 
   #login-form {
