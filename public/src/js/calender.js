@@ -226,15 +226,33 @@ const calendar = new Calendar();
 
 const $scheduleModalClose = document.querySelector('.schedule-modal-close');
 const $schedueleModalSave = document.querySelector('.schedule-modal-save');
+
 $scheduleModalClose.onclick = () => {
   document.querySelector('.modal-container').classList.add('hidden');
   $overlay.style.display = 'none';
 
 };
 
+const showSnackbar = target => {
+  const $snackbar = document.createElement('div');
+  $snackbar.setAttribute('id', 'snackbar');
+  const $main = document.querySelector('.container');
+  $main.appendChild($snackbar);
+  $snackbar.classList.add('show');
+
+  if (target === $schedueleModalSave) {
+    $snackbar.textContent = '일정을 저장 중 입니다.';
+  } else {
+    $snackbar.textContent = '일정을 삭제 중 입니다.';
+  }
+  setTimeout(() => {
+    $main.removeChild($snackbar);
+  }, 1200);
+};
+
 const getScheduleID = () => (schedules.length ? Math.max(...schedules.map(list => list.id)) + 1 : 1);
 
-$schedueleModalSave.onclick = () => {
+$schedueleModalSave.onclick = ({ target }) => {
   const startDate = new Date(document.getElementById('start-date').value);
   const endDate = new Date(document.getElementById('end-date').value);
   const $inputTitle = document.getElementById('schedule-name');
@@ -268,6 +286,7 @@ $schedueleModalSave.onclick = () => {
     }
   }
   postScheduleList();
+  showSnackbar(target);
 };
 
 // 일정 확인 닫기
@@ -312,11 +331,13 @@ async function deleteScheduleList(id) {
 
 // 일정 지우기
 const $checkScheduleRemove = document.getElementById('schedule-remove');
-$checkScheduleRemove.onclick = () => {
+$checkScheduleRemove.onclick = ({ target }) => {
   const id = +document.querySelector('.schedule-check-id').textContent;
   document.getElementById(`${id}`).parentNode.removeChild(document.getElementById(`${id}`));
   deleteScheduleList(id);
   document.querySelector('.check-schedule').classList.add('hidden');
+
+  showSnackbar(target);
 };
 
 function schedulesRender() {

@@ -1,18 +1,21 @@
   #login {
-    padding-top: 25vh;
+    /* padding-tovh; */
     /* background-color: rgb(139, 139, 139); */
-    height: calc(100vh - 25vh);
-    background-image: url('../img/[더콘테스트]\ 달력디자인\ 공모전\ -\ 2013\ 달력\ 디자인.gif');
+    height: 100vh;
+    background-image: url('../img/2018\ Calendar\ _\ 웬아이워즈영\ _\ wheniwasyoung\ -\ 디자인문구\ 브랜드….jpg ');
     background-repeat: no-repeat;
-    background-position: 70% 100%; 
+    /* background-position: 70% 100%;  */
     background-size: contain;
   }
 
   #login-form {
-    position: relative;
-    width: 700px;
+    
+    position: absolute;
+    width: 600px;
+    top: 150px;
+    right: 0;
     /* height: 00px; */
-    margin-left: 20vw;
+    /* margin-left: 20vw; */
     border-radius: 10px;
     /* background-color: rgb(238, 239, 241); */
     /* background-image: url('../img/메이아이플라워\ 태그\ 청첩장\ Mayiflower\ Wedding\ Invitation\ \(Tag\).jpg');
@@ -59,11 +62,11 @@
 
   .btn-login {
     font-weight: 700;
-    font-size: 20px;
+    font-size: 25px;
     color: #fff;
     display: block;
     width: 100%;
-    padding: 10px 0;
+    padding: 20px 0;
     background-color: rgb(41, 59, 83);
     border-radius: 10px;
     margin-top: 30px;
@@ -85,8 +88,8 @@
     background-repeat: no-repeat;
     width: 450px;
     height: 45px;
-    border: thin solid #ddd;
-    box-shadow: 1px 1px 1px grey;
+    /* border: thin solid #ddd; */
+    /* box-shadow: 1px 1px 1px grey; */
     border-radius: 5px;
     margin-top: 10px;
   }
@@ -109,7 +112,7 @@
     width: 450px;
     height: 45px;
     border: thin solid #ddd;
-    box-shadow: 1px 1px 1px grey;
+    /* box-shadow: 1px 1px 1px grey; */
     border-radius: 6px;
     position: relative;
   }
