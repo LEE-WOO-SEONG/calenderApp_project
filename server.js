@@ -97,6 +97,19 @@ server.delete('/users/:token/schedules/:id', (req, res) => {
   }
   res.send(db.get('users').find({ token }).value().schedules);
 });
+
+// token -> schedules/fkTable delete
+server.delete('/users/:token/schedules/fkTable/:fkTable', (req, res) => {
+  const { token, fkTable } = req.params;
+  const { schedules } = db.get('users').find({ token }).value();
+  const index = schedules.findIndex(table => table.fkTable === +fkTable);
+  if (index !== -1) {
+    schedules.splice(index, 1);
+    db.write();
+  }
+  res.send(db.get('users').find({ token }).value().schedules);
+});
+
 // Use default router
 server.use(router);
 server.listen(3000, () => {
