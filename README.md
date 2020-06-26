@@ -6,7 +6,11 @@
 
 - 구현 App : 개인별 일정관리가 가능한 Calender
 
-  [구글캘린더](https://calendar.google.com/calendar/r)
+  ![image-20200626150556114](C:\Users\112606\AppData\Roaming\Typora\typora-user-images\image-20200626150556114.png)
+
+  [시연 영상](https://www.loom.com/share/ff5b4fa3b07c409b83107cf0eaed0771)
+
+  참고 사이트 : [구글캘린더](https://calendar.google.com/calendar/r)
 
 - 목표
 

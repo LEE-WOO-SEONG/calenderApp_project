@@ -84,7 +84,7 @@ const changeCompleted = (order, checked) => {
   patchChecked(order, newChecked);
   render();
 };
-const showOnload = matchingUser => {
+const correctScheduleOption = matchingUser => {
   let option = '';
   matchingUser.forEach(list => {
     option += `<option value="${list.order}">${list.class}</option>`;
@@ -109,7 +109,7 @@ const removeCalenderList = order => {
       const response = await axios.delete(`users/${localStorage.getItem('userTk')}/tables/${order}`);
       const matchingUser = await response.data;
       tableList = await matchingUser;
-      showOnload(tableList);
+      correctScheduleOption(tableList);
       render();
     } catch (err) {
       console.error(err);
@@ -125,7 +125,7 @@ window.addEventListener('load', function () {
       const response = await axios.get(`users/${localStorage.getItem('userTk')}/tables`);
       const matchingUser = await response.data;
       tableList = await matchingUser;
-      showOnload(tableList);
+      correctScheduleOption(tableList);
       render();
     } catch (err) {
       console.error(err);
