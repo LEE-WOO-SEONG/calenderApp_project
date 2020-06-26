@@ -25,7 +25,7 @@
           "order": 1,
           "class": "도지현",
           "color": "red",
-          "checked": true
+          "checked": false
         }
       ],
       "schedules": []
@@ -43,19 +43,7 @@
           "checked": true
         }
       ],
-      "schedules": [
-        [
-          {
-            "id": 1,
-            "from": "20200709",
-            "to": "20200709",
-            "title": "",
-            "memo": "",
-            "length": 0,
-            "fkTable": "1"
-          }
-        ]
-      ]
+      "schedules": []
     },
     {
       "id": "yerin",
