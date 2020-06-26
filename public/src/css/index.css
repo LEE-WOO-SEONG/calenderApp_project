@@ -1,16 +1,23 @@
   #login {
     padding-top: 25vh;
-    background-color: rgb(139, 139, 139);
+    /* background-color: rgb(139, 139, 139); */
     height: calc(100vh - 25vh);
+    background-image: url('../img/[더콘테스트]\ 달력디자인\ 공모전\ -\ 2013\ 달력\ 디자인.gif');
+    background-repeat: no-repeat;
+    background-position: 70% 100%; 
+    background-size: contain;
   }
 
   #login-form {
     position: relative;
     width: 700px;
-    height: 400px;
-    margin: 0 auto;
+    /* height: 00px; */
+    margin-left: 20vw;
     border-radius: 10px;
-    background-color: rgb(246, 247, 250)
+    /* background-color: rgb(238, 239, 241); */
+    /* background-image: url('../img/메이아이플라워\ 태그\ 청첩장\ Mayiflower\ Wedding\ Invitation\ \(Tag\).jpg');
+    background-repeat: no-repeat;
+    background-position: 100% 50%; */
   }
 
   #login-form > fieldset {
@@ -59,7 +66,7 @@
     padding: 10px 0;
     background-color: rgb(41, 59, 83);
     border-radius: 10px;
-    margin-top: 10px;
+    margin-top: 30px;
   }
 
   .btn-login:hover {
@@ -67,7 +74,7 @@
   }
 
   .api-container {
-    margin-top: 20px;
+    margin-top: 100px;
   }
 
   /* 카카오 로그인 */

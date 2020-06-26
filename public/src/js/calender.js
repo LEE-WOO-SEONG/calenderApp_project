@@ -2,8 +2,6 @@ import { tableList } from './sidemenu.js';
 
 export let schedules = [];
 
-// let tablesClass = [];
-
 const pageMove = url => location.replace(url);
 const removeToken = () => localStorage.removeItem('userTk');
 
@@ -96,9 +94,7 @@ function Calendar() {
     $currentMonth.classList.add('today-btn');
     $headerContainer.classList.add('calendar-header');
     $monthAndYear.classList.add('month-year');
-    // $btnLogout.classList.add('api-btn');
 
-    // $currentMonth.innerHTML = '<i class="current-month"></i>';
     $currentMonth.innerHTML = '<span class="current-month">today</span>';
     $currentMonth.onclick = () => {
       this.currentYear = new Date().getFullYear();
@@ -125,13 +121,10 @@ function Calendar() {
 
     $monthAndYear.textContent = `${this.currentYear + '년 ' + this.months[this.currentMonth]}`;
 
-    // $btnLogout.textContent = '로그아웃';
-
     $headerContainer.appendChild($currentMonth);
     $headerContainer.appendChild($prevMonth);
     $headerContainer.appendChild($nextMonth);
     $headerContainer.appendChild($monthAndYear);
-    // $headerContainer.appendChild($btnLogout);
     $header.appendChild($headerContainer);
   };
 
@@ -158,7 +151,6 @@ function Calendar() {
     [...daysPrevMonth, ...daysThisMonth, ...daysNextMonth]
       .forEach(num => {
         // 날짜의 가장 바깥 컨테이너 생성
-        // 요소가 확정되면 정리할 것
         const $cell = document.createElement('div');
         $cell.setAttribute('id', num.id);
         $cell.classList.add('day');
@@ -178,33 +170,6 @@ function Calendar() {
         const $scheduleInnerContainer = document.createElement('div');
         $scheduleInnerContainer.setAttribute('class', 'schedule-inner-container');
         $scheduleContainer.appendChild($scheduleInnerContainer);
-
-        // const li1 = document.createElement('div');
-        // const li2 = document.createElement('div');
-        // const li3 = document.createElement('div');
-        // const li4 = document.createElement('div');
-        // const li5 = document.createElement('div');
-        // li1.setAttribute('class', 'schedule-list left');
-        // li1.setAttribute('role', 'button');
-        // const span = document.createElement('span');
-        // span.setAttribute('class', 'schedule-id');
-        // li1.appendChild(span);
-        // span.textContent = '10';
-
-        // console.log(document.querySelector('.schedule-list'));
-        // li2.setAttribute('class', 'schedule-list right');
-        // li2.setAttribute('role', 'button');
-        // li3.setAttribute('class', 'schedule-list');
-        // li3.setAttribute('role', 'button');
-        // li4.setAttribute('class', 'schedule-list single');
-        // li4.setAttribute('role', 'button');
-        // li5.setAttribute('class', 'schedule-list single');
-        // li5.setAttribute('role', 'button');
-        // $scheduleInnerContainer.appendChild(li1);
-        // $scheduleInnerContainer.appendChild(li2);
-        // $scheduleInnerContainer.appendChild(li3);
-        // $scheduleInnerContainer.appendChild(li4);
-        // $scheduleInnerContainer.appendChild(li5);
 
         $cell.addEventListener('click', e => {
           const $selected = document.querySelector('.selected');
@@ -277,13 +242,6 @@ $schedueleModalSave.onclick = () => {
   const titleValue = $inputTitle.value ? $inputTitle.value : '(제목 없음)';
   const memoValue = $inputMemo.value ? $inputMemo.value : '(설명 없음)';
   const dateDiff = (endDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24);
-  // for (let i = 0; i <= dateDiff; i++) {
-  //   const d = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate() + i);
-  //   const YYYYmmdd = calendar.YYYYmmdd(d);
-  //   const $cell = document.getElementById(`${YYYYmmdd}`);
-  //   console.log($cell.querySelector('.schedule-inner-container').innerHTML);
-  //   $cell.querySelector('.schedule-inner-container').innerHTML += `<div class="schedule-list ${YYYYmmdd}" role="button">${dateDiff}</div>`
-  // }
 
   $overlay.style.display = 'none';
 
@@ -295,14 +253,11 @@ $schedueleModalSave.onclick = () => {
     memo: memoValue,
     length: dateDiff,
     fkTable: +document.getElementById('select-schedule').value
-    // fkTable: document.getElementById('select-schedule').selectedIndex
   };
-
   schedules = [...schedules, newSchedule];
   document.querySelector('.modal-container').classList.add('hidden');
   document.getElementById('schedule-name').value = '';
   document.getElementById('schedule-memo').value = '';
-  // console.log(schedules);
   async function postScheduleList() {
     try {
       const sendUrl = `/users/${localStorage.getItem('userTk')}/schedules`;
@@ -351,7 +306,6 @@ async function deleteScheduleList(id) {
   try {
     const response = await axios.delete(`users/${localStorage.getItem('userTk')}/schedules/${id}`);
     const matchingList = await response.data;
-    // console.log(matchingList);
     schedules = matchingList;
     // console.log(schedules);
     schedulesRender();
@@ -372,39 +326,8 @@ $checkScheduleRemove.onclick = () => {
 // 랜더
 function schedulesRender() {
   const _schedules = [...schedules];
-  const saturday = [];
-  const $monthYear = document.querySelector('.month-year');
-  const year = +$monthYear.textContent.substring(0, 4);
-  const month = !isNaN(+$monthYear.textContent.substring(6, 8))
-    ? +$monthYear.textContent.substring(6, 8)
-    : +$monthYear.textContent.substring(6, 7);
-  const newDay = new Date(year, month - 1);
-  const firstSaturday = 7 - newDay.getDay();
-  // 토요일을 찾는 함수
-  function searchSaturday() {
-    const saturdaySchedules = [];
-    // 첫 토요일
-    for (let i = 0; i < 4; i++) {
-      if (firstSaturday + i * 7 < 30) {
-        saturday.push(firstSaturday + i * 7);
-      }
-    }
-    // console.log(saturday, 'saturday');
-    // 토요일들을 구함
-    _schedules.forEach(schedule => {
-      const _from = +schedule.from.substring(6, 8);
-      const _to = +schedule.to.substring(6, 8);
-      schedule.saturday = [];
-      for (let i = 0; i < saturday.length; i++) {
-        if (_from <= saturday[i] && _to >= saturday[i]) {
-          const sat = saturday[i];
-          schedule.saturday.push(sat);
-        }
-      }
-    });
-  }
 
-  // dep을 위한 순서 정렬
+  // length값으로 sort
   function compare(length) {
     return (a, b) => (a[length] < b[length] ? 1 : a[length] > b[length] ? -1 : 0);
   }
@@ -440,42 +363,28 @@ function schedulesRender() {
     }
   }
   // render
-  function render() {
-    searchSaturday();
+  function schedulesOrder(schedule, dep) {
     createDep();
     clear();
+    if (!document.getElementById(`${schedule.from}`) || document.getElementById(`${schedule.id}`)) return;
 
-    console.log(_schedules);
-    _schedules.forEach(schedule => {
+    async function paintSchedules() {
       const $inner = document.getElementById(`${schedule.from}`);
-      // 여러줄 생성
-      if (schedule.saturday.length) {
-        for (let i = 0; i < 5; i++) {
-          if (i === 0) {
-            const $sub = document.getElementById(`${schedule.from}`);
-            $sub.querySelector('.schedule-inner-container').innerHTML += `<div id="${schedule.id}" class="schedule-list sub1-${schedule.id}" role="button">${schedule.title}</div>`;
-            document.querySelector(`.sub1-${schedule.id}`).style.width = `${99 * (schedule.saturday[0] - schedule.from.substring(6, 8) + 1)}%`;
-            document.getElementById(`${schedule.id}`).style.transform = `translateY(${schedule.dep * 110}%)`;
-            document.getElementById(`${schedule.id}`).style.backgroundColor = `${tableList.find(table => table.order === schedule.fkTable).color}`;
-          } else if (schedule.saturday[i] && schedule.saturday[i] === schedule.saturday[schedule.saturday.length - 1]) {
-            const $sub = document.getElementById(`${schedule.to}`);
-            $sub.querySelector('.schedule-inner-container').innerHTML += `<div id="${schedule.id}" class="schedule-list subLast-${schedule.id}" role="button">${schedule.title}</div>`;
-            document.querySelector(`.subLast-${schedule.id}`).style.width = `${99 * (schedule.to.substring(6, 8) - schedule.saturday[i] + 1)}%`;
-            document.getElementById(`${schedule.id}`).style.transform = `translateY(${schedule.dep * 110}%)`;
-            document.getElementById(`${schedule.id}`).style.backgroundColor = `${tableList.find(table => table.order === schedule.fkTable).color}`;
-          }
-        }
-      } else {
-        if (!document.getElementById(`${schedule.from}`)) return;
-        // if (document.getElementById(`${schedule.id}`))
-        $inner.querySelector('.schedule-inner-container').innerHTML += `<div id="${schedule.id}" class="schedule-list" role="button">${schedule.title}</div>`;
-        document.getElementById(`${schedule.id}`).style.width = `${99 * (schedule.length + 1)}%`;
-        document.getElementById(`${schedule.id}`).style.transform = `translateY(${schedule.dep * 110}%)`;
-        document.getElementById(`${schedule.id}`).style.backgroundColor = `${tableList.find(table => table.order === schedule.fkTable).color}`;
-      }
-    });
+      $inner.querySelector('.schedule-inner-container').innerHTML += `<div id="${schedule.id}" class="schedule-list" role="button">${schedule.title}</div>`;
+
+      const response = await axios.get(`/users/${localStorage.getItem('userTk')}/tables`);
+      const tables = response.data;
+      const paintedSchedule = document.getElementById(`${schedule.id}`);
+      const bgcolor = tables.find(table => table.order === schedule.fkTable).color;
+
+      paintedSchedule.style.backgroundColor = `${bgcolor}`;
+      paintedSchedule.style.width = `${95 * (schedule.length + 1)}%`;
+      paintedSchedule.style.transform = `translateY(${dep * 110}%)`;
+    }
+
+    paintSchedules();
   }
-  render();
+  schedulesOrder();
 }
 
 async function getScheduleList() {
@@ -483,8 +392,7 @@ async function getScheduleList() {
     const response = await axios.get(`/users/${localStorage.getItem('userTk')}`);
     const _schedules = await response.data;
     schedules = _schedules.schedules;
-    // calenderList = _schedules.tables;
-    schedulesRender(schedules);
+    schedulesRender();
   } catch (err) {
     console.error(err);
   }
