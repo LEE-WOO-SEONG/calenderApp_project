@@ -238,6 +238,7 @@ body {
   height: 20px;
   margin-bottom: 5px;
   border-radius: 5px;
+  transition: all 0.2s;
 }
 
 .schedule-list:hover {

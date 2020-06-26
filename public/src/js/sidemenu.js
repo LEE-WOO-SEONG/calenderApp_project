@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-=======
 // module variables
->>>>>>> a278bd5b2ca0e456f7ce372d93a35fa46dd52c53
 import { schedules } from './calender.js';
 
 export let tableList = [];

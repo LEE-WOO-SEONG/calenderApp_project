@@ -363,28 +363,29 @@ function schedulesRender() {
     }
   }
   // render
-  function schedulesOrder(schedule, dep) {
+  function render() {
     createDep();
     clear();
-    if (!document.getElementById(`${schedule.from}`) || document.getElementById(`${schedule.id}`)) return;
+    _schedules.forEach(schedule => {
+      if (!document.getElementById(`${schedule.from}`) || document.getElementById(`${schedule.id}`)) return;
 
-    async function paintSchedules() {
-      const $inner = document.getElementById(`${schedule.from}`);
-      $inner.querySelector('.schedule-inner-container').innerHTML += `<div id="${schedule.id}" class="schedule-list" role="button">${schedule.title}</div>`;
+      async function paintSchedules() {
+        const $inner = document.getElementById(`${schedule.from}`);
+        $inner.querySelector('.schedule-inner-container').innerHTML += `<div id="${schedule.id}" class="schedule-list" role="button">${schedule.title}</div>`;
 
-      const response = await axios.get(`/users/${localStorage.getItem('userTk')}/tables`);
-      const tables = response.data;
-      const paintedSchedule = document.getElementById(`${schedule.id}`);
-      const bgcolor = tables.find(table => table.order === schedule.fkTable).color;
+        const response = await axios.get(`/users/${localStorage.getItem('userTk')}/tables`);
+        const tables = response.data;
+        const paintedSchedule = document.getElementById(`${schedule.id}`);
+        const bgcolor = tables.find(table => table.order === schedule.fkTable).color;
 
-      paintedSchedule.style.backgroundColor = `${bgcolor}`;
-      paintedSchedule.style.width = `${95 * (schedule.length + 1)}%`;
-      paintedSchedule.style.transform = `translateY(${dep * 110}%)`;
-    }
-
-    paintSchedules();
+        paintedSchedule.style.backgroundColor = `${bgcolor}`;
+        paintedSchedule.style.width = `${99 * (schedule.length + 1)}%`;
+        paintedSchedule.style.transform = `translateY(${schedule.dep * 110}%)`;
+      }
+      paintSchedules();
+    });
   }
-  schedulesOrder();
+  render();
 }
 
 async function getScheduleList() {
