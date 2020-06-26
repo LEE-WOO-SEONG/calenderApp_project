@@ -1,0 +1,570 @@
+main,
+section,
+div {
+  box-sizing: border-box;
+}
+
+
+body {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  background-color: #E3E6F3;
+  position: relative;
+  font-family: 'Muli', sans-serif;
+  overflow: hidden !important;
+}
+
+.overlay {
+  display:none;
+  position: absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background-color:rgba(107, 107, 107, 0.37);
+  z-index:10;
+}
+
+.wlhs-calendar {
+  width:100%;
+  background-color: white;
+}
+
+/* 헤더 */
+#header {
+  position: relative;
+}
+
+.calendar-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 15px 15px 15px 272px;
+  border-bottom: 1px solid #DDDDDD;
+}
+
+.calendar-header .month-year {
+  padding-left: 10px;
+  font-size: 25px;
+  display: inline-block;
+  color: rgb(54, 54, 54);
+  transform: translateY(-4px);
+}
+
+.calendar-header button {
+  background-color: transparent;
+  height: 34px;
+  width: 55px;
+  margin-right:10px;
+  line-height: 34px;
+  text-align: center;
+  border: none;
+  cursor: pointer;
+  color: rgb(54, 54, 54);
+  vertical-align: text-top;
+}
+
+.calendar-header button:active {
+  outline: none;
+}
+
+.calendar-header .arrow {
+  border: solid rgb(54, 54, 54);
+  border-width: 0 2px 2px 0;
+  display: inline-block;
+  padding: 5px;
+  background-color: transparent;
+  border-radius: 1px;
+}
+
+.calendar-header .current-month {
+  background-color:none;
+  border: 1px solid rgb(223, 223, 223);
+  display:block;
+  border-radius: 5px;
+  color:rgb(97, 97, 97);
+  transition: all 0.5s
+  /* padding:0 5px; */
+}
+
+.calendar-header .current-month:hover {
+  background-color:rgb(228, 228, 228);
+  /* color:white; */
+}
+
+.prev-month {
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+}
+
+.next-month {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+
+/* body-container */
+.body-container {
+  display: grid;
+  grid-template-columns: 1fr 6fr;
+}
+
+/* 사이드 */
+#sidemenu {
+  height: calc(100vh - 67px);
+  border-right: 1px solid #DDDDDD;
+}
+
+/* 캘린더 바디 */
+#calendar {
+  height: 100%;
+}
+
+.week-days {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-bottom: 1px solid #DDDDDD;
+  /* padding: 10px 0 5px 0; */
+  font-weight: bolder;
+  font-size: 12px;
+}
+
+.week-days div {
+  width: calc(100% / 7);
+  height: 20px;
+  border-right: 1px solid #DDDDDD;
+  text-align: center;
+}
+
+.wlhs-calendar .day {
+  display: flex;
+  justify-content: center;
+  width: calc(100% / 7);
+  border: none;
+  background-color: transparent;
+  color: black;
+}
+
+.wlhs-calendar button.not-current {
+  color: #AAAAAA;
+}
+
+.wlhs-calendar .active {
+  border: 2px solid rgb(30, 110, 218) !important;
+  box-sizing: border-box !important;
+
+}
+
+.wlhs-calendar .selected span {
+  color: white;
+  font-weight: bold;
+  background-color: rgb(100, 165, 211);
+  -webkit-transition: all .3s ease;
+  transition: all .3s ease;
+}
+
+.calendar-body .day {
+  box-sizing: border-box;
+  width: calc(100% / 7);
+  display: inline-block;
+  border-right: 1px solid #DDDDDD;
+  border-bottom: 1px solid #DDDDDD;
+  text-align: center;
+  cursor: pointer;
+  padding: 5px 0;
+}
+
+.calendar-body .not-current {
+  color: #999999;
+}
+
+.digit-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 20px;
+  margin: 0.25px;
+  text-align: center;
+}
+
+/* 텍스트 드래그 불가 */
+.digit-container>span{
+  -ms-user-select: none; 
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.calendar-body .day .digit-container span {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  line-height: 20px;
+  border-radius: 50%;
+  font-size: 12px;
+}
+
+.schedule-container {
+  /* width: 233.84px; */
+  /* width: 235px; */
+  height: 110px;
+  /* border-top: 1px solid dodgerblue; */
+}
+
+.schedule-inner-container {
+  width: 100%;
+  position: relative;
+}
+
+/* list 기본 */
+.schedule-list {
+  position: absolute;
+  text-align: left;
+  text-indent: 15px;
+  color: white;
+  width: 80%;
+  height: 20px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  transition: all 0.2s;
+}
+
+.schedule-list:hover {
+  opacity: 0.7;
+}
+
+/* list 시작 */
+.left {
+  width: 100%;
+  border-radius: 4px 0 0 4px;
+}
+
+/* list 끝 */
+.right {
+  width: 95%;
+  border-radius: 0 4px 4px 0;
+}
+
+/* list 한개일 경우 */
+.single {
+  width: 95%;
+  border-radius: 4px;
+}
+
+.calendar-header .api-btn {
+  background-color: gray;
+}
+
+/* 날짜 입력 모달 컨테이너 */
+.modal-container {
+  display: fixed;
+  position: absolute;
+  top: calc(50vh - 150px);
+  left: calc(50vw - 200px);
+  width: 500px;
+  height: 300px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 5px;
+  box-shadow: 0 0 2px 2px rgb(219, 218, 218);
+  z-index: 20;
+}
+
+.modal-flex {
+  padding-top: 10px;
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.modal-box-container {
+  /* border: 2px solid purple; */
+  margin: 15px 20px;
+}
+
+.modal-box-container:nth-child(2) {
+  padding-left: 3px;
+}
+
+.input-container.input-name-container {
+  padding-left: 35px;
+}
+
+.icon-container {
+  display: inline-block;
+}
+
+.input-container {
+  display: inline-block;
+  width: 400px;
+  padding-left: 10px;
+}
+
+.input-container > input {
+  border: none;
+  outline: none;
+  font-size: 15px;
+}
+
+#schedule-name {
+  height: 30px;
+  width: 350px;
+  font-size: 25px;
+  border-bottom: 1px solid #ddd;
+}
+
+#schedule-name:focus {
+  border-bottom: 1px solid rgb(26, 115, 232);
+}
+
+.date-input {
+  width: 140px;
+}
+
+.date-inputSign {
+  vertical-align: top;
+}
+
+/* #start-time, #end-time {
+  height: 24.5px;
+} */
+
+#start-date:hover,
+#end-date:hover {
+  background-color: rgb(241, 238, 238);
+}
+
+#schedule-memo:focus {
+  background-color: rgb(241, 238, 238);
+}
+
+#select-schedule {
+  height: 30px;
+  border: none;
+}
+
+#select-schedule:hover {
+  background-color: rgb(241, 238, 238);
+}
+
+.schedule-modal-close, .schedule-check-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 31px;
+  height: 31px;
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+.schedule-modal-close:hover, .schedule-check-close:hover {
+  opacity: 1;
+}
+
+.schedule-modal-close:before, .schedule-modal-close:after,
+.schedule-check-close:before, .schedule-check-close:after {
+  position: absolute;
+  left: 15px;
+  content: ' ';
+  height: 26px;
+  width: 2px;
+  background-color: #333;
+}
+.schedule-modal-close:before, .schedule-check-close:before {
+  transform: rotate(45deg);
+}
+.schedule-modal-close:after, .schedule-check-close:after {
+  transform: rotate(-45deg);
+}
+
+.schedule-modal-save {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  font-size: 15px;
+  color: #fff;
+  border-radius: 3px;
+  background-color: rgb(26, 115, 232);
+  padding: 10px 25px;
+}
+
+/* 스케줄 확인 버튼 */
+.check-schedule {
+  position: absolute;
+  top: 20px;
+  left: calc(50vw - 125px);
+  width: 500px;
+  height: 200px;
+  background-color: white;
+  padding:20px;
+  padding-top:30px;
+  z-index: 2;
+  border-radius: 7px;
+  /* box-shadow: 10px 10px 30px 5px rgba(41, 41, 41, 0.082), -5px -5px 30px 5px rgba(58, 58, 58, 0.082);   */
+  box-shadow: 0 24px 38px 3px rgba(0,0,0,0.14), 0 9px 46px 8px rgba(0,0,0,0.12), 0 11px 15px -7px rgba(0,0,0,0.2);
+
+  }
+
+#schedule-remove {
+  position: absolute;
+  top:9px;
+  right:70px;  
+  color: #444;
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+#schedule-remove:hover {
+  opacity: 1;
+}
+
+.schedule-check-container {
+  width: 100%;
+  /* height: 40px; */
+  line-height: 20px;
+  padding: 0px;
+  /* border: 1px solid gray; */
+}
+
+#schedule-check-title {
+  font-size:25px;
+  padding:10px 10px 0 10px;
+}
+
+#schedule-check-date {
+  font-size:12px;
+  padding:10px 10px 20px 10px;
+}
+
+#schedule-check-class {
+  font-size:20px;
+  padding:10px 10px 0 10px;
+}
+
+#schedule-check-memo {
+  font-size:14px;
+  padding:10px;
+
+}
+
+.schedule-date {
+  height: 40px;
+}
+
+.schedule-class {
+  height: 40px;
+}
+
+.schedule-memo {
+  width: 100%;
+  height: 40px;
+  background-color: rgb(10, 115, 190);
+}
+
+.hidden {
+  display: none;
+}
+
+
+.schedule-id, .schedule-check-id {
+  display: none;
+}
+
+.btn-logout {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: rgb(30, 110, 218);
+  color: #fff;
+  font-weight: 700;
+  z-index: 1;
+}
+
+/* 스낵바 */
+#snackbar {
+  visibility: hidden;
+  /* Hidden by default. Visible on click */
+  min-width: 250px;
+  /* Set a default minimum width */
+  margin-left: -125px;
+  /* Divide value of min-width by 2 */
+  background-color: #333;
+  /* Black background color */
+  color: #fff;
+  /* White text color */
+  text-align: center;
+  /* Centered text */
+  border-radius: 2px;
+  /* Rounded borders */
+  padding: 16px;
+  /* Padding */
+  position: fixed;
+  /* Sit on top of the screen */
+  z-index: 1;
+  /* Add a z-index if needed */
+  left: 50%;
+  /* Center the snackbar */
+  bottom: 30px;
+  /* 30px from the bottom */
+}
+/* Show the snackbar when clicking on a button (class added with JavaScript) */
+#snackbar.show {
+  visibility: visible;
+  /* Show the snackbar */
+  /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+However, delay the fade out process for 2.5 seconds */
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+/* Animations to fade the snackbar in and out */
+@-webkit-keyframes fadein {
+  from {
+      bottom: 0;
+      opacity: 0;
+  }
+  to {
+      bottom: 30px;
+      opacity: 1;
+  }
+}
+@keyframes fadein {
+  from {
+      bottom: 0;
+      opacity: 0;
+  }
+  to {
+      bottom: 30px;
+      opacity: 1;
+  }
+}
+@-webkit-keyframes fadeout {
+  from {
+      bottom: 30px;
+      opacity: 1;
+  }
+  to {
+      bottom: 0;
+      opacity: 0;
+  }
+}
+@keyframes fadeout {
+  from {
+      bottom: 30px;
+      opacity: 1;
+  }
+  to {
+      bottom: 0;
+      opacity: 0;
+  }
+}

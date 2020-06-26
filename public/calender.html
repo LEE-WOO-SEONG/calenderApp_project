@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="title" content="일정관리 calnedr 달력 페이지">
+  <meta name="description" content="개인별 일정관리가 가능한 달력 애플리케이션입니다.">
+  <meta name="keywords" content="일정,개인별,관리,달력,할일,기록,저장,calender,todo">
+  <meta property="og:title" content="나만의 일정관리를 하고싶다면?">
+  <meta property="og:description" content="나만의 일정을 달력에 기록할 수 있는 사이트">
+  <meta property="og:image" content="">
+  <meta property="og:url" content="">
+  <title>Private Calender</title>
+  <link rel="shortcut icon" href="">
+  <link rel="stylesheet" href="./src/css/common.css">
+  <link rel="stylesheet" href="./src/css/sidemenu.css">
+  <link rel="stylesheet" href="./src/css/calender.css">
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="https://kit.fontawesome.com/33179a3595.js" crossorigin="anonymous"></script>
+  <!-- <script src="../dist/js/bundle.js"></script> -->
+  <script type="module" src="./src/js/sidemenu.js" defer></script>
+  <script type="module" src="./src/js/calender.js" defer></script>
+</head>
+
+<body>
+  <div class="overlay"></div>
+  <main class="container">
+    <h1 class="a11y-hidden">일정관리 </h1>
+    <section id="header">
+      <h2 class="a11y-hidden">캘린더 년/월 이동</h2>
+    </section>
+    <div class="body-container">
+      <section id="sidemenu">
+        <h2 class="a11y-hidden">일정제목</h2>
+        <div class="add-calender-list-input">
+          <input type="text" placeholder="캘린더 추가" id="add-calender">
+          <!-- <label for="add-calender" class="a11y-hidden">캘린더 추가</label> -->
+          <button type="submit" class="add-list-submit">+</button>
+        </div>
+        <ul class="add-calender-list-box">
+          <!-- <li id="1" class="add-calender-first-list calendar-list">
+            <input type="checkbox" id="add-calender-list1" class="checkbox">
+            <label for="add-calender-list1"></label>
+          </li> -->
+        </ul>
+      </section>
+      <section id="calendar">
+        <!-- <h2 class="a11y-hidden">캘린더</h2> -->
+      </section>
+      <div class="check-schedule hidden">
+        <div class="schedule-check-container">
+          <div role="button" id="schedule-remove">
+            <svg width="28" height="28" viewBox="0 0 24 24" focusable="false" class=" NMm5M svg-remove">
+              <path d="M15 4V3H9v1H4v2h1v13c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V6h1V4h-5zm2 15H7V6h10v13z"></path>
+              <path d="M9 8h2v9H9zm4 0h2v9h-2z"></path>
+            </svg>
+          </div>
+          <div role="button" class="schedule-check-close"></div>
+        </div>
+        <div class="schedule-check-container" id="schedule-check-title"></div>
+        <div class="schedule-check-container" id="schedule-check-date"></div>
+        <div class="schedule-check-container" id="schedule-check-class"></div>
+        <div class="schedule-check-container" id="schedule-check-memo"></div>
+        <div class="schedule-check-id"></div>
+      </div>
+    </div>
+    <div class="modal-container hidden">
+      <div class="modal-flex">
+        <div class="modal-box-container">
+          <!-- <div class="icon-container"> -->
+            <!-- <span><i class="fa fa-camera fa-lg"></i></span> -->
+          <!-- </div> -->
+          <div class="input-name-container input-container">
+            <input type="text" id="schedule-name" placeholder="제목 및 시간추가">
+          </div>
+        </div>
+        <div class="modal-box-container">
+          <div class="icon-container">
+            <span><i class="far fa-calendar-plus"></i></span>
+          </div>
+          <div class="input-date-container input-container">
+            <input type="date" class="date-input" id="start-date">
+            <span class="date-inputSign"> ~ </span>
+            <input type="date" class="date-input" id="end-date">
+          </div>
+        </div>
+        <div class="modal-box-container">
+          <div class="icon-container">
+            <span><i class="fa fa-pencil fa-fw"></i></span>
+          </div>
+          <div class="input-memo-container input-container">
+            <input type="text" id="schedule-memo" placeholder="설명추가">
+          </div>
+        </div>
+        <div class="modal-box-container">
+          <div class="icon-container">
+            <span><i class="fas fa-id-card"></i></span>
+          </div>
+          <div class="input-select-container input-container">
+            <select id="select-schedule">
+            </select>
+          </div>
+        </div>
+          <button class="schedule-modal-save">저장</button>
+        <div role="button" class="schedule-modal-close"></div>
+      </div>
+    </div>
+    <button class="btn-logout">로그아웃</button>
+  </main>
+</body>
+
+</html>

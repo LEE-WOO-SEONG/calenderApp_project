@@ -1,0 +1,64 @@
+{
+  "users": [
+    {
+      "id": "wooseong",
+      "pw": "dldntjd",
+      "gender": "male",
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Indvb3Nlb25nIiwicHciOiJkbGRudGpkIn0.63MuIIELRLur7rTsxhYr7ALe7Gy4UKVVpZZcBEjVSuk",
+      "tables": [
+        {
+          "order": 1,
+          "class": "이우성",
+          "color": "red",
+          "checked": true
+        }
+      ],
+      "schedules": []
+    },
+    {
+      "id": "jihyeon",
+      "pw": "ehwlgus",
+      "gender": "female",
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImppaHllb24iLCJwdyI6ImVod2xndXMifQ.Ukhn9ofMxnh2ibymwtIdOU-txscUHKja0b8Dm25FTt4",
+      "tables": [
+        {
+          "order": 1,
+          "class": "도지현",
+          "color": "red",
+          "checked": false
+        }
+      ],
+      "schedules": []
+    },
+    {
+      "id": "dongwoo",
+      "pw": "fbehddn",
+      "gender": "male",
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImRvbmd3b28iLCJwdyI6ImdiZWhkZG4ifQ.LJn7kfgFCAv_q3alUeyG-yVHczgk4jepWH4GZjrziLM",
+      "tables": [
+        {
+          "order": 1,
+          "class": "류동우",
+          "color": "red",
+          "checked": true
+        }
+      ],
+      "schedules": []
+    },
+    {
+      "id": "yerin",
+      "pw": "chldPfls",
+      "gender": "female",
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InllcmluIiwicHciOiJjaGxkUGZscyJ9.mNqULwX20ah502qL-PgTuwubjXAOEVM90UTrkQMWp6o",
+      "tables": [
+        {
+          "order": 1,
+          "class": "최예린",
+          "color": "red",
+          "checked": true
+        }
+      ],
+      "schedules": []
+    }
+  ]
+}

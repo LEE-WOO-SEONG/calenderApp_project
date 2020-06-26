@@ -1,0 +1,195 @@
+  #login {
+    width: 100%;
+    height: 100vh;
+    background: url(../img/roman-bozhko-PypjzKTUqLo-unsplash.jpg) no-repeat -100px 0;
+    background-size: contain;
+    position: relative;
+  }
+
+  .calendar-text-img {
+    position: absolute;
+    top:170px;
+    display:block;
+    width:900px;
+  }
+
+  #login-form {
+    background-color: white;
+    height: 100%;
+    width: 750px;
+    float:right;
+  }
+
+  #login-form > fieldset {
+    /* position: absolute;
+    top: 80px;
+    left: 15px;
+    width: 450px;
+    border: none; */
+    position: absolute;
+    top: 280px;
+    right: 130px;
+    width: 450px;
+    border: none
+  }
+  
+  .login-title {
+    position: absolute;
+    top: -60px;
+    font-size: 35px;
+  }
+  
+  .login-idContainer,
+  .login-pwContainer {
+    position: relative;
+    margin-top: 20px;
+  }
+
+  [for^="login"] {
+    position: absolute;
+    transform: translateY(-100%);
+    color: rgb(122, 117, 116);
+  }
+
+  #login-id,
+  #login-pw {
+    border: none;
+    border-bottom: 2px solid #ddd;
+    outline: none;
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+    font-size: 30px;
+  }
+
+  .btn-login {
+    box-sizing: border-box;
+    font-weight: 700;
+    font-size: 20px;
+    display: block;
+    width: 100%;
+    padding: 15px 0;
+    border-radius: 30px;
+    margin-top: 15px;
+    border:2px solid white;
+    background-color: rgb(30, 110, 218);
+    color: #fff;
+    transition:all 0.4s;
+  }
+
+  .btn-login:hover {
+    box-sizing: border-box;
+    background-color:rgb(0, 85, 197);
+    color:white;
+    transition: all 0.4s;
+  }
+
+  .api-container {
+    margin-top: 40px;
+  }
+
+  /* 카카오 로그인 */
+  .btn-kakao {
+    background-image: url('../img/kakaologin_en.png');
+    background-position: 0% 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 450px;
+    height: 50px;
+    /* border: thin solid #ddd; */
+    border-radius: 30px;
+    margin-top: 10px;
+    transition:all 0.4s;
+  }
+
+  .btn-kakao::before {
+    content:'';
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 30px;
+    transition:all 0.4s;
+  }
+
+  .btn-kakao:hover::before {
+    background-color: rgb(93, 90, 90, 0.2);
+    transition:all 0.4s;
+  }
+  
+  /* 구글 로그인 */
+  .btn-google {
+    color: #444;
+    margin-top: 5px;
+    width: 450px;
+    height: 50px;
+    border: thin solid #ddd;
+    /* box-shadow: 1px 1px 1px grey; */
+    border-radius: 30px;
+    position: relative;
+    transition:all 0.4s;
+  }
+
+  .btn-google:hover {
+    background-color: rgb(93, 90, 90, 0.2);
+    transition:all 0.4s;
+  }
+ 
+  .btn-googleLogo {
+    background: url('../img/googlelogo.png');
+    background-position: 50%;
+    background-size: 80px;
+    background-repeat: no-repeat;
+    position: absolute;
+    left: 5px;
+    top: 0;
+    width: 60px;
+    height: 40px;
+  }
+
+  .btn-googleText {
+    display: inline-block;
+    font-size: 20px;
+    padding-left: 35px;
+  }
+ 
+  /* 로그아웃 모달 */
+  .modal-container {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    visibility: hidden;
+    text-align: center;
+    background-color: rgba(128, 127, 127, 0.8);
+  }
+
+  .modal-container.active {
+    visibility: visible;
+  }
+
+  .modal {
+    background-color: #fff;
+    border-radius: 5px;
+    width: 300px;
+    height: 150px;
+    margin: 0 auto;
+    margin-top: 70px;
+    transition: transform .4s;
+  }
+
+  .active .modal {
+    transform: translateY(20%);
+  }
+
+  .modal-comment {
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 100px;
+  }
+
+  .btn-modalClose {
+    font-weight: 700;
+    font-size: 17px;
+    color: rgb(77, 114, 184);
+    padding: 10px;
+  }

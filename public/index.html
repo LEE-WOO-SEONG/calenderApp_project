@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="title" content="일정관리 calnedr 로그인 페이지">
+  <meta name="description" content="개인별 일정관리가 가능한 달력 애플리케이션입니다.">
+  <meta name="keywords" content="일정,개인별,관리,달력,로그인,할일,기록,저장,calender,todo">
+  <meta property="og:title" content="나만의 일정관리를 하고싶다면?">
+  <meta property="og:description" content="나만의 일정을 달력에 기록할 수 있는 사이트">
+  <meta property="og:image" content="">
+  <meta property="og:url" content="">
+  <title>Private Calender</title>
+  <link rel="shortcut icon" href="">
+  <link rel="stylesheet" type="text/css" href="./src/css/common.css">
+  <link rel="stylesheet" type="text/css" href="./src/css/index.css">
+  <script src="https://apis.google.com/js/platform.js"></script>
+  <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <!-- <script src="./dist/js/bundle.js" defer></script> -->
+  <script src="./src/js/index.js" defer></script>
+</head>
+
+<body>
+  <section id="login">
+    <h1 class="a11y-hidden">Private Calender</h1>
+    <img src="./src/img/IMG_0309.PNG" alt="calender" class="calendar-text-img">
+    <form id="login-form">
+      <fieldset>
+        <legend class="login-title">Sign Up</legend>
+        <div class="login-container">
+          <div class="login-idContainer">
+            <label for="login-id">UserName</label>
+            <input id="login-id" type="text" name="id">
+          </div>
+          <div class="login-pwContainer">
+            <label for="login-pw">Password</label>
+            <input id="login-pw" type="password" name="password">
+          </div>
+        </div>
+        <button type="button" class="btn-login" name="password">Sign In</button>
+        <div class="api-container">
+          <button type="button" class="btn-google" type="button">
+            <span class="btn-googleLogo"></span>
+            <span class="btn-googleText">Login with Google</span>
+          </button>
+          <button type="button" class="btn-kakao"></button>
+        </div>
+      </fieldset>
+    </form>
+    <div class="modal-container">
+      <div class="modal">
+        <p class="modal-comment">정상적으로 로그아웃 되었습니다.</p>
+        <button type="button" class="btn-modalClose">확인</button>
+      </div>
+</body>
+
+</html>
