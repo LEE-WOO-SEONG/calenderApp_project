@@ -40,10 +40,6 @@ const randomColor = () => {
   let rc = '#' + random;
 
   if (colorArray.includes(rc)) {
-    // for (let i = 0; i < 6; i++) {
-    //   const count = Math.floor(Math.random() * str.length);
-    //   random += str[count];
-    // }
     randomColor();
   } else {
     colorArray.push(rc);

@@ -15,30 +15,12 @@
       ],
       "schedules": [
         {
-          "id": 6,
+          "id": 1,
           "from": "20200607",
-          "to": "20200607",
-          "title": "zxcxzczc",
-          "memo": "(설명 없음)",
-          "length": 0,
-          "fkTable": 1
-        },
-        {
-          "id": 9,
-          "from": "20200629",
-          "to": "20200629",
-          "title": "asdsadasd",
-          "memo": "(설명 없음)",
-          "length": 0,
-          "fkTable": 1
-        },
-        {
-          "id": 10,
-          "from": "20200601",
-          "to": "20200601",
+          "to": "20200614",
           "title": "(제목 없음)",
           "memo": "(설명 없음)",
-          "length": 0,
+          "length": 7,
           "fkTable": 1
         }
       ]

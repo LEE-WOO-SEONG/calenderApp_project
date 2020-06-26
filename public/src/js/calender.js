@@ -247,6 +247,11 @@ function Calendar() {
 
     document.querySelector('#calendar').appendChild($weekDays);
     document.querySelector('#calendar').appendChild($calendarBody);
+
+    // const $nthChildContainer = document.querySelector('.calendar-body');
+    // const $nthChildContainer = document.querySelectorAll('.calendar-body .day:nth-child(7n)');
+    // // console.log($nthChildContainer);
+    // if ($nthChildContainer.)
   };
 
   this.showCalendar = () => {
@@ -372,6 +377,7 @@ $checkScheduleRemove.onclick = () => {
 function schedulesRender() {
   // rander를 담당하는 변수
   const _schedules = [...schedules];
+  console.log(_schedules);
   // console.log(_schedules);
 
   // 토요일이 있는지 확인
@@ -477,7 +483,7 @@ function schedulesRender() {
     document.getElementById(`${schedule.id}`).style.transform = `translateY(${dep * 110}%)`;
     document.getElementById(`${schedule.id}`).style.backgroundColor = `${calenderList.find(table => table.order === schedule.fkTable).color}`;
   }
-  // console.log(_schedules);
+  console.log(_schedules);
   schedulesOrder();
 }
 
