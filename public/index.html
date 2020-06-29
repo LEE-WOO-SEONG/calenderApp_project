@@ -10,10 +10,12 @@
   <meta property="og:title" content="나만의 일정관리를 하고싶다면?">
   <meta property="og:description" content="나만의 일정을 달력에 기록할 수 있는 사이트">
   <meta property="og:image" content="https://user-images.githubusercontent.com/62285872/85822876-ec9f1180-b7b6-11ea-9fae-bf5c7ccc10f0.png">
-  <meta property="og:url" content="http://akakqogk.dothome.co.kr/">  <title>Private Calender</title>
+  <meta property="og:url" content="http://akakqogk.dothome.co.kr/">
+  <title>Private Calender</title>
   <link rel="shortcut icon" href="">
   <link rel="stylesheet" type="text/css" href="./src/css/common.css">
   <link rel="stylesheet" type="text/css" href="./src/css/index.css">
+  <script src="https://kit.fontawesome.com/33179a3595.js" crossorigin="anonymous"></script>
   <script src="https://apis.google.com/js/platform.js"></script>
   <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -22,6 +24,7 @@
 </head>
 
 <body>
+  <i class="fas fa-spinner"></i>
   <section id="login">
     <h1 class="a11y-hidden">Private Calender</h1>
     <img src="./src/img/IMG_0309.PNG" alt="calender" class="calendar-text-img">
@@ -50,7 +53,7 @@
     </form>
     <div class="modal-container">
       <div class="modal">
-        <p class="modal-comment">정상적으로 로그아웃 되었습니다.</p>
+        <p class="modal-comment"></p>
         <button type="button" class="btn-modalClose">확인</button>
       </div>
 </body>
