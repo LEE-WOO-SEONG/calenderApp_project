@@ -106,7 +106,6 @@ function Calendar() {
 
     $prevMonth.innerHTML = '<i class="arrow prev-month"></i>';
     $prevMonth.onclick = () => {
-      console.log(this.currentMonth);
       this.prevMonth();
       $monthAndYear.textContent = `${this.currentYear + '년 ' + this.months[this.currentMonth]}`;
       schedulesRender();
@@ -374,7 +373,6 @@ function schedulesRender() {
       ? $monthYear.textContent.substring(6, 8)
       : 0 + $monthYear.textContent.substring(6, 7);
     const newDay = new Date(year, +month + 1, -1).getDate();
-    console.log(newDay);
     for (let i = 1; i <= newDay; i++) {
       const $clear = document.getElementById(`${year}${month}${i < 10 ? '0' + i : i}`);
       $clear.querySelector('.schedule-inner-container').innerHTML = '';

@@ -1,11 +1,14 @@
 /* variables */
 // dom
+const $login = document.getElementById('login');
+const $spinner = document.querySelector('.fa-spinner');
 const $loginForm = document.getElementById('login-form');
 const $inputId = document.getElementById('login-id');
 const $inputPw = document.getElementById('login-pw');
 const $btnKakao = document.querySelector('.btn-kakao');
 const $btnGoogle = document.querySelector('.btn-google');
 const $modalContainer = document.querySelector('.modal-container');
+const $modalComment = document.querySelector('.modal-comment');
 
 /* functions */
 const pageMove = url => location.replace(url);
@@ -18,10 +21,17 @@ const validateUserinfo = async (userid, userpw) => {
     const users = await res.data;
     const user = users.find(user => user.id === userid);
 
-    if (!user) return alert('일치하는 회원정보가 없습니다.');
+    if (!user) {
+      $modalContainer.classList.add('active');
+      $modalComment.textContent = '일치하는 회원정보가 없습니다.';
+    }
+
     const userPw = user.pw;
 
-    if (userPw === userpw) {
+    if (userPw !== userpw) {
+      $modalContainer.classList.add('active');
+      $modalComment.textContent = '일치하는 회원정보가 없습니다.';
+    } else {
       pageMove('http://localhost:3000/calender.html');
       saveToken(user.token);
     }
@@ -101,11 +111,20 @@ const loginGoogle = async () => {
 };
 
 /* event */
+// spinner
+setTimeout(() => {
+  $login.style.display = 'block';
+  $spinner.style.visibility = 'hidden';
+}, 1300);
+
 // 로그아웃 확인
 window.addEventListener('load', () => {
   if (localStorage.getItem('userTk')) {
     pageMove('http://localhost:3000/calender.html');
-  } else $modalContainer.classList.add('active');
+  } else {
+    $modalContainer.classList.add('active');
+    $modalComment.textContent = '정상적으로 로그아웃 되었습니다';
+  }
 });
 
 // 회원정보로 로그인
@@ -116,9 +135,11 @@ $loginForm.onclick = ({ target }) => {
   const userPw = $inputPw.value;
 
   if (!userId || !userId.trim()) {
-    alert('ID를 입력하세요');
+    $modalContainer.classList.add('active');
+    $modalComment.textContent = 'ID를 입력하세요';
   } else if (!userPw) {
-    alert('Password를 입력하세요');
+    $modalContainer.classList.add('active');
+    $modalComment.textContent = 'Password를 입력하세요';
   } else {
     $inputId.value = '';
     $inputPw.value = '';
@@ -133,9 +154,11 @@ $inputPw.onkeyup = e => {
   const userPw = $inputPw.value;
 
   if (!userId || !userId.trim()) {
-    alert('ID를 입력하세요');
+    $modalContainer.classList.add('active');
+    $modalComment.textContent = 'ID를 입력하세요';
   } else if (!userPw) {
-    alert('Password를 입력하세요');
+    $modalContainer.classList.add('active');
+    $modalComment.textContent = 'Password를 입력하세요';
   } else {
     $inputId.value = '';
     $inputPw.value = '';
