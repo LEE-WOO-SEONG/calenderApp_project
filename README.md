@@ -6,7 +6,7 @@
 
 - 구현 App : 개인별 일정관리가 가능한 Calender
 
-  ![image-20200626150556114](C:\Users\112606\AppData\Roaming\Typora\typora-user-images\image-20200626150556114.png)
+  ![image](https://user-images.githubusercontent.com/62285872/85980067-a2b76500-ba1c-11ea-919c-36726f749fff.png)
 
   [시연 영상](https://www.loom.com/share/ff5b4fa3b07c409b83107cf0eaed0771)
 
